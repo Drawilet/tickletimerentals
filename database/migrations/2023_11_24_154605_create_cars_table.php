@@ -17,17 +17,22 @@ return new class extends Migration {
 
             $table->string("name");
             $table->text("description");
-
-            $table->string("address");
-            $table->string("city");
-            $table->string("state");
-            $table->string("country");
-
-            $table->json("schedule");
-
             $table->string("color");
-            $table->text('notes')->nullable();
 
+            $table->string("plate_number");
+            $table->string("brand");
+            $table->string("model");
+            $table->string("year");
+            $table->string("fuel_type");
+            $table->string("transmission");
+            $table->string("engine");
+            $table->string("seats");
+            $table->string("doors");
+
+            $table->json("features");
+            $table->json("prices");
+
+            $table->text('notes')->nullable();
 
             $table->foreignId("tenant_id")->constrained("tenants");
 

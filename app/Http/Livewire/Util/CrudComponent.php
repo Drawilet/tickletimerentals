@@ -38,7 +38,7 @@ class CrudComponent extends Component
     ];
 
     public $modals = [
-        'save' => false,
+        'save' => true,
         'delete' => false,
         'error' => false,
     ];
