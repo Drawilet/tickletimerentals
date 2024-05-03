@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire\Tenant;
 
-use App\Http\Livewire\Tenant\Cars\ScheduleComponent;
+use App\Http\Livewire\Tenant\Cars\FeaturesComponent;
 use App\Http\Livewire\Tenant\Cars\PhotosComponent;
+use App\Http\Livewire\Tenant\Cars\PricesComponent;
 use App\Http\Livewire\Util\CrudComponent;
 
 use App\Models\Car;
@@ -19,6 +20,15 @@ class CarsComponent extends CrudComponent
         $this->setup(Car::class, [
             'mainKey' => 'name',
             'types' => [
+                "features" => [
+                    "type" => "array",
+                    "component" => FeaturesComponent::class,
+                ],
+                "prices" => [
+                    "type" => "array",
+                    "component" => PricesComponent::class,
+                ],
+
                 'name' => ['type' => 'text'],
                 'photos' => [
                     'type' => 'file',
@@ -31,16 +41,41 @@ class CarsComponent extends CrudComponent
                     ],
                 ],
                 'description' => ['type' => 'textarea', 'rows' => 4],
-                'address' => ['type' => 'text'],
-                'city' => ['type' => 'text'],
-                'state' => ['type' => 'text'],
-                'country' => ['type' => 'text'],
-                'schedule' => [
-                    'type' => 'array',
-                    'component' => ScheduleComponent::class,
-                    'hidden' => true,
-                ],
                 'color' => ['type' => 'color'],
+                'plate_number' => ['type' => 'text'],
+                'brand' => ['type' => 'text'],
+                'model' => ['type' => 'text'],
+                'year' => ['type' => 'number'],
+                'fuel_type' => [
+                    'type' => 'select',
+                    'options' =>
+                        [
+                            ["value" => "gasoline", "label" => __("car-lang.fuel.gasoline")],
+                            ["value" => "diesel", "label" => __("car-lang.fuel.diesel")],
+                            ["value" => "electric", "label" => __("car-lang.fuel.electric")],
+                            ["value" => "hybrid", "label" => __("car-lang.fuel.hybrid")],
+                            ["value" => "lpg", "label" => __("car-lang.fuel.lpg")],
+                            ["value" => "cng", "label" => __("car-lang.fuel.cng")],
+                            ["value" => "bioethanol", "label" => __("car-lang.fuel.bioethanol")],
+                            ["value" => "hydrogen", "label" => __("car-lang.fuel.hydrogen")],
+                            ["value" => "other", "label" => __("car-lang.fuel.other")],
+                        ]
+                ],
+                'transmission' => [
+                    'type' => 'select',
+                    'options' =>
+                        [
+                            ["value" => "manual", "label" => __("car-lang.transmission_type.manual")],
+                            ["value" => "automatic", "label" => __("car-lang.transmission_type.automatic")],
+                            ["value" => "semiautomatic", "label" => __("car-lang.transmission_type.semi-automatic")],
+                            ["value" => "cv", "label" => __("car-lang.transmission_type.cv")],
+                            ["value" => "other", "label" => __("car-lang.transmission_type.other")],
+                        ]
+                ],
+                'engine' => ['type' => 'text'],
+                'seats' => ['type' => 'number'],
+                'doors' => ['type' => 'number'],
+
                 'notes' => ['type' => 'textarea', 'rules' => 'nullable'],
             ],
             'mobileStyles' => "

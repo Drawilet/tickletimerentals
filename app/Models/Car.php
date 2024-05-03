@@ -11,27 +11,29 @@ class Car extends Base
     protected $fillable = [
         "name",
         "description",
-        "address",
-        "city",
-        "state",
-        "country",
-        "schedule",
         "color",
-        "notes",
+        "plate_number",
+        "brand",
+        "model",
+        "year",
+        "fuel_type",
+        "transmission",
+        "engine",
+        "seats",
+        "doors",
+        "features",
+        "prices",
+        "tenant_id"
+    ];
+
+    protected $casts = [
+        'features' => 'array',
+        'prices' => 'array',
     ];
 
     public function photos()
     {
         return $this->hasMany(CarPhoto::class);
-    }
-
-    protected $casts = [
-        'schedule' => 'array',
-    ];
-
-    public function getAddress()
-    {
-        return $this->address . ", " . $this->city . ", " . $this->state . ", " . $this->country;
     }
 
     public function events()
