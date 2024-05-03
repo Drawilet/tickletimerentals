@@ -1,0 +1,34 @@
+name: Prettier action
+
+# This action works with pull requests and pushes
+on:
+  pull_request:
+  push:
+    branches:
+      - dev
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          # Make sure the actual branch is checked out when running on pull requests
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --global prettier@2.8.1 @prettier/plugin-php
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.3
+        with:
+          prettier_version: 2.8.1
+          prettier_plugins: "@prettier/plugin-php"
+          prettier_options: --write **/*.{js,php}
