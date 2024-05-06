@@ -1,6 +1,6 @@
 <?php
 return [
-    "new-rent" => "Nuevo renta",
+    "new-rent" => "Nueva renta",
     "update-rent" => "Actualizar renta",
 
     'Rentname' => 'Nombre del renta',
