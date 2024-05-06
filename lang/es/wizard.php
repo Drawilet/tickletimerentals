@@ -53,9 +53,9 @@ return [
         "text-5" => "¡Listo para configurar tu primer producto? ¡Vamos allá!"
     ],
     "first-rent" => [
-        "text-1" => "Tu primer Rento",
-        "text-2" => "Para crear un nuevo rento, simplemente haz clic en el día del calendario en el que deseas programar el rento. Se abrirá automáticamente el formulario para que puedas completarlo.",
-        "text-3" => "Este paso es opcional, así que si prefieres explorar otras funcionalidades antes de crear un rento, ¡siéntete libre de hacerlo!"
+        "text-1" => "Tu primer Renta",
+        "text-2" => "Para crear un nuevo renta, simplemente haz clic en el día del calendario en el que deseas programar el renta. Se abrirá automáticamente el formulario para que puedas completarlo.",
+        "text-3" => "Este paso es opcional, así que si prefieres explorar otras funcionalidades antes de crear un renta, ¡siéntete libre de hacerlo!"
     ],
 
 

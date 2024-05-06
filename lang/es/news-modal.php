@@ -1,7 +1,7 @@
 <?php
 return [
     'title' => 'Próximos rentas',
-    'message' => 'El rento se llevará a cabo el día ',
+    'message' => 'El renta se llevará a cabo el día ',
     'payment-message' => 'Resta por liquidar la cantidad de ',
     "paid" => "El rent ha sido pagado.",
 
