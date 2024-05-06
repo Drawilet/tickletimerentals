@@ -36,9 +36,9 @@ class Car extends Base
         return $this->hasMany(CarPhoto::class);
     }
 
-    public function events()
+    public function rents()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Rent::class);
     }
 
     public function tenant()

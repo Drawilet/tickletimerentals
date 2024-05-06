@@ -7,19 +7,19 @@
         <div class="modal-box overflow-hidden">
             <h2 class="text-3xl text-center text-blue-500 mb-4">{{ __('news-modal.title') }}</h2>
             <ul class="car-y-4 max-h-96 overflow-y-scroll">
-                @foreach ($filteredEvents as $event)
-                    <li class="p-4 rounded-md shadow-md cursor-pointer" wire:click='openEvent("{{ $event->id }}")'>
+                @foreach ($filteredRents as $rent)
+                    <li class="p-4 rounded-md shadow-md cursor-pointer" wire:click='openRent("{{ $rent->id }}")'>
                         <h3 class="flex items-center text-xl text-blue-600">
-                            <span class="mr-2">{{ $event->name }}</span>
-                            <span class="w-3 h-3 rounded-full"style="background-color: {{ $event->car->color }}"></span>
+                            <span class="mr-2">{{ $rent->name }}</span>
+                            <span class="w-3 h-3 rounded-full"style="background-color: {{ $rent->car->color }}"></span>
                         </h3>
                         <p class="text-white-600 mt-2">
                             <span>{{ __('news-modal.message') }}</span>
                             <span>
-                                @isset($event['date'])
-                                    {{ \Carbon\Carbon::parse($event['date'])->format('d') }},
-                                    {{ __('month-lang.' . strtolower(\Carbon\Carbon::parse($event['date'])->format('F'))) }},
-                                    {{ \Carbon\Carbon::parse($event['date'])->format('Y') }}
+                                @isset($rent['date'])
+                                    {{ \Carbon\Carbon::parse($rent['date'])->format('d') }},
+                                    {{ __('month-lang.' . strtolower(\Carbon\Carbon::parse($rent['date'])->format('F'))) }},
+                                    {{ \Carbon\Carbon::parse($rent['date'])->format('Y') }}
                                 @endisset
                             </span>
 
@@ -27,7 +27,7 @@
                         <p class="text-white-500 mt-1">
 
                             @php
-                                $remaining = $this->getRemaining($event->id);
+                                $remaining = $this->getRemaining($rent->id);
                             @endphp
 
                             @if ($remaining > 0)
@@ -80,9 +80,9 @@
         }
 
 
-        document.getElementById('toggle-news').addEventListener('click', () => toggleNews(true))
+        document.getElementById('toggle-news').addRentListener('click', () => toggleNews(true))
 
-        document.getElementById('later-button').addEventListener('click', () => close('later'))
-        document.getElementById('tomorrow-button').addEventListener('click', () => close('tomorrow'))
+        document.getElementById('later-button').addRentListener('click', () => close('later'))
+        document.getElementById('tomorrow-button').addRentListener('click', () => close('tomorrow'))
     </script>
 </div>

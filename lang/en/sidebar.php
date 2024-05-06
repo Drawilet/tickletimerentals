@@ -8,7 +8,7 @@ return [
     'payments' => 'Payments',
     'more' => 'More',
     'users' => 'Users',
-    'events' => 'Events',
+    'rent' => 'Rents',
 
     'App' => 'App',
     'tenants' => 'Tenants',

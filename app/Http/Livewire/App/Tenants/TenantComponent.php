@@ -46,7 +46,7 @@ class TenantComponent extends Component
         }
         $tenant->customers()->delete();
         $tenant->cars()->delete();
-        $tenant->events()->delete();
+        $tenant->rents()->delete();
         $tenant->products()->delete();
         $tenant->transactions()->delete();
 

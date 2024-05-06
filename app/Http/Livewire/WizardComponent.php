@@ -26,7 +26,7 @@ class WizardComponent extends Component
             "skippable" => true
         ],
         [
-            "name" => "event",
+            "name" => "rent",
             "route" => "dashboard.show",
             "skippable" => true
         ]

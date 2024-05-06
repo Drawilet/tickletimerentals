@@ -9,8 +9,8 @@ class Product extends Base
     use HasFactory;
     protected $fillable = ["photo", "name", "description", "cost", "price", "notes"];
 
-    public function events()
+    public function rents()
     {
-        return $this->hasMany(EventProduct::class);
+        return $this->hasMany(RentProduct::class);
     }
 }

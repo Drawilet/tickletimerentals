@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EventPayment extends Base
+class RentPayment extends Base
 {
     use HasFactory;
 
     protected $fillable = [
-        "event_id",
+        "rent_id",
         "amount",
         "notes",
     ];

@@ -117,7 +117,7 @@ class CarsComponent extends CrudComponent
                 }
 
             ",
-            'foreigns' => ['events'],
+            'foreigns' => ['rents'],
         ]);
     }
 

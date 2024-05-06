@@ -12,10 +12,10 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('event_payments', function (Blueprint $table) {
+        Schema::create('rent_payments', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId("event_id")->constrained();
+            $table->foreignId("rent_id")->constrained();
             $table->string("amount");
             $table->text("notes");
 

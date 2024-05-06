@@ -31,9 +31,9 @@ class Tenant extends Model
     {
         return $this->hasMany(Customer::class);
     }
-    public function events()
+    public function rents()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Rent::class);
     }
     public function users()
     {
@@ -47,9 +47,9 @@ class Tenant extends Model
     {
         return $this->hasMany(Car::class);
     }
-    public function eventPayments()
+    public function rentPayments()
     {
-        return $this->hasMany(EventPayment::class);
+        return $this->hasMany(RentPayment::class);
     }
 
     public function plan()

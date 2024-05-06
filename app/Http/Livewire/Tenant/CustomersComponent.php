@@ -40,7 +40,7 @@ class CustomersComponent extends CrudComponent
 
 
             ",
-            'foreigns' => ['events'],
+            'foreigns' => ['rents'],
         ]);
     }
 }

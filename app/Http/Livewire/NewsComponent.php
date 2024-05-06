@@ -3,8 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Http\Traits\WithCrudActions;
-use App\Models\Event;
-use App\Models\EventProduct;
+use App\Models\Rent;
+use App\Models\RentProduct;
 use App\Models\Product;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -20,44 +20,44 @@ class NewsComponent extends Component
         "news" => false,
     ];
 
-    public $events, $filteredEvents, $products,$offON;
+    public $rents, $filteredRents, $products, $offON;
 
     public function mount()
     {
-        $this->addCrud(Event::class, ["useItemsKey" => false, "get" => false, "afterUpdate" => "getProducts"]);
+        $this->addCrud(Rent::class, ["useItemsKey" => false, "get" => false, "afterUpdate" => "getProducts"]);
         $this->addCrud(Product::class, ["useItemsKey" => false, "get" => true]);
-    
-        $this->events = Event::whereBetween("date", [
+
+        $this->rents = Rent::whereBetween("date", [
             Carbon::now()->format("Y-m-d"),
             Carbon::now()->addDays(1)->format("Y-m-d")
         ])->get();
-    
-        if ($this->events->isEmpty()) {
+
+        if ($this->rents->isEmpty()) {
             $this->emit('toggleNews', false);
         }
     }
 
     public function render()
-{
-    $this->filteredEvents =
-        $this->events->filter(function ($event) {
-            return count($event->payments) > 0;
-        });
+    {
+        $this->filteredRents =
+            $this->rents->filter(function ($rent) {
+                return count($rent->payments) > 0;
+            });
 
-    if ($this->filteredEvents->isEmpty()) {
-        $this->modals["news"] = false;
-        $this->offON = false;
-    }else{
-        $this->offON = true;
+        if ($this->filteredRents->isEmpty()) {
+            $this->modals["news"] = false;
+            $this->offON = false;
+        } else {
+            $this->offON = true;
+        }
+
+        return view('livewire.news-component');
     }
 
-    return view('livewire.news-component');
-}
-
-    public function getTotal($event)
+    public function getTotal($rent)
     {
-        $total = $event["price"] ?? 0;
-        foreach ($event["products"] as $data) {
+        $total = $rent["price"] ?? 0;
+        foreach ($rent["products"] as $data) {
             $total += $this->products->find($data["product_id"])->price * $data["quantity"];
         }
         return $total;
@@ -65,9 +65,9 @@ class NewsComponent extends Component
 
     public function getRemaining($id)
     {
-        $event = $this->events->find($id);
-        $remaining = $this->getTotal($event);
-        foreach ($event["payments"] as $payment) {
+        $rent = $this->rents->find($id);
+        $remaining = $this->getTotal($rent);
+        foreach ($rent["payments"] as $payment) {
             $remaining -= $payment["amount"];
         }
         return $remaining;
@@ -75,18 +75,20 @@ class NewsComponent extends Component
 
     public function getProducts()
     {
-        if ($this->events->isEmpty()) return;
-        if ($this->products->isEmpty()) return;
-
-        $event = $this->events->last();
-        if (!$event)
+        if ($this->rents->isEmpty())
+            return;
+        if ($this->products->isEmpty())
             return;
 
-        $products = EventProduct::where("event_id", $event->id)->get();
-        $event->products = $products;
+        $rent = $this->rents->last();
+        if (!$rent)
+            return;
 
-        $this->events->pop();
-        $this->events->push($event);
+        $products = RentProduct::where("rent_id", $rent->id)->get();
+        $rent->products = $products;
+
+        $this->rents->pop();
+        $this->rents->push($rent);
     }
 
 
@@ -96,7 +98,7 @@ class NewsComponent extends Component
     }
 
 
-    public function openEvent($id)
+    public function openRent($id)
     {
         $this->toggleNews(false);
         $this->emit("Modal", "save", true, ["id" => $id]);

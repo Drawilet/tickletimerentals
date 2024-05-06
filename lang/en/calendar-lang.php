@@ -1,9 +1,9 @@
 <?php
 return [
-    "new-event" => "New event",
-    "update-event" => "Update event",
+    "new-rent" => "New rent",
+    "update-rent" => "Update rent",
 
-    'Eventname' => 'Event name',
+    'Rentname' => 'Rent name',
     'Car' => 'Car',
     'Customer' => 'Customer',
     'Date' => 'Date',
@@ -17,7 +17,7 @@ return [
     'Name' => 'Name',
     'Save' => 'Save',
     'Searchproducts' => 'Search products...',
-    'event' => 'Event',
+    'rent' => 'Rent',
     'Amount' => 'Amount',
     'balance' => 'Balance',
     'AddPayment' => 'Add payment',
@@ -40,13 +40,13 @@ return [
     "payments" => "It has :payments_count payments.",
     "delete" => "Delete",
     "cancel" => "Cancel",
-    "delete-success" => "Event deleted successfully!",
+    "delete-success" => "Rent deleted successfully!",
 
     "show-payments" => "Show payments",
     "hide-payments" => "Hide payments",
 
-    "event-not-found" => "Event not found, try to refresh the page or re create the event.",
+    "rent-not-found" => "Rent not found, try to refresh the page or re create the rent.",
     "toast" => "toast",
     "success" => "success",
-    "EventPayment" => "EventPayment added successfully",
+    "RentPayment" => "RentPayment added successfully",
 ];

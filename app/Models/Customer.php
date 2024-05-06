@@ -16,8 +16,8 @@ class Customer extends Base
         "notes",
     ];
 
-    public function events()
+    public function rents()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Rent::class);
     }
 }

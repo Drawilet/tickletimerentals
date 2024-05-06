@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Event extends Base
+class Rent extends Base
 {
     use HasFactory;
     protected $fillable = ["name", "car_id", "customer_id", "date", "start_time", "end_time", "price", "notes"];
@@ -21,11 +21,11 @@ class Event extends Base
 
     public function products()
     {
-        return $this->hasMany(EventProduct::class);
+        return $this->hasMany(RentProduct::class);
     }
 
     public function payments()
     {
-        return $this->hasMany(EventPayment::class);
+        return $this->hasMany(RentPayment::class);
     }
 }
