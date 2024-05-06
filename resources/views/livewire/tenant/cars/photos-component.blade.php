@@ -15,7 +15,7 @@
         if($event.target.files[0].size > 1000000) {
             $wire.emit('toast', 'error','{{ __('toast-lang.exceded-file-size') }}')
         } else {
-            $wire.upload('uploadedPhotos', $rent.target.files[0])
+            $wire.upload('uploadedPhotos', $event.target.files[0])
         }
             " />
 
