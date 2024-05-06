@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\Dashboard\UserDashboard;
 
 use App\Http\Traits\WithCrudActions;
-use App\Models\Event;
 use App\Models\Car;
+use App\Models\Rent;
 use Asantibanez\LivewireCalendar\LivewireCalendar;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -18,7 +18,7 @@ class CalendarComponent extends LivewireCalendar
 
     public function getCurrentEvents()
     {
-        $this->currentEvents = Event::where('date', '>=', $this->gridStartsAt)
+        $this->currentEvents = Rent::where('date', '>=', $this->gridStartsAt)
             ->where('date', '<=', $this->gridEndsAt)
             ->when(count($this->filters['cars']) > 0, function ($query) {
                 return $query->whereIn('car_id', $this->filters['cars']);
@@ -33,9 +33,9 @@ class CalendarComponent extends LivewireCalendar
         });
 
         if ($key !== false) {
-            $this->currentEvents[$key] = Event::find($event['id']);
+            $this->currentEvents[$key] = Rent::find($event['id']);
         } else {
-            $this->currentEvents->push(Event::find($event['id']));
+            $this->currentEvents->push(Rent::find($event['id']));
         }
     }
 

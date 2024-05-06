@@ -3,10 +3,10 @@
 namespace App\Http\Livewire\Tenant;
 
 use App\Http\Livewire\Util\CrudComponent;
-use App\Models\Event;
-use App\Models\EventPayment;
+use App\Models\Rent;
+use App\Models\RentPayment;
 
-class EventPaymentsComponent extends CrudComponent
+class RentPaymentsComponent extends CrudComponent
 {
     public $events = ['beforeSave', 'specialValidator'];
 
@@ -17,15 +17,15 @@ class EventPaymentsComponent extends CrudComponent
     }
     public function mount()
     {
-        $this->setup(EventPayment::class, [
+        $this->setup(RentPayment::class, [
             'mainKey' => 'id',
             'types' => [
-                'event_id' => [
+                'rent_id' => [
                     'type' => 'select',
-                    'options' => Event::all()->map(function ($event) {
+                    'options' => Rent::all()->map(function ($rent) {
                         return [
-                            'value' => $event->id,
-                            'label' => $event->name,
+                            'value' => $rent->id,
+                            'label' => $rent->name,
                         ];
                     }),
                 ],
@@ -39,19 +39,19 @@ class EventPaymentsComponent extends CrudComponent
         ]);
     }
 
-    public function getTotal($event)
+    public function getTotal($rent)
     {
-        $total = $event['price'] ?? 0;
-        foreach ($event['products'] as $data) {
+        $total = $rent['price'] ?? 0;
+        foreach ($rent['products'] as $data) {
             $total += $this->products->find($data['product_id'])->price * $data['quantity'];
         }
         return $total;
     }
 
-    public function getRemaining($event)
+    public function getRemaining($rent)
     {
-        $remaining = $this->getTotal($event);
-        foreach ($event['payments'] as $payment) {
+        $remaining = $this->getTotal($rent);
+        foreach ($rent['payments'] as $payment) {
             $remaining -= $payment['amount'];
         }
         return $remaining;
@@ -59,8 +59,8 @@ class EventPaymentsComponent extends CrudComponent
 
     public function specialValidator($payment)
     {
-        $event = Event::find($payment['event_id']);
-        $remaining = $this->getRemaining($event);
+        $rent = Rent::find($payment['rent_id']);
+        $remaining = $this->getRemaining($rent);
 
         return [
             'amount' => 'numeric|max:' . $remaining,

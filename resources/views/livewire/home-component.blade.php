@@ -10,8 +10,8 @@
         </div>
     </section>
 
-    <x-hero-component title="{{ __('home-lang.event.title') }}" description="{{ __('home-lang.event.description') }}"
-        src="event.png" alt="Tickle Time Rentals" align="left" />
+    <x-hero-component title="{{ __('home-lang.rent.title') }}" description="{{ __('home-lang.rent.description') }}"
+        src="rent.png" alt="Tickle Time Rentals" align="left" />
 
     <x-hero-component title="{{ __('home-lang.alert.title') }}" description="{{ __('home-lang.alert.description') }}"
         src="alert.png" alt="Tickle Time Rentals" />

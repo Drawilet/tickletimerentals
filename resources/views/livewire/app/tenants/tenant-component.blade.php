@@ -49,8 +49,8 @@
                     <div class="stat-value text-4xl">{{ $tenant->cars->count() }}</div>
                 </div>
                 <div class="stat flex-1 p-4 shadow">
-                    <div class="stat-title text-2xl">{{ __('sidebar.events') }}</div>
-                    <div class="stat-value text-4xl">{{ $tenant->events->count() }}</div>
+                    <div class="stat-title text-2xl">{{ __('sidebar.rents') }}</div>
+                    <div class="stat-value text-4xl">{{ $tenant->rents->count() }}</div>
                 </div>
 
             </div>

@@ -267,7 +267,7 @@
                     </p>
                     <h2>Our services </h2>
                     <p>we provide a comprehensive solution for reservation management,
-                        appointments and events, with a friendly interface and functions that improve efficiency
+                        appointments and rents, with a friendly interface and functions that improve efficiency
                         and user satisfaction in the planning process.
                     </p>
                 </div>

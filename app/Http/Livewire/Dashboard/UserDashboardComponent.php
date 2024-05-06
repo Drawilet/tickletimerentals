@@ -5,8 +5,8 @@ namespace App\Http\Livewire\Dashboard;
 use App\Http\Traits\WithCrudActions;
 use App\Http\Traits\WithValidations;
 use App\Models\Customer;
-use App\Models\Event;
-use App\Models\EventPayment;
+use App\Models\Rent;
+use App\Models\RentPayment;
 use App\Models\Product;
 use App\Models\Car;
 use Carbon\Carbon;
@@ -29,7 +29,7 @@ class UserDashboardComponent extends Component
         "newCustomer" => false,
         "payments" => false,
     ];
-    public $event, $initialEvent = [
+    public $rent, $initialRent = [
         "customer_id" => null,
         "name" => null,
         "car_id" => null,
@@ -48,9 +48,9 @@ class UserDashboardComponent extends Component
         "product_name" => null,
     ];
 
-    public $payment, $initialEventPayment = [
+    public $payment, $initialRentPayment = [
         "user_id" => null,
-        "event_id" => null,
+        "rent_id" => null,
         "amount" => null,
         "notes" => null,
     ];
@@ -79,14 +79,14 @@ class UserDashboardComponent extends Component
 
     public function mount()
     {
-        $this->addCrud(Event::class, ["useItemsKey" => false, "get" => false, "afterUpdate" => "updateEvents"]);
-        $this->addCrud(EventPayment::class, ["useItemsKey" => false, "get" => true]);
+        $this->addCrud(Rent::class, ["useItemsKey" => false, "get" => false, "afterUpdate" => "updateRent"]);
+        $this->addCrud(RentPayment::class, ["useItemsKey" => false, "get" => true]);
         $this->addCrud(Customer::class, ["useItemsKey" => false, "get" => true]);
         $this->addCrud(Car::class, ["useItemsKey" => false, "get" => true]);
         $this->addCrud(Product::class, ["useItemsKey" => false, "get" => true]);
 
-        $this->event = $this->initialEvent;
-        $this->payment = $this->initialEventPayment;
+        $this->rent = $this->initialRent;
+        $this->payment = $this->initialRentPayment;
         $this->filters = $this->initialFilters;
 
         $this->customers = Customer::take($this->CUSTOMER_PER_PAGE)->get();
@@ -97,7 +97,7 @@ class UserDashboardComponent extends Component
     {
         $this->SelectCustomer = Customer::find($id);
         $this->searchTerm = $this->SelectCustomer->firstname . ' ' . $this->SelectCustomer->lastname;
-        $this->event['customer_id'] = $id;
+        $this->rent['customer_id'] = $id;
 
     }
 
@@ -136,7 +136,7 @@ class UserDashboardComponent extends Component
             return true;
         });
 
-        $this->currentSpace = $this->cars->find($this->event["car_id"]) ?? null;
+        $this->currentSpace = $this->cars->find($this->rent["car_id"]) ?? null;
 
         $this->CAN_LOAD_MORE = $this->customers->count() > $this->skip_customer;
         return view('livewire.dashboard.user-dashboard-component');
@@ -147,30 +147,30 @@ class UserDashboardComponent extends Component
         switch ($name) {
             case 'save':
                 if ($value === true) {
-                    $this->event = $this->initialEvent;
+                    $this->rent = $this->initialRent;
                     $this->searchTerm = '';
                 } else
                     $this->modals["payments"] = false;
 
                 if ($data) {
                     if (gettype($data) != "array" && array_keys($data->toArray()) > 2) {
-                        $this->event = array_merge(
-                            $this->event,
+                        $this->rent = array_merge(
+                            $this->rent,
                             $data->load("products", "payments", "customer")->toArray()
                         );
                     } else if (isset($data["id"])) {
-                        $event = Event::find($data["id"]);
-                        if ($event)
-                            $this->event = array_merge(
-                                $this->event,
-                                $event->load("products", "payments", "customer")->toArray()
+                        $rent = Rent::find($data["id"]);
+                        if ($rent)
+                            $this->rent = array_merge(
+                                $this->rent,
+                                $rent->load("products", "payments", "customer")->toArray()
                             );
                     } else
-                        $this->event = array_merge($this->event, $data);
+                        $this->rent = array_merge($this->rent, $data);
                 }
 
-                if (isset($event) && isset($event["customer"])) {
-                    $this->searchTerm = $event["customer"]["firstname"] . ' ' . $event["customer"]["lastname"];
+                if (isset($rent) && isset($rent["customer"])) {
+                    $this->searchTerm = $rent["customer"]["firstname"] . ' ' . $rent["customer"]["lastname"];
                 }
 
                 break;
@@ -182,7 +182,7 @@ class UserDashboardComponent extends Component
 
             case 'delete':
                 if ($value === true) {
-                    $this->event["payments_count"] = count($this->event["payments"]);
+                    $this->rent["payments_count"] = count($this->rent["payments"]);
                     $this->modals["save"] = false;
                 }
                 break;
@@ -191,11 +191,11 @@ class UserDashboardComponent extends Component
         $this->modals[$name] = $value;
     }
 
-    public function saveEvent()
+    public function saveRent()
     {
         $schedule = $this->getSchedule();
 
-        Validator::make($this->event, [
+        Validator::make($this->rent, [
             "name" => "required|" . $this->validations["text"],
             "car_id" => "required",
             "customer_id" => "required|exists:customers,id",
@@ -204,17 +204,17 @@ class UserDashboardComponent extends Component
             "notes" => "nullable|" . $this->validations["textarea"],
         ])->validate();
 
-        if (!isset($this->event["id"])) {
-            Validator::make($this->event, [
+        if (!isset($this->rent["id"])) {
+            Validator::make($this->rent, [
                 "start_time" => "required|after_or_equal:" . $schedule["opening"] . "|before_or_equal:" . $schedule["closing"],
                 "end_time" => "required|after:start_time|before_or_equal:" . $schedule["closing"],
             ])->validate();
 
-            $events = Event::where("car_id", $this->event["car_id"])->where("date", $this->event["date"]);
-            foreach ($events as $event) {
+            $rents = Rent::where("car_id", $this->rent["car_id"])->where("date", $this->rent["date"]);
+            foreach ($rents as $rent) {
                 if (
-                    ($this->event["start_time"] >= $event->start_time && $this->event["start_time"] < $event->end_time) ||
-                    ($this->event["end_time"] > $event->start_time && $this->event["end_time"] <= $event->end_time)
+                    ($this->rent["start_time"] >= $rent->start_time && $this->rent["start_time"] < $rent->end_time) ||
+                    ($this->rent["end_time"] > $rent->start_time && $this->rent["end_time"] <= $rent->end_time)
                 ) {
                     $this->emit("toast", "error", __("calendar-lang.not-available"));
                     return;
@@ -222,56 +222,56 @@ class UserDashboardComponent extends Component
             }
         }
 
-        $event = Event::updateOrCreate(["id" => $this->event["id"] ?? ""], $this->event);
+        $rent = Rent::updateOrCreate(["id" => $this->rent["id"] ?? ""], $this->rent);
 
-        $event->products()->delete();
-        foreach ($this->event["products"] as $product) {
-            $event->products()->create([
+        $rent->products()->delete();
+        foreach ($this->rent["products"] as $product) {
+            $rent->products()->create([
                 "product_id" => $product["product_id"],
                 "quantity" => $product["quantity"],
             ]);
         }
 
-        if (strlen($event["start_time"]) == 5)
-            $event["start_time"] .= ":00";
-        if (strlen($event["end_time"]) == 5)
-            $event["end_time"] .= ":00";
+        if (strlen($rent["start_time"]) == 5)
+            $rent["start_time"] .= ":00";
+        if (strlen($rent["end_time"]) == 5)
+            $rent["end_time"] .= ":00";
 
-        $this->Modal("save", true, $event->load("products", "payments", "customer")->toArray());
+        $this->Modal("save", true, $rent->load("products", "payments", "customer")->toArray());
 
-        $this->emit("update-event", $event);
-        $this->emit("toast", "success", __("calendar-lang.save-success") . " " . $event->name);
+        $this->emit("update-rent", $rent);
+        $this->emit("toast", "success", __("calendar-lang.save-success") . " " . $rent->name);
 
         $user = Auth::user();
-        $events = Event::where('tenant_id', $user->tenant_id)->get();
-        if ($events->count() == 1) {
+        $rents = Rent::where('tenant_id', $user->tenant_id)->get();
+        if ($rents->count() == 1) {
             $user->wizard_step = 4;
             $user->save();
         }
     }
-    public function updateEvents($action, $data)
+    public function updateRents($action, $data)
     {
-        $this->emit("update-events", $this->events->load("car", "customer"));
+        $this->emit("update-rents", $this->rents->load("car", "customer"));
 
-        if (isset($this->event["id"]) && $this->event["id"] == $data["id"]) {
-            $event = $this->events->find($data["id"]);
-            if ($event)
-                $this->event = $event->load("products", "payments", "customer", "car")->toArray();
+        if (isset($this->rent["id"]) && $this->rent["id"] == $data["id"]) {
+            $rent = $this->rents->find($data["id"]);
+            if ($rent)
+                $this->rent = $rent->load("products", "payments", "customer", "car")->toArray();
             else
-                $this->event = $this->initialEvent;
+                $this->rent = $this->initialRent;
         }
     }
 
     public function productAction($product_id, $action, $quantity = 1)
     {
-        $productIndex = array_search($product_id, array_column($this->event["products"], "product_id"));
+        $productIndex = array_search($product_id, array_column($this->rent["products"], "product_id"));
 
         switch ($action) {
             case 'add':
                 if ($productIndex !== false) {
-                    $this->event["products"][$productIndex]["quantity"] += $quantity;
+                    $this->rent["products"][$productIndex]["quantity"] += $quantity;
                 } else {
-                    $this->event["products"][] = [
+                    $this->rent["products"][] = [
                         "quantity" => $quantity,
                         "product_id" => $product_id,
                     ];
@@ -280,17 +280,17 @@ class UserDashboardComponent extends Component
 
             case 'decrease':
                 if ($productIndex !== false) {
-                    if ($this->event["products"][$productIndex]["quantity"] > 1) {
-                        $this->event["products"][$productIndex]["quantity"] -= $quantity;
+                    if ($this->rent["products"][$productIndex]["quantity"] > 1) {
+                        $this->rent["products"][$productIndex]["quantity"] -= $quantity;
                     } else {
-                        unset($this->event["products"][$productIndex]);
+                        unset($this->rent["products"][$productIndex]);
                     }
                 }
                 break;
 
             case 'remove':
                 if ($productIndex !== false) {
-                    unset($this->event["products"][$productIndex]);
+                    unset($this->rent["products"][$productIndex]);
                 }
                 break;
         }
@@ -300,8 +300,8 @@ class UserDashboardComponent extends Component
 
     public function getTotal()
     {
-        $total = $this->event["price"] ?? 0;
-        foreach ($this->event["products"] as $data) {
+        $total = $this->rent["price"] ?? 0;
+        foreach ($this->rent["products"] as $data) {
             $total += $this->products->find($data["product_id"])->price * $data["quantity"];
         }
         return $total;
@@ -310,16 +310,16 @@ class UserDashboardComponent extends Component
     public function getRemaining()
     {
         $remaining = $this->getTotal();
-        foreach ($this->event["payments"] as $payment) {
+        foreach ($this->rent["payments"] as $payment) {
             $remaining -= $payment["amount"];
         }
         return $remaining;
     }
 
-    public function addEventPayment()
+    public function addRentPayment()
     {
-        if (!$this->event["id"] || !Event::find($this->event["id"]))
-            return $this->emit("toast", "error", __("calendar-lang.event-not-found"));
+        if (!$this->rent["id"] || !Rent::find($this->rent["id"]))
+            return $this->emit("toast", "error", __("calendar-lang.rent-not-found"));
 
         Validator::make($this->payment, [
             "amount" => "required|" . "max:" . $this->getRemaining() . "|" . $this->validations["number"],
@@ -327,14 +327,14 @@ class UserDashboardComponent extends Component
         ])->validate();
 
         $this->payment["amount"] = (float) $this->payment["amount"];
-        $this->payment["event_id"] = $this->event["id"];
+        $this->payment["rent_id"] = $this->rent["id"];
         $this->payment["user_id"] = auth()->user()->id;
 
-        $payment = EventPayment::create($this->payment);
-        $this->event["payments"][] = $payment;
-        $this->payment = $this->initialEventPayment;
+        $payment = RentPayment::create($this->payment);
+        $this->rent["payments"][] = $payment;
+        $this->payment = $this->initialRentPayment;
 
-        $this->emit(__("calendar-lang.toast"), __("calendar-lang.success"), __("calendar-lang.EventPayment"));
+        $this->emit(__("calendar-lang.toast"), __("calendar-lang.success"), __("calendar-lang.RentPayment"));
 
         $this->handleCrudActions(
             "payment",
@@ -344,7 +344,7 @@ class UserDashboardComponent extends Component
             ]
         );
 
-        $this->emit("update-event", $this->event);
+        $this->emit("update-rent", $this->rent);
     }
 
     public function newCustomer()
@@ -372,14 +372,14 @@ class UserDashboardComponent extends Component
             ]
         );
 
-        $this->event["customer_id"] = $customer->id;
+        $this->rent["customer_id"] = $customer->id;
 
         $this->emit("toast", "success", __('toast-lang.Customeraddedsuccessfully'));
     }
 
     public function getSchedule()
     {
-        $date = Carbon::parse($this->event["date"]);
+        $date = Carbon::parse($this->rent["date"]);
         $dayName = strtolower($date->format("l"));
         $schedule = $this->currentSpace
             ? $this->currentSpace->schedule[$dayName]
@@ -393,29 +393,29 @@ class UserDashboardComponent extends Component
 
     function updateEndTime()
     {
-        if ($this->event["end_time"])
+        if ($this->rent["end_time"])
             return;
-        $this->event["end_time"] = $this->event["start_time"];
+        $this->rent["end_time"] = $this->rent["start_time"];
     }
 
-    public function deleteEvent($id)
+    public function deleteRent($id)
     {
         $this->Modal("delete", false);
 
-        $event = Event::find($id);
-        if (!$event)
+        $rent = Rent::find($id);
+        if (!$rent)
             return;
 
-        $event->payments()->delete();
-        $event->products()->delete();
+        $rent->payments()->delete();
+        $rent->products()->delete();
 
-        $event->delete();
+        $rent->delete();
 
         $this->handleCrudActions(
-            "event",
+            "rent",
             [
                 "action" => "delete",
-                "data" => $this->event
+                "data" => $this->rent
             ]
         );
 

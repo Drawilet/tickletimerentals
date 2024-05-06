@@ -1,9 +1,9 @@
 <?php
 return [
-    "new-event" => "Nuevo evento",
-    "update-event" => "Actualizar evento",
+    "new-rent" => "Nuevo renta",
+    "update-rent" => "Actualizar renta",
 
-    'Eventname' => 'Nombre del evento',
+    'Rentname' => 'Nombre del renta',
     'Car' => 'Carro',
     'Customer' => 'Cliente',
     'Date' => 'Fecha',
@@ -17,12 +17,12 @@ return [
     'Name' => 'Nombre',
     'Save' => 'Guardar',
     'Searchproducts' => 'Buscar productos...',
-    'event' => 'Evento',
+    'rent' => 'Renta',
     'Amount' => 'Importe',
     'Concept' => 'Notas',
     'balance' => 'Saldo',
     'AddPayment' => 'Añadir pago',
-    'Payments' => 'Pagos relacionados al evento',
+    'Payments' => 'Pagos relacionados al renta',
     "payment-notes" => "Notas del pago",
     'Opening' => 'Apertura',
     'Closing' => 'Cierre',
@@ -41,13 +41,13 @@ return [
     "payments" => "Tiene :payments_count pagos.",
     "delete" => "Eliminar",
     "cancel" => "Cancelar",
-    "delete-success" => "¡Evento eliminado con éxito!",
+    "delete-success" => "¡Renta eliminado con éxito!",
 
     "show-payments" => "Mostrar pagos",
     "hide-payments" => "Ocultar pagos",
 
-    "event-not-found" => "Evento no encontrado, intenta refrescar la página o volver a crear el evento.",
+    "rent-not-found" => "Renta no encontrado, intenta refrescar la página o volver a crear el renta.",
     "toast" => "toast",
     "success" => "éxito",
-    "EventPayment" => "Pago de evento añadido con éxito",
+    "RentPayment" => "Pago de renta añadido con éxito",
 ];

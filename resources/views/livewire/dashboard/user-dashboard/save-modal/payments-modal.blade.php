@@ -1,4 +1,4 @@
-@isset($event['id'])
+@isset($rent['id'])
     @php
         $remaining = $this->getRemaining();
     @endphp
@@ -10,8 +10,8 @@
 
         <ul class="menu">
             <div class=" overflow-y-auto max-h-48">
-                @isset($event['payments'])
-                    @foreach ($event['payments'] as $payment)
+                @isset($rent['payments'])
+                    @foreach ($rent['payments'] as $payment)
                         <li>
                             <a class="flex justify-between">
                                 <span>{{ Carbon\Carbon::parse($payment['created_at'])->format('d/m/Y') }}</span>
@@ -45,7 +45,7 @@
                     </x-form-control>
 
 
-                    <button class="btn btn-primary w-full mt-2" wire:click.prevent='addEventPayment()'>
+                    <button class="btn btn-primary w-full mt-2" wire:click.prevent='addRentPayment()'>
                         <x-icons.plus />{{ __('calendar-lang.AddPayment') }}
                     </button>
                 </form>

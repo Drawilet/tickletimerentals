@@ -58,7 +58,7 @@ class ProductsComponent extends CrudComponent
                 }
 
             ",
-            'foreigns' => ['events'],
+            'foreigns' => ['rents'],
         ]);
     }
 

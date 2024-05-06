@@ -1,19 +1,19 @@
 <?php
 return [
     "hero" => [
-        "title" => "¡Organiza tus eventos sin estrés!",
-        "description" => "Desde la gestión de clientes y productos hasta la programación de eventos y la administración de pagos, todo en un solo lugar",
+        "title" => "¡Organiza tus rentas sin estrés!",
+        "description" => "Desde la gestión de clientes y productos hasta la programación de rentas y la administración de pagos, todo en un solo lugar",
         "cta" => "Empieza ahora",
     ],
 
-    "event" => [
-        "title" => "Programación de eventos",
-        "description" => "Programa tus eventos de manera sencilla y eficiente"
+    "rent" => [
+        "title" => "Programación de rentas",
+        "description" => "Programa tus rentas de manera sencilla y eficiente"
     ],
 
     "alert" => [
-        "title" => "Alerta de eventos proximos",
-        "description" => "Recibe notificaciones de eventos proximos para que no se te pase ninguno"
+        "title" => "Alerta de rentas proximos",
+        "description" => "Recibe notificaciones de rentroximos para que no se te pase ninguno"
     ],
 
     "product" => [

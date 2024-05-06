@@ -1,9 +1,9 @@
 <?php
 return [
-    'title' => 'Próximos eventos',
-    'message' => 'El evento se llevará a cabo el día ',
+    'title' => 'Próximos rentas',
+    'message' => 'El renta se llevará a cabo el día ',
     'payment-message' => 'Resta por liquidar la cantidad de ',
-    "paid" => "El evento ha sido pagado.",
+    "paid" => "El rent ha sido pagado.",
 
     'remind' => 'Recordarme',
     'close' => 'Cerrar',

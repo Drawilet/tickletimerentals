@@ -1,6 +1,6 @@
 <?php
 return [
-    'event_id' => 'Evento',
+    'rent_id' => 'Renta',
     'concept' => 'Concepto',
     'amount' => 'Monto',
     'notes' => 'Notas',
