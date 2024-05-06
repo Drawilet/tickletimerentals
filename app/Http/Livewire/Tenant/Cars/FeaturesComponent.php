@@ -54,7 +54,8 @@ class FeaturesComponent extends Component
     public function delete($key)
     {
         unset($this->data['features'][$key]);
-        $this->data['features'] = array_values($this->data['features']); 
+        $this->data['features'] = array_values($this->data['features']);
+        $this->handlefeaturesChange();
     }
 
 
