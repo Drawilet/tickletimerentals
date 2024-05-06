@@ -12,12 +12,12 @@
             {{ $dayInMonth ? 'bg-base-300' : 'bg-base-200' }} flex flex-col {{ $isToday || $day->isFuture() ? 'cursor-pointer' : 'cursor-not-allowed' }}">
             {{-- Number of Day --}}
             <div class="flex items-center">
-                <p
-                    class="text-sm rounded-full
+                <span
+                    class="size-7 text-sm rounded-full flex justify-center items-center
                     {{ $isToday ? 'bg-primary p-2' : '' }} {{ $dayInMonth ? ' font-medium ' : '' }}">
                     {{ $day->format('j') }}
 
-                </p>
+                </span>
                 <p class="text-xs text-gray-600 ml-4">
                     @if ($events->isNotEmpty())
                         {{ $events->count() }} {{ Str::plural(__('calendar-lang.event'), $events->count()) }}
