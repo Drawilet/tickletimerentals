@@ -8,6 +8,10 @@ class FeaturesComponent extends Component
 {
     protected $listeners = ['update-data' => 'handleData'];
 
+    public $name;
+    public $value;
+    public $editingId = null;
+
     public $data = [
         'features' => [],
     ];
@@ -31,4 +35,47 @@ class FeaturesComponent extends Component
         $this->emit('update-data', $this->data);
     }
 
+    public function add()
+    {
+        $this->validate([
+            'name' => 'required',
+            'value' => 'required',
+        ]);
+
+        $this->data['features'][] = [
+            'name' => $this->name,
+            'value' => $this->value,
+        ];
+
+        $this->name = '';
+        $this->value = '';
+        $this->handlefeaturesChange();
+    }
+    public function delete($key)
+    {
+        unset($this->data['features'][$key]);
+        $this->data['features'] = array_values($this->data['features']); 
+    }
+
+
+    public function edit($name)
+    {
+        $this->editingId = $name;
+        $feature = $this->data['features'][$name];
+        $this->name = $feature['name'];
+        $this->value = $feature['value'];
+    }
+
+    public function save()
+    {
+        $this->data['features'][$this->editingId] = [
+            'name' => $this->name,
+            'value' => $this->value,
+        ];
+        $this->name = '';
+        $this->value = '';
+        $this->editingId = null;
+        $this->handlefeaturesChange();
+    }
 }
+
