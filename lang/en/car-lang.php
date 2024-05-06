@@ -31,6 +31,16 @@ return [
     'engine' => 'Engine',
     'seats' => 'Seats',
     'doors' => 'Doors',
+    "features" => "Features",
+    "feature-name" => "Feature name",
+    "feature-value" => "Feature value",
+    "feature-actions" => "Actions",
+
+    "prices" => "Prices",
+    "price-kilometers" => "Kilometers",
+    "price" => "Price",
+    "price-actions" => "Actions",
+
     'notes' => 'Notes',
 
     'search' => 'Search car...',

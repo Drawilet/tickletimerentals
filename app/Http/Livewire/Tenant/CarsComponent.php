@@ -20,15 +20,6 @@ class CarsComponent extends CrudComponent
         $this->setup(Car::class, [
             'mainKey' => 'name',
             'types' => [
-                "features" => [
-                    "type" => "array",
-                    "component" => FeaturesComponent::class,
-                ],
-                "prices" => [
-                    "type" => "array",
-                    "component" => PricesComponent::class,
-                ],
-
                 'name' => ['type' => 'text'],
                 'photos' => [
                     'type' => 'file',
@@ -75,8 +66,17 @@ class CarsComponent extends CrudComponent
                 'engine' => ['type' => 'text'],
                 'seats' => ['type' => 'number'],
                 'doors' => ['type' => 'number'],
-
-                'notes' => ['type' => 'textarea', 'rules' => 'nullable'],
+                "features" => [
+                    "type" => "array",
+                    "hidden" => true,
+                    "component" => FeaturesComponent::class,
+                ],
+                "prices" => [
+                    "type" => "array",
+                    "hidden" => true,
+                    "component" => PricesComponent::class,
+                ],
+                'notes' => ['type' => 'textarea', 'rules' => 'nullable', "hidden" => true],
             ],
             'mobileStyles' => "
                 .name {

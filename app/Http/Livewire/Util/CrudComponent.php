@@ -35,10 +35,11 @@ class CrudComponent extends Component
         'text' => '',
         'textarea' => '',
         'file' => '',
+        "array" => [],
     ];
 
     public $modals = [
-        'save' => true,
+        'save' => false,
         'delete' => false,
         'error' => false,
     ];
