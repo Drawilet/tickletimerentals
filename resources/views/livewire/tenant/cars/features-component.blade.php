@@ -39,9 +39,9 @@
             </td>
             <td>
                 @if ($editingId === null)
-                    <x-button wire:click="add()" class="btn btn-primary"><x-icons.plus /> </x-button>
+                    <x-button wire:click="add()" class="btn btn-primary w-full"><x-icons.plus /> </x-button>
                 @else
-                    <x-button wire:click="save" class="btn btn-primary">Save</x-button>
+                    <x-button wire:click="save" class="btn btn-primary w-full">Save</x-button>
                 @endif
             </td>
         </tr>

@@ -30,7 +30,6 @@ return new class extends Migration {
             $table->string("doors");
 
             $table->json("features");
-            $table->json("prices");
 
             $table->text('notes')->nullable();
 
