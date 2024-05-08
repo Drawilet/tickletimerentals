@@ -31,6 +31,16 @@ return [
     'engine' => 'Motor',
     'seats' => 'Asientos',
     'doors' => 'Puertas',
+    "features" => "Características",
+    "feature-name" => "Nombre de la característica",
+    "feature-value" => "Valor de la característica",
+    "feature-actions" => "Acciones",
+
+    "prices" => "Precios",
+    "price-kilometers" => "Kilómetros",
+    "price" => "Precio",
+    "price-actions" => "Acciones",
+
     'notes' => 'Notas',
 
     'search' => 'Buscar carro...',
