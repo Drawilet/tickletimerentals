@@ -22,13 +22,11 @@ class Car extends Base
         "seats",
         "doors",
         "features",
-        "prices",
         "tenant_id"
     ];
 
     protected $casts = [
         'features' => 'array',
-        'prices' => 'array',
     ];
 
     public function photos()

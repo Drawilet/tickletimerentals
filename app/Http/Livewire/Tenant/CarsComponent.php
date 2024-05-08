@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Tenant;
 
 use App\Http\Livewire\Tenant\Cars\FeaturesComponent;
 use App\Http\Livewire\Tenant\Cars\PhotosComponent;
-use App\Http\Livewire\Tenant\Cars\PricesComponent;
 use App\Http\Livewire\Util\CrudComponent;
 
 use App\Models\Car;
@@ -70,11 +69,6 @@ class CarsComponent extends CrudComponent
                     "type" => "array",
                     "hidden" => true,
                     "component" => FeaturesComponent::class,
-                ],
-                "prices" => [
-                    "type" => "array",
-                    "hidden" => true,
-                    "component" => PricesComponent::class,
                 ],
                 'notes' => ['type' => 'textarea', 'rules' => 'nullable', "hidden" => true],
             ],
