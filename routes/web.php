@@ -75,6 +75,10 @@ Route::prefix("tenant")->name("tenant.")->middleware($defaultMiddleware)->group(
         ->get('users', \App\Http\Livewire\Tenant\UsersComponent::class)
         ->name('users.show');
 
+    Route
+        ::middleware("permission:tenant.regions.show")
+        ->get('regions', \App\Http\Livewire\Tenant\RegionsComponent::class)
+        ->name('regions.show');
 });
 
 Route

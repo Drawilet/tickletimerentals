@@ -70,7 +70,7 @@ class CarsComponent extends CrudComponent
                     "hidden" => true,
                     "component" => FeaturesComponent::class,
                 ],
-                'notes' => ['type' => 'textarea', 'rules' => 'nullable', "hidden" => true],
+                'notes' => ['type' => 'textarea', 'rules' => 'nullable'],
             ],
             'mobileStyles' => "
                 .name {
