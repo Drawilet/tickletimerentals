@@ -1,12 +1,12 @@
 <x-dialog-modal wire:model.defer="modals.save">
     <x-slot name="title">
-        {{ gettype($data['id']) == 'string' ? __($name . '-lang.' . 'create') : __($name . '-lang.' . 'update') }}
+        {{ gettype($data['id']) == 'string' ? __($name . '.' . 'create') : __($name . '.' . 'update') }}
     </x-slot>
 
     <x-slot name="content">
         @foreach ($types as $key => $type)
             <x-form-control class="mt-2">
-                <x-label for="" value="{{ __($name . '-lang.' . $key) }}" />
+                <x-label for="" value="{{ __($name . '.' . $key) }}" />
 
                 @isset($type['component'])
                     @livewire($type['component'], key($key))
@@ -51,14 +51,13 @@
     </x-slot>
 
     <x-slot name="footer">
-        <button wire:click="Modal('save', false)" type="button"
-            class="btn w-28 mr-2">{{ __('show-lang.cancel') }}</button>
+        <button wire:click="Modal('save', false)" type="button" class="btn w-28 mr-2">{{ __('show.cancel') }}</button>
         <button class="btn btn-primary px-8" wire:click="save" wire:loading.attr="disabled">
             <span wire:loading wire:target="save">
                 {{ __('auth.cargando') }}...
             </span>
             <span wire:loading.remove wire:target="save">
-                {{ __('calendar-lang.Save') }}
+                {{ __('calendar.Save') }}
             </span>
         </button>
     </x-slot>

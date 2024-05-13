@@ -93,7 +93,7 @@
         </div>
 
         <h3 class="text-right -mb-1">
-            {{ __('calendar-lang.balance') }}: ${{ number_format($tenant->balance, 2) }}
+            {{ __('calendar.balance') }}: ${{ number_format($tenant->balance, 2) }}
         </h3>
 
         <h3 class="text-right text-sm">
@@ -102,20 +102,20 @@
 
         <form class="mt-10" wire:submit.prevent='addTransaction'>
             <x-form-control>
-                <x-label value="{{ __('calendar-lang.Amount') }}" />
+                <x-label value="{{ __('calendar.Amount') }}" />
                 <x-input name="transaction.amount" wire:model="transaction.amount" type="number" />
                 <x-input-error for="amount" class="mt-2" />
             </x-form-control>
 
             <x-form-control>
-                <x-label value="{{ __('calendar-lang.payment-notes') }}" />
+                <x-label value="{{ __('calendar.payment-notes') }}" />
                 <textarea class="textarea textarea-bordered" name="notes" wire:model="transaction.notes"> </textarea>
                 <x-input-error for="notes" class="mt-2" />
             </x-form-control>
 
 
             <button class="btn btn-primary w-full mt-2" type="submit">
-                <x-icons.plus />{{ __('calendar-lang.AddPayment') }}
+                <x-icons.plus />{{ __('calendar.AddPayment') }}
             </button>
         </form>
     </div>

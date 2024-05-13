@@ -216,7 +216,7 @@ class UserDashboardComponent extends Component
                     ($this->rent["start_time"] >= $rent->start_time && $this->rent["start_time"] < $rent->end_time) ||
                     ($this->rent["end_time"] > $rent->start_time && $this->rent["end_time"] <= $rent->end_time)
                 ) {
-                    $this->emit("toast", "error", __("calendar-lang.not-available"));
+                    $this->emit("toast", "error", __("calendar.not-available"));
                     return;
                 }
             }
@@ -240,7 +240,7 @@ class UserDashboardComponent extends Component
         $this->Modal("save", true, $rent->load("products", "payments", "customer")->toArray());
 
         $this->emit("update-rent", $rent);
-        $this->emit("toast", "success", __("calendar-lang.save-success") . " " . $rent->name);
+        $this->emit("toast", "success", __("calendar.save-success") . " " . $rent->name);
 
         $user = Auth::user();
         $rents = Rent::where('tenant_id', $user->tenant_id)->get();
@@ -319,7 +319,7 @@ class UserDashboardComponent extends Component
     public function addRentPayment()
     {
         if (!$this->rent["id"] || !Rent::find($this->rent["id"]))
-            return $this->emit("toast", "error", __("calendar-lang.rent-not-found"));
+            return $this->emit("toast", "error", __("calendar.rent-not-found"));
 
         Validator::make($this->payment, [
             "amount" => "required|" . "max:" . $this->getRemaining() . "|" . $this->validations["number"],
@@ -334,7 +334,7 @@ class UserDashboardComponent extends Component
         $this->rent["payments"][] = $payment;
         $this->payment = $this->initialRentPayment;
 
-        $this->emit(__("calendar-lang.toast"), __("calendar-lang.success"), __("calendar-lang.RentPayment"));
+        $this->emit(__("calendar.toast"), __("calendar.success"), __("calendar.RentPayment"));
 
         $this->handleCrudActions(
             "payment",
@@ -374,7 +374,7 @@ class UserDashboardComponent extends Component
 
         $this->rent["customer_id"] = $customer->id;
 
-        $this->emit("toast", "success", __('toast-lang.Customeraddedsuccessfully'));
+        $this->emit("toast", "success", __('toast.Customeraddedsuccessfully'));
     }
 
     public function getSchedule()
@@ -419,6 +419,6 @@ class UserDashboardComponent extends Component
             ]
         );
 
-        $this->emit("toast", "success", __('calendar-lang.delete-success'));
+        $this->emit("toast", "success", __('calendar.delete-success'));
     }
 }

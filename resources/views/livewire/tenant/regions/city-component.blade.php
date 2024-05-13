@@ -1,10 +1,10 @@
 <section>
     <form class="flex justify-between gap-2 mb-4">
         <x-form-control>
-            <x-label for="filter.country_id" value="{{ __('region-lang.country') }}" />
+            <x-label for="filter.country_id" value="{{ __('region.country') }}" />
             <select class="select" wire:model='filter.country_id' wire:change='handleCountryChange'>
                 <option value="">
-                    {{ __('region-lang.country-placeholder') }}
+                    {{ __('region.country-placeholder') }}
                 </option>
                 @foreach ($countries as $country)
                     <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -14,10 +14,10 @@
         </x-form-control>
 
         <x-form-control>
-            <x-label for="filter.state_id" value="{{ __('region-lang.division') }}" />
+            <x-label for="filter.state_id" value="{{ __('region.division') }}" />
             <select class="select" wire:model='filter.division_id' wire:change='handleDivisionChange'>
                 <option value="">
-                    {{ __('region-lang.division-placeholder') }}
+                    {{ __('region.division-placeholder') }}
                 </option>
                 @foreach ($divisions as $division)
                     <option value="{{ $division->id }}">{{ $division->name }}</option>
@@ -33,7 +33,7 @@
     <div class="flex justify-between px-2 gap-4">
         <div class="flex-1">
             <h3 class="font-bold">
-                {{ __('region-lang.available-cities') }}
+                {{ __('region.available-cities') }}
             </h3>
             <ul class="max-h-96 overflow-y-scroll">
                 @foreach ($cities as $city)
@@ -48,7 +48,7 @@
         </div>
         <div class="flex-1">
             <h3 class="font-bold">
-                {{ __('region-lang.selected-cities') }}
+                {{ __('region.selected-cities') }}
             </h3>
             <ul class="max-h-96 overflow-y-scroll">
                 @foreach ($data['cities'] as $key => $city)

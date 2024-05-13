@@ -18,7 +18,7 @@
                             <span>
                                 @isset($rent['date'])
                                     {{ \Carbon\Carbon::parse($rent['date'])->format('d') }},
-                                    {{ __('month-lang.' . strtolower(\Carbon\Carbon::parse($rent['date'])->format('F'))) }},
+                                    {{ __('month.' . strtolower(\Carbon\Carbon::parse($rent['date'])->format('F'))) }},
                                     {{ \Carbon\Carbon::parse($rent['date'])->format('Y') }}
                                 @endisset
                             </span>

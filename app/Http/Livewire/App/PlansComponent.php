@@ -19,10 +19,10 @@ class PlansComponent extends CrudComponent
                 'duration_unit' => [
                     'type' => 'select',
                     'options' => [
-                        ['value' => 'day', 'label' => __('plan-lang.day')],
-                        ['value' => 'week', 'label' => __('plan-lang.week')],
-                        ['value' => 'month', 'label' => __('plan-lang.month')],
-                        ['value' => 'year', 'label' => __('plan-lang.year')],
+                        ['value' => 'day', 'label' => __('plan.day')],
+                        ['value' => 'week', 'label' => __('plan.week')],
+                        ['value' => 'month', 'label' => __('plan.month')],
+                        ['value' => 'year', 'label' => __('plan.year')],
                     ]
                 ],
             ],

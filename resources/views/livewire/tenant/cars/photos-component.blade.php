@@ -13,7 +13,7 @@
     <input type="file" id="imgs-id" class="hidden" accept="image/*"
         x-on:change="
         if($event.target.files[0].size > 1000000) {
-            $wire.emit('toast', 'error','{{ __('toast-lang.exceded-file-size') }}')
+            $wire.emit('toast', 'error','{{ __('toast.exceded-file-size') }}')
         } else {
             $wire.upload('uploadedPhotos', $event.target.files[0])
         }
@@ -25,7 +25,7 @@
 
     <div class="w-full" wire:loading wire:target="uploadedPhotos">
         <div class="bg-blue-500 text-white px-4 py-2 rounded-md">
-            {{ __('car-lang.uploading') }}
+            {{ __('car.uploading') }}
         </div>
     </div>
 </section>

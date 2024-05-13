@@ -7,9 +7,9 @@
     <div class="dropdown md:dropdown-end">
         <div tabindex="0" role="button" class="btn m-1 px-10">
             @if (count($cars) == count($filters['cars']))
-                {{ __('filter-lang.All') }}
+                {{ __('filter.All') }}
             @else
-                {{ count($filters['cars']) }} {{ __('filter-lang.Cars') }}
+                {{ count($filters['cars']) }} {{ __('filter.Cars') }}
             @endif
         </div>
 
@@ -18,7 +18,7 @@
                 <label for="all">
                     <input id="all" type="checkbox" class="checkbox" wire:click="toggleSpace('all')"
                         @checked(count($cars) == count($filters['cars'])) />
-                    {{ __('filter-lang.All') }}
+                    {{ __('filter.All') }}
                 </label>
             </li>
             @foreach ($cars as $car)
