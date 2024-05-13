@@ -321,7 +321,7 @@ class CrudComponent extends Component
         ]);
 
         $this->Modal('save', false);
-        $this->emit('toast', 'success', $this->Name . ' ' . __('toast-lang.savedsuccessfully'));
+        $this->emit('toast', 'success', $this->Name . ' ' . __('toast.savedsuccessfully'));
     }
     public function delete()
     {
@@ -332,7 +332,7 @@ class CrudComponent extends Component
             $items = $item->$foreign;
             if (count($items) != 0) {
                 $this->modals['error'] = true;
-                $this->emit('toast', 'error', __('toast-lang.cannotdelete') . ' ' . __(strtolower($item->{$this->mainKey})) . ' ' . __('toast-lang.because') . ' ' . __('toast-lang.has') . ' ' . __('toast-lang.' . $foreign));
+                $this->emit('toast', 'error', __('toast.cannotdelete') . ' ' . __(strtolower($item->{$this->mainKey})) . ' ' . __('toast.because') . ' ' . __('toast.has') . ' ' . __('toast.' . $foreign));
                 return;
             }
         }
@@ -378,7 +378,7 @@ class CrudComponent extends Component
             'data' => $this->data,
         ]);
 
-        $this->emit('toast', 'success', $this->Name . ' ' . __('toast-lang.deletedsuccessfully'));
+        $this->emit('toast', 'success', $this->Name . ' ' . __('toast.deletedsuccessfully'));
     }
 
     public function parseValue($value)

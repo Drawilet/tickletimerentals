@@ -4,7 +4,7 @@
         <div class="px-6 py-4">
             <div>
                 <h2>
-                    {{ !isset($rent['id']) ? __('calendar-lang.new-rent') : __('calendar-lang.update-rent') }}
+                    {{ !isset($rent['id']) ? __('calendar.new-rent') : __('calendar.update-rent') }}
                 </h2>
             </div>
 
@@ -12,7 +12,7 @@
                 <h3 class="text-2xl">
                     @isset($rent['date'])
                         {{ \Carbon\Carbon::parse($rent['date'])->format('d') }},
-                        {{ __('month-lang.' . strtolower(\Carbon\Carbon::parse($rent['date'])->format('F'))) }},
+                        {{ __('month.' . strtolower(\Carbon\Carbon::parse($rent['date'])->format('F'))) }},
                         {{ \Carbon\Carbon::parse($rent['date'])->format('Y') }}
                     @endisset
 
@@ -30,17 +30,17 @@
                 {{-- INFORMATION --}}
                 <section>
                     <x-form-control>
-                        <x-label for="name" value="{{ __('calendar-lang.Rentname') }}" />
+                        <x-label for="name" value="{{ __('calendar.Rentname') }}" />
                         <x-input id="name" name="name" wire:model="rent.name" wire:loading.attr="disabled"
                             wire:target="saveRent" />
                         <x-input-error for="name" class="mt-2" />
                     </x-form-control>
 
                     <x-form-control>
-                        <x-label for="car_id" value="{{ __('calendar-lang.Car') }}" />
+                        <x-label for="car_id" value="{{ __('calendar.Car') }}" />
                         <select class="select select-bordered" wire:model="rent.car_id" wire:loading.attr="disabled"
                             wire:target="saveRent">
-                            <option value="{{ null }}">{{ __('calendar-lang.Pickone') }}</option>
+                            <option value="{{ null }}">{{ __('calendar.Pickone') }}</option>
                             @foreach ($cars as $car)
                                 <option value="{{ $car->id }}">{{ $car->name }}
                                 </option>
@@ -50,7 +50,7 @@
                     </x-form-control>
 
                     <x-form-control>
-                        <x-label for="customer_id" value="{{ __('calendar-lang.Customer') }}" />
+                        <x-label for="customer_id" value="{{ __('calendar.Customer') }}" />
                         <div class="flex items-center">
                             <div x-data="{ open: false }" class="flex-grow relative">
                                 <input type="text" class="input input-bordered w-full"
@@ -85,14 +85,14 @@
                     @endphp
 
                     <x-form-control>
-                        <x-label for="date" value="{{ __('calendar-lang.Date') }}" />
+                        <x-label for="date" value="{{ __('calendar.Date') }}" />
                         <x-input id="date" name="date" type="date" wire:model="rent.date"
                             wire:loading.attr="disabled" wire:target="saveRent" />
                         <x-input-error for="date" class="mt-2" />
                     </x-form-control>
 
                     <x-form-control>
-                        <x-label for="start_time" value="{{ __('calendar-lang.Starttime') }}" />
+                        <x-label for="start_time" value="{{ __('calendar.Starttime') }}" />
                         <x-input id="start_time" name="start_time" type="time" wire:model="rent.start_time"
                             wire:change='updateEndTime' min="{{ $schedule['opening'] }}"
                             max="{{ $schedule['closing'] }}" wire:loading.attr="disabled" wire:target="saveRent" />
@@ -100,21 +100,21 @@
                     </x-form-control>
 
                     <x-form-control>
-                        <x-label for="end_time" value="{{ __('calendar-lang.Endtime') }}" />
+                        <x-label for="end_time" value="{{ __('calendar.Endtime') }}" />
                         <x-input id="end_time" name="end_time" type="time" wire:model="rent.end_time"
                             wire:loading.attr="disabled" wire:target="saveRent" />
                         <x-input-error for="end_time" class="mt-2" />
                     </x-form-control>
 
                     <x-form-control>
-                        <x-label for="price" value="{{ __('calendar-lang.Price') }}" />
+                        <x-label for="price" value="{{ __('calendar.Price') }}" />
                         <x-input id="price" name="price" type="number" wire:model="rent.price"
                             wire:loading.attr="disabled" wire:target="saveRent" />
                         <x-input-error for="price" class="mt-2" />
                     </x-form-control>
 
                     <x-form-control>
-                        <x-label for="notes" value="{{ __('calendar-lang.Notes') }}" />
+                        <x-label for="notes" value="{{ __('calendar.Notes') }}" />
                         <textarea id="notes" name="notes" class="textarea textarea-bordered" wire:model="rent.notes"
                             wire:loading.attr="disabled" wire:target="saveRent"></textarea>
                         <x-input-error for="notes" class="mt-2" />
@@ -127,13 +127,13 @@
                         <button class="btn mr-2" wire:click="Modal('addProduct', true)">
                             <x-icons.plus />
                         </button>
-                        {{ __('calendar-lang.Products') }}
+                        {{ __('calendar.Products') }}
                     </h2>
                     <div class="overflow-x-auto">
                         <table class="table w-full table-zebra ">
                             <thead>
                                 <tr>
-                                    <th class="w-3/4">{{ __('calendar-lang.Name') }}</th>
+                                    <th class="w-3/4">{{ __('calendar.Name') }}</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -182,7 +182,7 @@
 
 
         <div class="flex flex-row items-center justify-end px-6 py-4">
-            <span class="text-xl mr-auto block">{{ __('calendar-lang.total') }}: $
+            <span class="text-xl mr-auto block">{{ __('calendar.total') }}: $
                 {{ number_format($this->getTotal(), 2) }}</span>
 
             <button class="btn btn-primary px-8" wire:click="saveRent" wire:loading.attr="disabled">
@@ -190,7 +190,7 @@
                     {{ __('auth.cargando') }}...
                 </span>
                 <span wire:loading.remove wire:target="saveRent">
-                    {{ __('calendar-lang.Save') }}
+                    {{ __('calendar.Save') }}
                 </span>
             </button>
 
@@ -199,12 +199,12 @@
 
         <div class="w-11/12 mx-auto flex md:hidden gap-2">
             <button class="w-1/3 btn btn-neutral" wire:click='Modal("save",false)'>
-                {{ __('calendar-lang.close') }}
+                {{ __('calendar.close') }}
             </button>
 
             @isset($rent['id'])
                 <button class="w-2/3 btn btn-secondary" wire:click="Modal('payments', true)">
-                    {{ __('calendar-lang.show-payments') }}
+                    {{ __('calendar.show-payments') }}
                 </button>
             @endisset
 

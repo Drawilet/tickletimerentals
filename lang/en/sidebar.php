@@ -3,6 +3,7 @@ return [
     'dashboard' => 'Dashboard',
     'customers' => 'Customers',
     'cars' => 'Cars',
+    'regions' => 'Regions',
     'products' => 'Products',
     'Settings' => 'Settings',
     'payments' => 'Payments',

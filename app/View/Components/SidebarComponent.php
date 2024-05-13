@@ -32,6 +32,12 @@ class SidebarComponent extends Component
             "permission" => "tenant.cars.show",
         ],
 
+        "regions" => [
+            "icon" => "map-pin",
+            "route" => "tenant.regions.show",
+            "permission" => "tenant.regions.show",
+        ],
+
         "payments" => [
             "icon" => "bank-notes",
             "route" => "tenant.payments.show",

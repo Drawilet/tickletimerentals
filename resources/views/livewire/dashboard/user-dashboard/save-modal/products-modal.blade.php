@@ -1,8 +1,8 @@
 <dialog id="product_modal" class="modal modal-bottom md:modal-middle" {{ $modals['addProduct'] ? 'open' : '' }}>
     <div class="modal-box">
-        <h3 class="font-bold text-lg">{{ __('calendar-lang.Addproduct') }}</h3>
+        <h3 class="font-bold text-lg">{{ __('calendar.Addproduct') }}</h3>
 
-        <input type="search" class="mt-2 input w-full" placeholder="{{ __('calendar-lang.Searchproducts') }}"
+        <input type="search" class="mt-2 input w-full" placeholder="{{ __('calendar.Searchproducts') }}"
             wire:model="filters.product_name">
         <table class="table w-full">
 
@@ -15,7 +15,7 @@
             </tbody>
         </table>
         <div class="modal-action">
-            <button class="btn" wire:click="Modal('addProduct', false)">{{ __('calendar-lang.close') }}</button>
+            <button class="btn" wire:click="Modal('addProduct', false)">{{ __('calendar.close') }}</button>
         </div>
     </div>
 </dialog>

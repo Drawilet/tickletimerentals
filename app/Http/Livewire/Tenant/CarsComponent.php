@@ -40,26 +40,26 @@ class CarsComponent extends CrudComponent
                     'type' => 'select',
                     'options' =>
                         [
-                            ["value" => "gasoline", "label" => __("car-lang.fuel.gasoline")],
-                            ["value" => "diesel", "label" => __("car-lang.fuel.diesel")],
-                            ["value" => "electric", "label" => __("car-lang.fuel.electric")],
-                            ["value" => "hybrid", "label" => __("car-lang.fuel.hybrid")],
-                            ["value" => "lpg", "label" => __("car-lang.fuel.lpg")],
-                            ["value" => "cng", "label" => __("car-lang.fuel.cng")],
-                            ["value" => "bioethanol", "label" => __("car-lang.fuel.bioethanol")],
-                            ["value" => "hydrogen", "label" => __("car-lang.fuel.hydrogen")],
-                            ["value" => "other", "label" => __("car-lang.fuel.other")],
+                            ["value" => "gasoline", "label" => __("car.fuel.gasoline")],
+                            ["value" => "diesel", "label" => __("car.fuel.diesel")],
+                            ["value" => "electric", "label" => __("car.fuel.electric")],
+                            ["value" => "hybrid", "label" => __("car.fuel.hybrid")],
+                            ["value" => "lpg", "label" => __("car.fuel.lpg")],
+                            ["value" => "cng", "label" => __("car.fuel.cng")],
+                            ["value" => "bioethanol", "label" => __("car.fuel.bioethanol")],
+                            ["value" => "hydrogen", "label" => __("car.fuel.hydrogen")],
+                            ["value" => "other", "label" => __("car.fuel.other")],
                         ]
                 ],
                 'transmission' => [
                     'type' => 'select',
                     'options' =>
                         [
-                            ["value" => "manual", "label" => __("car-lang.transmission_type.manual")],
-                            ["value" => "automatic", "label" => __("car-lang.transmission_type.automatic")],
-                            ["value" => "semiautomatic", "label" => __("car-lang.transmission_type.semi-automatic")],
-                            ["value" => "cv", "label" => __("car-lang.transmission_type.cv")],
-                            ["value" => "other", "label" => __("car-lang.transmission_type.other")],
+                            ["value" => "manual", "label" => __("car.transmission_type.manual")],
+                            ["value" => "automatic", "label" => __("car.transmission_type.automatic")],
+                            ["value" => "semiautomatic", "label" => __("car.transmission_type.semi-automatic")],
+                            ["value" => "cv", "label" => __("car.transmission_type.cv")],
+                            ["value" => "other", "label" => __("car.transmission_type.other")],
                         ]
                 ],
                 'engine' => ['type' => 'text'],
@@ -70,7 +70,7 @@ class CarsComponent extends CrudComponent
                     "hidden" => true,
                     "component" => FeaturesComponent::class,
                 ],
-                'notes' => ['type' => 'textarea', 'rules' => 'nullable', "hidden" => true],
+                'notes' => ['type' => 'textarea', 'rules' => 'nullable'],
             ],
             'mobileStyles' => "
                 .name {

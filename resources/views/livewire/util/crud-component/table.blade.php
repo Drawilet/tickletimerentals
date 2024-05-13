@@ -18,7 +18,7 @@
                     <th></th>
                     @foreach ($keys as $key)
                         <th class="capitalize {{ $mainKey == $key ? '' : '' }}">
-                            {{ __($name . '-lang.' . $key) }}</th>
+                            {{ __($name . '.' . $key) }}</th>
                     @endforeach
                     @can('tenant.' . $name . 's' . '.manage')
                         <th></th>
@@ -37,7 +37,7 @@
                             <td class="{{ $key }} flex flex-wrap md:table-cell">
                                 @if (!isset($mobileStyles))
                                     <span class="font-medium mr-10 opacity-80 md:hidden">
-                                        {{ __($name . '-lang.' . $key) }}</span>
+                                        {{ __($name . '.' . $key) }}</span>
                                 @endif
                                 @if (isset($type['parser']))
                                     @php
@@ -139,11 +139,11 @@
         @endif
     @else
         <div class="flex flex-col items-center justify-center mt-5">
-            <h2 class="text-2xl opacity-90"> {{ __($name . '-lang.' . 'notfound') }}</h2>
+            <h2 class="text-2xl opacity-90"> {{ __($name . '.' . 'notfound') }}</h2>
             <button wire:click="Modal('save', true)" class=" btn btn-primary py-2 px-4 mt-4">
                 @component('components.icons.plus')
                 @endcomponent
-                {{ __($name . '-lang.' . 'create') }}
+                {{ __($name . '.' . 'create') }}
             </button>
         </div>
     @endif

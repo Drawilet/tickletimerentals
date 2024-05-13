@@ -16,7 +16,7 @@
         </div>
 
         <h3 class="text-right -mb-1">
-            {{ __('calendar-lang.balance') }}: ${{ number_format($data['balance'], 2) }}
+            {{ __('calendar.balance') }}: ${{ number_format($data['balance'], 2) }}
         </h3>
 
         <h3 class="text-right text-sm">

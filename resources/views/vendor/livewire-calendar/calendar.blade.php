@@ -29,26 +29,26 @@
     <div class="h-full flex flex-col w-full gap-2 flex-1 px-1">
         <div>
             <h2 class="text-xl ml-2 text-center" id="title">
-                {{ trans('month-lang.' . strtolower($monthGrid[2]->first()->format('F'))) }}
+                {{ trans('month.' . strtolower($monthGrid[2]->first()->format('F'))) }}
                 {{ $monthGrid[2]->first()->format('Y') }}
             </h2>
         </div>
 
         <div class="flex justify-between w-ful">
-            <button type="button" title="{{ __('month-lang.Previousmonth') }}" wire:click='goToPreviousMonth'
+            <button type="button" title="{{ __('month.Previousmonth') }}" wire:click='goToPreviousMonth'
                 aria-pressed="false" class="btn ">
                 @component('components.icons.chevron-left')
                 @endcomponent
             </button>
 
-            <button type="button" title="{{ __('month-lang.CurrentMonth') }}" wire:click='goToCurrentMonth'
+            <button type="button" title="{{ __('month.CurrentMonth') }}" wire:click='goToCurrentMonth'
                 aria-pressed="false" class="btn">
                 @component('components.icons.calendar')
                 @endcomponent
             </button>
 
-            <button type="button" title="{{ __('month-lang.Nextmonth') }}" wire:click='goToNextMonth'
-                aria-pressed="false" class="btn ">
+            <button type="button" title="{{ __('month.Nextmonth') }}" wire:click='goToNextMonth' aria-pressed="false"
+                class="btn ">
                 @component('components.icons.chevron-right')
                 @endcomponent
             </button>

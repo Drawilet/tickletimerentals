@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
                 AppSeeder::class,
                 PermissionSeeder::class,
                 UserSeeder::class,
+                WorldTablesSeeder::class,
             ]
         );
 

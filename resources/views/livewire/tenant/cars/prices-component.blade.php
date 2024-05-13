@@ -1,9 +1,9 @@
 <table class="table table-sm">
     <thead>
         <tr>
-            <th> {{ __('car-lang.price-kilometers') }} </th>
-            <th>{{ __('car-lang.price') }}</th>
-            <th>{{ __('car-lang.price-actions') }}</th>
+            <th> {{ __('car.price-kilometers') }} </th>
+            <th>{{ __('car.price') }}</th>
+            <th>{{ __('car.price-actions') }}</th>
         </tr>
     </thead>
     <tbody>

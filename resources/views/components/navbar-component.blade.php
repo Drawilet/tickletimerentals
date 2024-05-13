@@ -34,11 +34,11 @@
             <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                 <!-- Account Management -->
                 <div class="block px-4 py-2 text-xs">
-                    {{ __('navbar-lang.ManageAccount') }}
+                    {{ __('navbar.ManageAccount') }}
                 </div>
 
                 <x-dropdown-link href="{{ route('profile.show') }}">
-                    {{ __('navbar-lang.Profile') }}
+                    {{ __('navbar.Profile') }}
                 </x-dropdown-link>
 
 
@@ -47,7 +47,7 @@
                     @csrf
 
                     <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                        {{ __('navbar-lang.LogOut') }}
+                        {{ __('navbar.LogOut') }}
                     </x-dropdown-link>
                 </form>
             </ul>

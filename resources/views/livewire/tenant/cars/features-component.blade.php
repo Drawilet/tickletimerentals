@@ -1,9 +1,9 @@
 <table class="table table-sm">
     <thead>
         <tr>
-            <th> {{ __('car-lang.feature-name') }} </th>
-            <th>{{ __('car-lang.feature-value') }}</th>
-            <th>{{ __('car-lang.feature-actions') }}</th>
+            <th> {{ __('car.feature-name') }} </th>
+            <th>{{ __('car.feature-value') }}</th>
+            <th>{{ __('car.feature-actions') }}</th>
         </tr>
     </thead>
     <tbody>

@@ -3,25 +3,24 @@
         <div class="hero-overlay bg-opacity-50"></div>
         <div class="hero-content text-center text-neutral-content">
             <div class="max-w-md">
-                <h1 class="mb-5 text-5xl font-bold text-white">{{ __('home-lang.hero.title') }}</h1>
-                <p class="mb-5 text-white">{{ __('home-lang.hero.description') }}</p>
-                <a class="btn btn-primary w-full max-w-xs" href="#contact">{{ __('home-lang.hero.cta') }}</a>
+                <h1 class="mb-5 text-5xl font-bold text-white">{{ __('home.hero.title') }}</h1>
+                <p class="mb-5 text-white">{{ __('home.hero.description') }}</p>
+                <a class="btn btn-primary w-full max-w-xs" href="#contact">{{ __('home.hero.cta') }}</a>
             </div>
         </div>
     </section>
 
-    <x-hero-component title="{{ __('home-lang.rent.title') }}" description="{{ __('home-lang.rent.description') }}"
-        src="rent.png" alt="Tickle Time Rentals" align="left" />
+    <x-hero-component title="{{ __('home.rent.title') }}" description="{{ __('home.rent.description') }}" src="rent.png"
+        alt="Tickle Time Rentals" align="left" />
 
-    <x-hero-component title="{{ __('home-lang.alert.title') }}" description="{{ __('home-lang.alert.description') }}"
+    <x-hero-component title="{{ __('home.alert.title') }}" description="{{ __('home.alert.description') }}"
         src="alert.png" alt="Tickle Time Rentals" />
 
-    <x-hero-component title="{{ __('home-lang.product.title') }}"
-        description="{{ __('home-lang.product.description') }}" src="product.png" alt="Tickle Time Rentals"
-        align="left" />
+    <x-hero-component title="{{ __('home.product.title') }}" description="{{ __('home.product.description') }}"
+        src="product.png" alt="Tickle Time Rentals" align="left" />
 
-    <x-hero-component title="{{ __('home-lang.payment.title') }}"
-        description="{{ __('home-lang.payment.description') }}" src="payment.png" alt="Tickle Time Rentals" />
+    <x-hero-component title="{{ __('home.payment.title') }}" description="{{ __('home.payment.description') }}"
+        src="payment.png" alt="Tickle Time Rentals" />
 
     <section class="hero lg:min-h-screen" id="contact">
         @if ($sent)
@@ -54,45 +53,45 @@
                         transform="translate(-315 -194.16259)" fill="#6c63ff" />
                 </svg>
 
-                <h2 class="text-3xl font-bold -mt-16 text-center">{{ __('home-lang.contact.success') }}</h2>
+                <h2 class="text-3xl font-bold -mt-16 text-center">{{ __('home.contact.success') }}</h2>
             </div>
         @else
             <div class="hero-content flex-col lg:flex-row lg:justify-between w-full">
                 <div class="max-w-lg">
-                    <h2 class="text-5xl font-bold mb-4 text-center">{{ __('home-lang.contact.title') }}</h2>
+                    <h2 class="text-5xl font-bold mb-4 text-center">{{ __('home.contact.title') }}</h2>
                     <p class="mb-2 text-center">
-                        {{ __('home-lang.contact.description') }}
+                        {{ __('home.contact.description') }}
                     </p>
                 </div>
 
                 <form class="w-full max-w-md">
                     <div class="form-control">
                         <label class="label">
-                            <span class="label-text">{{ __('home-lang.contact.name') }}</span>
+                            <span class="label-text">{{ __('home.contact.name') }}</span>
                         </label>
-                        <input type="text" placeholder="{{ __('home-lang.contact.name') }}" wire:model="data.name"
+                        <input type="text" placeholder="{{ __('home.contact.name') }}" wire:model="data.name"
                             wire:loading.attr="disabled" wire:target="submit" class="input input-bordered">
                         <x-input-error for="name" class="mt-2" />
                     </div>
                     <div class="form-control">
                         <label class="label">
-                            <span class="label-text">{{ __('home-lang.contact.email') }}</span>
+                            <span class="label-text">{{ __('home.contact.email') }}</span>
                         </label>
-                        <input type="text" placeholder="{{ __('home-lang.contact.email') }}" wire:model="data.email"
+                        <input type="text" placeholder="{{ __('home.contact.email') }}" wire:model="data.email"
                             wire:loading.attr="disabled" wire:target="submit" class="input input-bordered">
                         <x-input-error for="email" class="mt-2" />
                     </div>
                     <div class="form-control">
                         <label class="label">
-                            <span class="label-text">{{ __('home-lang.contact.message') }}</span>
+                            <span class="label-text">{{ __('home.contact.message') }}</span>
                         </label>
-                        <textarea placeholder="{{ __('home-lang.contact.message') }}" wire:model='data.message' wire:loading.attr="disabled"
+                        <textarea placeholder="{{ __('home.contact.message') }}" wire:model='data.message' wire:loading.attr="disabled"
                             wire:target="submit" class="textarea textarea-bordered"></textarea>
                         <x-input-error for="message" class="mt-2" />
                     </div>
                     <div class="form-control mt-4">
                         <button type="button" class="btn btn-primary" wire:click='submit' wire:loading.attr="disabled"
-                            wire:target="submit">{{ __('home-lang.contact.submit') }}</button>
+                            wire:target="submit">{{ __('home.contact.submit') }}</button>
                     </div>
                 </form>
 
