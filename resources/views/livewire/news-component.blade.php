@@ -80,9 +80,9 @@
         }
 
 
-        document.getElementById('toggle-news').addRentListener('click', () => toggleNews(true))
+        document.getElementById('toggle-news').addEventListener('click', () => toggleNews(true))
 
-        document.getElementById('later-button').addRentListener('click', () => close('later'))
-        document.getElementById('tomorrow-button').addRentListener('click', () => close('tomorrow'))
+        document.getElementById('later-button').addEventListener('click', () => close('later'))
+        document.getElementById('tomorrow-button').addEventListener('click', () => close('tomorrow'))
     </script>
 </div>
