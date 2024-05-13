@@ -15,9 +15,10 @@
                         @case('textarea')
                             <textarea id="{{ $key }}" wire:model.defer="data.{{ $key }}" class="textarea textarea-bordered"
                                 @foreach ($type as $key => $value)
-                                    @if ($key != 'type')
-                                     {{ $key }}="{{ $value }}"
-                                       @endif @endforeach></textarea>
+                                        @if ($key != 'type' || $key != 'hidden')
+                                        {{ $key }}="{{ $value }}"
+                                       @endif @endforeach>
+                                    </textarea>
                         @break
 
                         @case('select')
