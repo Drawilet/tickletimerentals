@@ -2,7 +2,8 @@
 
 namespace App\Http\Livewire\Tenant;
 
-use App\Http\Livewire\Tenant\Regions\CityComponent;
+use App\Http\Livewire\Tenant\Regions\LocationComponent;
+use App\Http\Livewire\Tenant\Regions\RateComponent;
 use App\Http\Livewire\Util\CrudComponent;
 use App\Models\Region;
 
@@ -14,10 +15,16 @@ class RegionsComponent extends CrudComponent
             'mainKey' => 'name',
             'types' => [
                 "name" => ['type' => 'text'],
-                "cities" => [
+                "locations" => [
                     'type' => 'array',
                     "hidden" => true,
-                    "component" => CityComponent::class,
+                    "component" => LocationComponent::class,
+                ],
+                "rate_schedule" => [
+                    'type' => 'array',
+                    'hidden' => true,
+                    'component' => RateComponent::class,
+
                 ],
             ],
             'mobileStyles' => "

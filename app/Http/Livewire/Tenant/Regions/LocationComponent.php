@@ -6,12 +6,12 @@ use Khsing\World\Models\Country;
 use Khsing\World\Models\Division;
 use Livewire\Component;
 
-class CityComponent extends Component
+class LocationComponent extends Component
 {
 
     protected $listeners = ['update-data' => 'handleData'];
     public $data = [
-        'cities' => [],
+        'locations' => [],
     ];
     public $filter, $initialFilter = [
         'country_id' => 106,
@@ -29,45 +29,41 @@ class CityComponent extends Component
 
     public function render()
     {
-        return view('livewire.tenant.regions.city-component');
+        return view('livewire.tenant.regions.location-component');
     }
 
     public function handleCountryChange()
     {
         $country = Country::find($this->filter['country_id']);
         $this->divisions = $country->divisions;
+        $this->data['locations'] = [];
     }
 
-    public function handleDivisionChange()
-    {
-        $division = Division::find($this->filter['division_id']);
-        $this->cities = $division->cities;
-    }
 
-    public function addCity($city_id)
+    public function addLocation($location_id)
     {
-        $this->data['cities'][] = [
-            'id' => $city_id,
-            'name' => $this->cities->where('id', $city_id)->first()->name,
+        $this->data['locations'][] = [
+            'id' => $location_id,
+            'name' => $this->divisions->where('id', $location_id)->first()->name,
         ];
 
         $this->handleDataChange();
     }
 
-    public function removeCity($index)
+    public function removeLocation($index)
     {
-        unset($this->data['cities'][$index]);
-        $this->data['cities'] = array_values($this->data['cities']);
+        unset($this->data['locations'][$index]);
+        $this->data['locations'] = array_values($this->data['locations']);
         $this->handleDataChange();
     }
 
     /*<──  ───────    PARENT   ───────  ──>*/
     public function handleData($data)
     {
-        if (isset($data['cities'])) {
-            $this->data['cities'] = $data['cities'];
+        if (isset($data['locations'])) {
+            $this->data['locations'] = $data['locations'];
         } else {
-            $this->data['cities'] = [];
+            $this->data['locations'] = [];
         }
     }
 

@@ -11,10 +11,13 @@ class Region extends Base
 
     protected $fillable = [
         'name',
-        'cities'
+        'locations',
+        'rate_schedule',
+        'daily_rate',
     ];
 
     protected $casts = [
-        'cities' => 'array'
+        'locations' => 'array',
+        'rate_schedule' => 'array'
     ];
 }
