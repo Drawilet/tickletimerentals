@@ -34,7 +34,7 @@ class RateComponent extends Component
 
     public function handleratesChange()
     {
-        $this->emit('update-data', $this->data);
+        $this->emitUp('update-data', $this->data);
     }
 
 

@@ -85,10 +85,10 @@ class LocationComponent extends Component
             $this->data['locations'] = [];
         }
 
-        $this->data["id"] = $data["id"];
+        $id = $this->data["id"] ?? null;
 
         // Occupied locations
-        $regions = Region::where('id', '!=', $this->data["id"])->get();
+        $regions = Region::where('id', '!=', $id)->get();
         $this->occupiedLocations = [];
         foreach ($regions as $region) {
             foreach ($region->locations as $location) {
@@ -102,7 +102,7 @@ class LocationComponent extends Component
 
     public function handleDataChange()
     {
-        $this->emit('update-data', $this->data);
+        $this->emitUp('update-data', $this->data);
     }
 
 }

@@ -22,7 +22,7 @@ class CrudComponent extends Component
     use WithFileUploads, WithCrudActions, WithValidations;
 
     public $mainKey, $keys;
-    public $Model, $ItemRent;
+    public $Model, $ItemEvent;
     public $Name, $name;
 
     public $initialData, $data, $initialFiles, $files;
@@ -52,7 +52,7 @@ class CrudComponent extends Component
     ],
     $filter;
 
-    public $rents = [];
+    public $events = [];
 
     public $foreigns = [];
 
