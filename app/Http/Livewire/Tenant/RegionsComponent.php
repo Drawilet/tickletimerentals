@@ -2,22 +2,31 @@
 
 namespace App\Http\Livewire\Tenant;
 
-use App\Http\Livewire\Tenant\Regions\CityComponent;
+use App\Http\Livewire\Tenant\Regions\LocationComponent;
+use App\Http\Livewire\Tenant\Regions\RateComponent;
 use App\Http\Livewire\Util\CrudComponent;
 use App\Models\Region;
 
 class RegionsComponent extends CrudComponent
 {
+
+    public $events = ["afterSave"];
     public function mount()
     {
         $this->setup(Region::class, [
             'mainKey' => 'name',
             'types' => [
                 "name" => ['type' => 'text'],
-                "cities" => [
+                "locations" => [
                     'type' => 'array',
                     "hidden" => true,
-                    "component" => CityComponent::class,
+                    "component" => LocationComponent::class,
+                ],
+                "rate_schedule" => [
+                    'type' => 'array',
+                    'hidden' => true,
+                    'component' => RateComponent::class,
+
                 ],
             ],
             'mobileStyles' => "
@@ -41,7 +50,24 @@ class RegionsComponent extends CrudComponent
 
 
             ",
-            'foreigns' => ['rents'],
+            /* 'foreigns' => ['rents'], */
         ]);
+    }
+
+    public function afterSave($region, $data)
+    {
+        $regions = Region::where('id', '!=', $this->data["id"])->get();
+
+        foreach ($regions as $region) {
+            $regionLocations = $region->locations;
+            $filteredLocations = array_filter($regionLocations, function ($location) use ($data) {
+                return !in_array($location['id'], array_column($data['locations'], 'id'));
+            });
+
+            if (count($filteredLocations) != count($regionLocations)) {
+                $region->locations = $filteredLocations;
+                $region->save();
+            }
+        }
     }
 }
