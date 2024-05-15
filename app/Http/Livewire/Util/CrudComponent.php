@@ -123,7 +123,7 @@ class CrudComponent extends Component
     public function loadMore()
     {
         $newItems = $this->Model
-            ::when(in_array('additionalSql', $this->rents), function ($query) {
+            ::when(in_array('additionalSql', $this->events), function ($query) {
                 $this->additionalSql($query);
             })
             ->when($this->filter['search'] != '', function ($query) {
@@ -187,7 +187,7 @@ class CrudComponent extends Component
                 case 'save':
                     if ($id) {
                         $item = $this->Model::find($id);
-                        if (in_array('beforeOpenSaveModal', $this->rents)) {
+                        if (in_array('beforeOpenSaveModal', $this->events)) {
                             $this->data = $this->beforeOpenSaveModal($item);
                         } else {
                             $this->data = $item->toArray();
@@ -212,7 +212,7 @@ class CrudComponent extends Component
 
     public function save()
     {
-        if (in_array('specialValidator', $this->rents)) {
+        if (in_array('specialValidator', $this->events)) {
             $specialRules = $this->specialValidator($this->data);
             $this->crudRules = array_merge($this->crudRules, $specialRules);
         }
@@ -234,7 +234,7 @@ class CrudComponent extends Component
             }
         }
 
-        if (in_array('beforeSave', $this->rents)) {
+        if (in_array('beforeSave', $this->events)) {
             $this->data = $this->beforeSave($this->data);
         }
         $item = $this->Model::updateOrCreate(['id' => $this->data['id']], $this->data);
@@ -311,7 +311,7 @@ class CrudComponent extends Component
         }
 
         $item->save();
-        if (in_array('afterSave', $this->rents)) {
+        if (in_array('afterSave', $this->events)) {
             $this->afterSave($item, $this->data);
         }
 
@@ -367,7 +367,7 @@ class CrudComponent extends Component
             }
         }
 
-        if (in_array('beforeDelete', $this->rents)) {
+        if (in_array('beforeDelete', $this->events)) {
             $this->beforeDelete($item);
         }
 
