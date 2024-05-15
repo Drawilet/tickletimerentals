@@ -56,12 +56,13 @@ class RegionsComponent extends CrudComponent
 
     public function afterSave($region, $data)
     {
-        $regions = Region::where('id', '!=', $this->data["id"])->get();
+        $regions = Region::where('id', '!=', $region["id"])->get();
 
         foreach ($regions as $region) {
             $regionLocations = $region->locations;
+
             $filteredLocations = array_filter($regionLocations, function ($location) use ($data) {
-                return !in_array($location['id'], array_column($data['locations'], 'id'));
+                return !in_array($location, $data['locations']);
             });
 
             if (count($filteredLocations) != count($regionLocations)) {
