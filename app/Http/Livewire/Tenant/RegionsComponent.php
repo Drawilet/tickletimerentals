@@ -9,6 +9,8 @@ use App\Models\Region;
 
 class RegionsComponent extends CrudComponent
 {
+
+    public $events = ["afterSave"];
     public function mount()
     {
         $this->setup(Region::class, [
@@ -48,7 +50,24 @@ class RegionsComponent extends CrudComponent
 
 
             ",
-            'foreigns' => ['rents'],
+            /* 'foreigns' => ['rents'], */
         ]);
+    }
+
+    public function afterSave($region, $data)
+    {
+        $regions = Region::where('id', '!=', $this->data["id"])->get();
+
+        foreach ($regions as $region) {
+            $regionLocations = $region->locations;
+            $filteredLocations = array_filter($regionLocations, function ($location) use ($data) {
+                return !in_array($location['id'], array_column($data['locations'], 'id'));
+            });
+
+            if (count($filteredLocations) != count($regionLocations)) {
+                $region->locations = $filteredLocations;
+                $region->save();
+            }
+        }
     }
 }

@@ -15,7 +15,7 @@ class RateComponent extends Component
 
     public $data = [
         'rate_schedule' => [],
-        'daily_rate' => 0,
+        'daily_rate' => null,
     ];
 
     public function render()

@@ -16,11 +16,26 @@
         <div class="flex-1">
             <ul class="max-h-96 overflow-y-scroll">
                 @foreach ($divisions as $division)
+                    @php
+                        $locationData = array_filter($occupiedLocations, function ($location) use ($division) {
+                            return $location['id'] == $division->id;
+                        });
+                        $locationData = array_values($locationData);
+                        $locationData = $locationData ? $locationData[0] : null;
+                    @endphp
+
+
                     <label
-                        class="flex items-center gap-4 odd:bg-base-100 py-1 px-2 cursor-pointer transition-colors hover:brightness-90"
-                        wire:click='addLocation({{ $division->id }})'>
+                        class="flex items-center gap-4 odd:bg-base-100 py-1 px-2 cursor-pointer {{ $locationData ? 'brightness-75' : '' }} transition-colors hover:brightness-90"
+                        wire:click='toggleLocation({{ $division->id }})'>
                         <input type="checkbox" class="checkbox-primary" @checked(in_array($division->id, array_column($data['locations'], 'id'))) />
                         {{ $division->name }}
+
+                        @if ($locationData)
+                            <span class="text-xs text-red-500">
+                                ({{ $locationData['region_name'] }})
+                            </span>
+                        @endif
                     </label>
                 @endforeach
             </ul>
