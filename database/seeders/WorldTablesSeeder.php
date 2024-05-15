@@ -27,11 +27,11 @@ class WorldTablesSeeder extends Seeder
         \DB::disableQueryLog();//disable log
 
         $this->call(WorldContinentsTableSeeder::class);
-        $this->call(WorldContinentsLocaleTableSeeder::class);
+        //    $this->call(WorldContinentsLocaleTableSeeder::class);
         $this->call(WorldCountriesTableSeeder::class);
-        $this->call(WorldCountriesLocaleTableSeeder::class);
+        //  $this->call(WorldCountriesLocaleTableSeeder::class);
         $this->call(WorldDivisionsTableSeeder::class);
-        $this->call(WorldDivisionsLocaleTableSeeder::class);
+        //      $this->call(WorldDivisionsLocaleTableSeeder::class);
         /*    $this->call(WorldCitiesTableSeeder::class);
            $this->call(WorldCitiesTableSeederOne::class);
            $this->call(WorldCitiesTableSeederTwo::class);
