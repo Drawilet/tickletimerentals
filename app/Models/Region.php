@@ -20,4 +20,9 @@ class Region extends Base
         'locations' => 'array',
         'rate_schedule' => 'array'
     ];
+
+    public function rents()
+    {
+        return $this->hasMany(Rent::class);
+    }
 }
