@@ -57,7 +57,7 @@
                 {{ __('auth.cargando') }}...
             </span>
             <span wire:loading.remove wire:target="save">
-                {{ __('calendar.Save') }}
+                {{ __('calendar.save') }}
             </span>
         </button>
     </x-slot>

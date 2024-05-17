@@ -1,53 +1,63 @@
 <?php
 return [
-    "new-rent" => "Nueva renta",
-    "update-rent" => "Actualizar renta",
+    "new-rent" => "Nuevo alquiler",
+    "update-rent" => "Actualizar alquiler",
 
-    'Rentname' => 'Nombre del renta',
-    'Car' => 'Carro',
-    'Customer' => 'Cliente',
-    'Date' => 'Fecha',
-    'Starttime' => 'Hora de inicio',
-    'Endtime' => 'Hora de finalización',
-    'Price' => 'Precio',
-    'Notes' => 'Notas',
-    'Addproduct' => 'Añadir producto',
-    'close' => 'Cerrar',
-    'Products' => 'Productos',
-    'Name' => 'Nombre',
-    'Save' => 'Guardar',
-    'Searchproducts' => 'Buscar productos...',
-    'rent' => 'Renta',
-    'Amount' => 'Importe',
-    'Concept' => 'Notas',
-    'balance' => 'Saldo',
-    'AddPayment' => 'Añadir pago',
-    'Payments' => 'Pagos relacionados al renta',
-    "payment-notes" => "Notas del pago",
-    'Opening' => 'Apertura',
-    'Closing' => 'Cierre',
-    'Firstname' => 'Nombre',
-    'Lastname' => 'Apellido',
-    'Email' => 'Correo',
-    'Phone' => 'Teléfono',
-    'Address' => 'Dirección',
-    'Submit' => 'Guardar',
-    'Newcustomer' => 'Nuevo cliente',
+    /*<──  ───────    RENT   ───────  ──>*/
+    "rent-name" => "Nombre del alquiler",
+
+    "car" => "Coche",
+    "pick-car" => "Seleccionar coche",
+
+    "region" => "Región",
+    "pick-region" => "Seleccionar región",
+
+    "customer" => "Cliente",
+
+    "start_date" => "Fecha de inicio",
+    "end_date" => "Fecha de finalización",
+
+    "notes" => "Notas",
+
+    "products" => "Productos",
+    "product-name" => "Nombre del producto",
+    "add-product" => "Añadir producto",
+    "search-product" => "Buscar producto",
+
     "total" => "Total",
-    'Pickone' => 'Seleccionar',
-    "not-available" => "El carro no está disponible en este momento",
 
-    "delete-title" => "¿Estás seguro de que quieres eliminar :name?",
-    "payments" => "Tiene :payments_count pagos.",
-    "delete" => "Eliminar",
-    "cancel" => "Cancelar",
-    "delete-success" => "¡Renta eliminado con éxito!",
+    "close" => "Cerrar",
+    "save" => "Guardar",
 
+    /*<──  ───────    CUSTOMER   ───────  ──>*/
+    "firstname" => "Nombre",
+    "lastname" => "Apellido",
+    "email" => "Correo electrónico",
+    "phone" => "Teléfono",
+    "address" => "Dirección",
+    "submit" => "Enviar",
+
+    /*<──  ───────    PAYMENTS   ───────  ──>*/
     "show-payments" => "Mostrar pagos",
+
+    "payments" => "Pagos",
+    "balance" => "Saldo",
+    "amount" => "Importe",
+
+    "add-payment" => "Añadir pago",
     "hide-payments" => "Ocultar pagos",
 
-    "rent-not-found" => "Renta no encontrado, intenta refrescar la página o volver a crear el renta.",
-    "toast" => "toast",
-    "success" => "éxito",
-    "RentPayment" => "Pago de renta añadido con éxito",
+    "rent" => "Alquiler",
+
+    /*<──  ───────    TOAST   ───────  ──>*/
+    "car-not-available" => "El coche no está disponible en las fechas seleccionadas",
+    "save-success" => "Alquiler guardado con éxito: ",
+    "delete-success" => "Alquiler eliminado con éxito",
+
+    /*<──  ───────    DELETE   ───────  ──>*/
+    "delete-title" => "Eliminar alquiler",
+    "delete-message" => "¿Estás seguro de que quieres eliminar este alquiler?",
+
+    "cancel" => "Cancelar",
+    "delete" => "Eliminar",
 ];

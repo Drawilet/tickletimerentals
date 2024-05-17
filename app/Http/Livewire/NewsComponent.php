@@ -27,7 +27,7 @@ class NewsComponent extends Component
         $this->addCrud(Rent::class, ["useItemsKey" => false, "get" => false, "afterUpdate" => "getProducts"]);
         $this->addCrud(Product::class, ["useItemsKey" => false, "get" => true]);
 
-        $this->rents = Rent::whereBetween("date", [
+        $this->rents = Rent::whereBetween("start_date", [
             Carbon::now()->format("Y-m-d"),
             Carbon::now()->addDays(1)->format("Y-m-d")
         ])->get();
