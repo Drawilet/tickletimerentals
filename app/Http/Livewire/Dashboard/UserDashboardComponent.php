@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Dashboard;
 use App\Http\Traits\WithCrudActions;
 use App\Http\Traits\WithValidations;
 use App\Models\Customer;
+use App\Models\Region;
 use App\Models\Rent;
 use App\Models\RentPayment;
 use App\Models\Product;
@@ -33,12 +34,11 @@ class UserDashboardComponent extends Component
         "customer_id" => null,
         "name" => null,
         "car_id" => null,
+        "region_id" => null,
 
-        "date" => null,
-        "start_time" => null,
-        "end_time" => null,
+        "start_date" => null,
+        "end_date" => null,
 
-        "price" => null,
         "notes" => null,
 
         "products" => [],
@@ -64,7 +64,7 @@ class UserDashboardComponent extends Component
         "notes" => null,
     ];
 
-    public $products, $filteredProducts, $customers, $cars, $payments;
+    public $products, $filteredProducts, $customers, $cars, $regions, $payments, $rents;
 
     public $currentSpace;
     public $searchTerm;
@@ -79,11 +79,12 @@ class UserDashboardComponent extends Component
 
     public function mount()
     {
-        $this->addCrud(Rent::class, ["useItemsKey" => false, "get" => false, "afterUpdate" => "updateRent"]);
+        $this->addCrud(Rent::class, ["useItemsKey" => false, "get" => true, "afterUpdate" => "updateRents"]);
         $this->addCrud(RentPayment::class, ["useItemsKey" => false, "get" => true]);
         $this->addCrud(Customer::class, ["useItemsKey" => false, "get" => true]);
         $this->addCrud(Car::class, ["useItemsKey" => false, "get" => true]);
         $this->addCrud(Product::class, ["useItemsKey" => false, "get" => true]);
+        $this->addCrud(Region::class, ["useItemsKey" => false, "get" => true]);
 
         $this->rent = $this->initialRent;
         $this->payment = $this->initialRentPayment;
@@ -193,32 +194,26 @@ class UserDashboardComponent extends Component
 
     public function saveRent()
     {
-        $schedule = $this->getSchedule();
-
         Validator::make($this->rent, [
             "name" => "required|" . $this->validations["text"],
-            "car_id" => "required",
+            "car_id" => "required|exists:cars,id",
+            "region_id" => "required|exists:regions,id",
+            "start_date" => "required|date|after_or_equal:" . Carbon::now()->format("Y-m-d"),
+            "end_date" => "required|date|after:start_date",
             "customer_id" => "required|exists:customers,id",
-            "date" => "required",
-            "price" => "required|" . $this->validations["number"],
             "notes" => "nullable|" . $this->validations["textarea"],
         ])->validate();
 
-        if (!isset($this->rent["id"])) {
-            Validator::make($this->rent, [
-                "start_time" => "required|after_or_equal:" . $schedule["opening"] . "|before_or_equal:" . $schedule["closing"],
-                "end_time" => "required|after:start_time|before_or_equal:" . $schedule["closing"],
-            ])->validate();
+        $this->rent["total"] = $this->getTotal();
 
-            $rents = Rent::where("car_id", $this->rent["car_id"])->where("date", $this->rent["date"]);
-            foreach ($rents as $rent) {
-                if (
-                    ($this->rent["start_time"] >= $rent->start_time && $this->rent["start_time"] < $rent->end_time) ||
-                    ($this->rent["end_time"] > $rent->start_time && $this->rent["end_time"] <= $rent->end_time)
-                ) {
-                    $this->emit("toast", "error", __("calendar.not-available"));
-                    return;
-                }
+        // validate car availability
+        $rents = Rent::where('car_id', $this->rent["car_id"])->get();
+        foreach ($rents as $rent) {
+            if ($this->rent["start_date"] >= $rent->start_date && $this->rent["start_date"] <= $rent->end_date) {
+                return $this->emit("toast", "error", __("calendar.car-not-available"));
+            }
+            if ($this->rent["end_date"] >= $rent->start_date && $this->rent["end_date"] <= $rent->end_date) {
+                return $this->emit("toast", "error", __("calendar.car-not-available"));
             }
         }
 
@@ -231,11 +226,6 @@ class UserDashboardComponent extends Component
                 "quantity" => $product["quantity"],
             ]);
         }
-
-        if (strlen($rent["start_time"]) == 5)
-            $rent["start_time"] .= ":00";
-        if (strlen($rent["end_time"]) == 5)
-            $rent["end_time"] .= ":00";
 
         $this->Modal("save", true, $rent->load("products", "payments", "customer")->toArray());
 
@@ -251,8 +241,6 @@ class UserDashboardComponent extends Component
     }
     public function updateRents($action, $data)
     {
-        $this->emit("update-rents", $this->rents->load("car", "customer"));
-
         if (isset($this->rent["id"]) && $this->rent["id"] == $data["id"]) {
             $rent = $this->rents->find($data["id"]);
             if ($rent)
@@ -300,16 +288,47 @@ class UserDashboardComponent extends Component
 
     public function getTotal()
     {
-        $total = $this->rent["price"] ?? 0;
-        foreach ($this->rent["products"] as $data) {
-            $total += $this->products->find($data["product_id"])->price * $data["quantity"];
+        $total = 0;
+        if ($this->rent["products"])
+            foreach ($this->rent["products"] as $data) {
+                $total += $this->products->find($data["product_id"])->price * $data["quantity"];
+            }
+
+        if ($this->rent["region_id"] && $this->rent["start_date"] && $this->rent["end_date"]) {
+            $region = $this->regions->find($this->rent["region_id"]);
+            $start_date = Carbon::parse($this->rent["start_date"]);
+            $end_date = Carbon::parse($this->rent["end_date"]);
+
+            // if the rent days is negative then return 0
+            if ($end_date->diffInDays($start_date) < 0)
+                return $total;
+
+            $days = $end_date->diffInDays($start_date);
+
+            $currentRate = null;
+            foreach ($region->rate_schedule as $rate) {
+                if ($days >= $rate["min"] && $days <= $rate["max"]) {
+                    $currentRate = $rate["value"];
+                    break;
+                }
+            }
+
+            if (!$currentRate)
+                $currentRate = $region->rate_schedule[count($region->rate_schedule) - 1]["value"];
+
+            if ($region->daily_rate) {
+                $price = $region->daily_rate * $days;
+                $total += $price - ($price * $currentRate / 100);
+            } else
+                $total += $currentRate;
         }
+
         return $total;
     }
 
     public function getRemaining()
     {
-        $remaining = $this->getTotal();
+        $remaining = $this->rent["total"] ?? 0;
         foreach ($this->rent["payments"] as $payment) {
             $remaining -= $payment["amount"];
         }
@@ -334,7 +353,7 @@ class UserDashboardComponent extends Component
         $this->rent["payments"][] = $payment;
         $this->payment = $this->initialRentPayment;
 
-        $this->emit(__("calendar.toast"), __("calendar.success"), __("calendar.RentPayment"));
+        $this->emit("toast", "success", __("calendar.RentPayment"));
 
         $this->handleCrudActions(
             "payment",

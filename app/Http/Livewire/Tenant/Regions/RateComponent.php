@@ -30,6 +30,12 @@ class RateComponent extends Component
         } else {
             $this->data['rate_schedule'] = [];
         }
+
+        if (isset($data['daily_rate'])) {
+            $this->data['daily_rate'] = $data['daily_rate'];
+        } else {
+            $this->data['daily_rate'] = null;
+        }
     }
 
     public function handleratesChange()

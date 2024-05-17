@@ -12,21 +12,21 @@ use Illuminate\Support\Collection;
 class CalendarComponent extends LivewireCalendar
 {
     use WithCrudActions;
-    protected $listeners = ['update-event' => 'updateEvent'];
+    protected $listeners = ['update-rent' => 'updateRent'];
 
     public $currentEvents, $currentDate;
 
     public function getCurrentEvents()
     {
-        $this->currentEvents = Rent::where('date', '>=', $this->gridStartsAt)
-            ->where('date', '<=', $this->gridEndsAt)
+        $this->currentEvents = Rent::where('start_date', '>=', $this->gridStartsAt)
+            ->where('end_date', '<=', $this->gridEndsAt)
             ->when(count($this->filters['cars']) > 0, function ($query) {
                 return $query->whereIn('car_id', $this->filters['cars']);
             })
             ->get();
     }
 
-    public function updateEvent($event)
+    public function updateRent($event)
     {
         $key = $this->currentEvents->search(function ($item) use ($event) {
             return $item->id == $event['id'];
@@ -53,14 +53,14 @@ class CalendarComponent extends LivewireCalendar
                         'id' => $event->id,
                         'title' => $event->name,
                         'location' => $event->car->name,
-                        'description' => Carbon::createFromFormat('H:i:s', $event->start_time)->format('g:i A') . ' - ' . Carbon::createFromFormat('H:i:s', $event->end_time)->format('g:i A'),
-                        'date' => $event->date,
+                        'description' => $event->notes,
+                        'date' => $event->start_date,
                         'color' => $event->car->color,
                         'start_time' => $event->start_time,
                         'isDraft' => isset ($event->payments) && count($event->payments) == 0,
                     ];
                 })
-                ->sortBy('start_time')
+                ->sortBy('start_date')
                 ->values()
                 ->toArray(),
         );

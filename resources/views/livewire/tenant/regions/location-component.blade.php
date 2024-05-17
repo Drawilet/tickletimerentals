@@ -24,11 +24,10 @@
                         $locationData = $locationData ? $locationData[0] : null;
                     @endphp
 
-
                     <label
-                        class="flex items-center gap-4  py-1 px-2 cursor-pointer {{ $locationData ? 'bg-primary bg-opacity-25' : 'odd:bg-base-100' }} transition-colors hover:brightness-90"
-                        wire:click='toggleLocation({{ $division->id }})'>
-                        <input type="checkbox" class="checkbox-primary" @checked(in_array($division->id, array_column($data['locations'], 'id'))) />
+                        class="flex items-center gap-4  py-1 px-2 cursor-pointer {{ $locationData ? 'bg-primary bg-opacity-25' : 'odd:bg-base-100' }} transition-colors hover:brightness-90">
+                        <input type="checkbox" class="checkbox-primary" wire:change='handleDataChange'
+                            wire:model='data.locations' value="{{ $division->id }}" />
                         {{ $division->name }}
 
                         @if ($locationData)

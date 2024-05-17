@@ -20,7 +20,7 @@
                 </span>
                 <p class="text-xs text-gray-600 ml-4">
                     @if ($events->isNotEmpty())
-                        {{ $events->count() }} {{ Str::plural(__('calendar.event'), $events->count()) }}
+                        {{ $events->count() }} {{ Str::plural(__('calendar.rent'), $events->count()) }}
                     @endif
                 </p>
             </div>

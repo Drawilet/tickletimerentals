@@ -7,7 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Rent extends Base
 {
     use HasFactory;
-    protected $fillable = ["name", "car_id", "customer_id", "date", "start_time", "end_time", "price", "notes"];
+    protected $fillable = [
+        "name",
+        "car_id",
+        "customer_id",
+        "start_date",
+        "end_date",
+        "total",
+        "notes"
+    ];
 
     public function customer()
     {
