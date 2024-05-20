@@ -37,19 +37,19 @@
             <div class="stats stats-vertical lg:stats-horizontal shadow flex flex-col lg:flex-row justify-between">
 
                 <div class="stat flex-1 p-4 shadow">
-                    <div class="stat-title text-2xl">{{ __('sidebar.customers') }}</div>
+                    <div class="stat-title text-2xl">{{ __('tenant-card.customers') }}</div>
                     <div class="stat-value text-4xl">{{ $tenant->customers->count() }}</div>
                 </div>
                 <div class="stat flex-1 p-4 shadow">
-                    <div class="stat-title text-2xl">{{ __('sidebar.products') }}</div>
+                    <div class="stat-title text-2xl">{{ __('tenant-card.products') }}</div>
                     <div class="stat-value text-4xl">{{ $tenant->products->count() }}</div>
                 </div>
                 <div class="stat flex-1 p-4 shadow">
-                    <div class="stat-title text-2xl">{{ __('sidebar.cars') }}</div>
+                    <div class="stat-title text-2xl">{{ __('tenant-card.cars') }}</div>
                     <div class="stat-value text-4xl">{{ $tenant->cars->count() }}</div>
                 </div>
                 <div class="stat flex-1 p-4 shadow">
-                    <div class="stat-title text-2xl">{{ __('sidebar.rents') }}</div>
+                    <div class="stat-title text-2xl">{{ __('tenant-card.rents') }}</div>
                     <div class="stat-value text-4xl">{{ $tenant->rents->count() }}</div>
                 </div>
 
@@ -62,9 +62,9 @@
                 <button class="w-1/2 btn {{ $tenant->suspended ? 'btn-neutral' : 'btn-secondary' }}"
                     wire:click="toggleSuspended({{ $tenant->id }})">
                     @if ($tenant->suspended)
-                        {{ __('suspended.Activate') }}
+                        {{ __('tenant-card.activate') }}
                     @else
-                        {{ __('suspended.Suspend') }}
+                        {{ __('tenant-card.suspend') }}
                     @endif
 
                 </button>
@@ -77,7 +77,7 @@
     </div>
 
     <div class="absolute -top-4 right-0 bg-base-200 shadow-lg rounded-lg p-6 border border-base-100 w-96">
-        <h2 class="text-xl mb-4 border-b pb-2 text-primary">{{ __('Historial de transacciones') }}</h2>
+        <h2 class="text-xl mb-4 border-b pb-2 text-primary">{{ __('tenant-card.transactions') }}</h2>
         <div class="car-y-1 overflow-auto h-36">
             @foreach ($transactions as $transaction)
                 <div class="shadow p-2 rounded-lg flex justify-between items-center">
@@ -93,29 +93,29 @@
         </div>
 
         <h3 class="text-right -mb-1">
-            {{ __('calendar.balance') }}: ${{ number_format($tenant->balance, 2) }}
+            {{ __('tenant-card.balance') }}: ${{ number_format($tenant->balance, 2) }}
         </h3>
 
         <h3 class="text-right text-sm">
-            {{ __('tenant.next-payment') }}: ${{ number_format($tenant->plan->price, 2) }}
+            {{ __('tenant-card.next-payment') }}: ${{ number_format($tenant->plan->price, 2) }}
         </h3>
 
         <form class="mt-10" wire:submit.prevent='addTransaction'>
             <x-form-control>
-                <x-label value="{{ __('calendar.Amount') }}" />
+                <x-label value="{{ __('tenant-card.amount') }}" />
                 <x-input name="transaction.amount" wire:model="transaction.amount" type="number" />
                 <x-input-error for="amount" class="mt-2" />
             </x-form-control>
 
             <x-form-control>
-                <x-label value="{{ __('calendar.payment-notes') }}" />
+                <x-label value="{{ __('tenant-card.notes') }}" />
                 <textarea class="textarea textarea-bordered" name="notes" wire:model="transaction.notes"> </textarea>
                 <x-input-error for="notes" class="mt-2" />
             </x-form-control>
 
 
             <button class="btn btn-primary w-full mt-2" type="submit">
-                <x-icons.plus />{{ __('calendar.AddPayment') }}
+                <x-icons.plus />{{ __('tenant-card.add-payment') }}
             </button>
         </form>
     </div>
