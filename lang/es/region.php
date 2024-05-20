@@ -5,25 +5,20 @@ return [
     'country' => 'País',
     "country-placeholder" => "Seleccionar país",
 
-    'rate_type' => 'Tipo de tarifa',
-    'price' => 'Precio',
-    'percentage' => 'Porcentaje',
+    'rate_schedule' => "",
     "daily_rate" => "Tarifa diaria",
-
-    'rate_schedule' => "Tarifas",
-    'rate-range' => 'Rango de tarifa',
-    'rate-value' => 'Valor de tarifa',
+    'rate_type' => 'Tipo de tarifa',
+    "percentage" => "Porcentaje",
+    'price' => 'Precio',
+    "discount" => "Descuento",
     'rate-actions' => 'Acciones',
 
-    "min" => "Mínimo",
-    "to" => "a",
-    "max" => "Máximo",
+    "rate-already-exists" => "La tarifa ya existe",
 
-    'days' => 'Días',
+    "days" => "Días",
 
-
-    'search' => 'Buscar región...',
-    'create' => 'Crear región',
+    "search" => "Buscar región...",
+    "create" => "Crear región",
     "update" => "Actualizar región",
-    'notfound' => 'Aun sin regiones',
+    "notfound" => "Aún no hay regiones",
 ];
