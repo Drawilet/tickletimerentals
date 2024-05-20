@@ -1,7 +1,7 @@
 <input type="checkbox" class="modal-toggle" @checked($modals['save']) />
 <div class="modal" role="dialog">
     <div class="modal-box">
-        <div class="px-6 py-4">
+        <div class="">
             <div>
                 <h2>
                     {{ !isset($rent['id']) ? __('calendar.new-rent') : __('calendar.update-rent') }}
