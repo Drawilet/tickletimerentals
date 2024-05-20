@@ -72,7 +72,8 @@ class CalendarComponent extends LivewireCalendar
         $day = str_pad($day, 2, '0', STR_PAD_LEFT);
 
         $this->emit('Modal', 'save', true, [
-            'date' => $year . '-' . $month . '-' . $day,
+            'start_date' => $year . '-' . $month . '-' . $day,
+            "end_date" => $year . '-' . $month . '-' . $day,
         ]);
     }
 
