@@ -20,6 +20,7 @@ class CarsComponent extends CrudComponent
             'mainKey' => 'name',
             'types' => [
                 'name' => ['type' => 'text'],
+                'description' => ['type' => 'textarea', 'rows' => 4],
                 'photos' => [
                     'type' => 'file',
                     'component' => PhotosComponent::class,
@@ -30,7 +31,6 @@ class CarsComponent extends CrudComponent
                         'name' => 'url',
                     ],
                 ],
-                'description' => ['type' => 'textarea', 'rows' => 4],
                 'color' => ['type' => 'color'],
                 'plate_number' => ['type' => 'text'],
                 'brand' => ['type' => 'text'],
