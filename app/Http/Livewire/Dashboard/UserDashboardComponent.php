@@ -307,20 +307,16 @@ class UserDashboardComponent extends Component
 
             $currentRate = null;
             foreach ($region->rate_schedule as $rate) {
-                if ($days >= $rate["min"] && $days <= $rate["max"]) {
-                    $currentRate = $rate["value"];
+                if ($days == (int) $rate["days"]) {
+                    $currentRate = (int) $rate["price"];
                     break;
                 }
             }
 
             if (!$currentRate)
-                $currentRate = $region->rate_schedule[count($region->rate_schedule) - 1]["value"];
+                $currentRate = $region->daily_rate;
 
-            if ($region->daily_rate) {
-                $price = $region->daily_rate * $days;
-                $total += $price - ($price * $currentRate / 100);
-            } else
-                $total += $currentRate;
+            $total += $currentRate * $days;
         }
 
         return $total;
