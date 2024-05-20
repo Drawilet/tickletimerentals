@@ -24,49 +24,52 @@
                 @auth
 href="{{ url('/dashboard') }}"
                 @else
-href="{{ url('/') }}" @endauth>
-                <x-application-mark />
-            </a>
-        </div>
-        <nav class="flex-none">
-            <ul class="menu flex-row px-1 -my-3 ">
                 @auth
-                    <li>
-                        <a href="{{ url('/dashboard') }}" class="text-sm underline">{{ __('login-register.Dashboard') }}</a>
-                    </li>
-                @else
-                    <li>
-                        <a href="{{ route('login') }}" class="text-sm underline">{{ __('login-register.Login') }}</a>
-                    </li>
-
-                    @if (Route::has('register'))
-                        <li>
-                            <a href="{{ route('register') }}"
-                                class="md:ml-4 text-sm  underline">{{ __('login-register.Register') }}</a>
-                        </li>
-                    @endif
-                @endauth
-            </ul>
-        </nav>
-    </header>
-
-    <div class="font-sansantialiased">
-        {{ $slot }}
+                href="{{ url('/dashboard') }}"
+                 @endauth
+            href="{{ url('/') }}" @endauth>
+            <x-application-mark />
+        </a>
     </div>
+    <nav class="flex-none">
+        <ul class="menu flex-row px-1 -my-3 ">
+            @auth
+                <li>
+                    <a href="{{ url('/dashboard') }}" class="text-sm underline">{{ __('login-register.Dashboard') }}</a>
+                </li>
+            @else
+                <li>
+                    <a href="{{ route('login') }}" class="text-sm underline">{{ __('login-register.Login') }}</a>
+                </li>
 
-    @livewire('accessibility-component')
-    @livewireScripts
+                @if (Route::has('register'))
+                    <li>
+                        <a href="{{ route('register') }}"
+                            class="md:ml-4 text-sm  underline">{{ __('login-register.Register') }}</a>
+                    </li>
+                @endif
+            @endauth
+        </ul>
+    </nav>
+</header>
 
-    <script>
-        const header = document.getElementById('header');
-        document.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                header.classList.add('bg-base-100');
-            } else {
-                header.classList.remove('bg-base-100');
-            }
-        });
-    </script>
+<div class="font-sansantialiased">
+    {{ $slot }}
+</div>
+
+@livewire('accessibility-component')
+@livewireScripts
+
+<script>
+    const header = document.getElementById('header');
+    document.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.classList.add('bg-base-100');
+        } else {
+            header.classList.remove('bg-base-100');
+        }
+    });
+</script>
 </body>
 
 </html>

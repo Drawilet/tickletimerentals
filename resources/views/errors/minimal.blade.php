@@ -20,7 +20,7 @@
 <body>
     <header class="navbar bg-base-100 fixed top-0 left-0 w-full z-50">
         <div class="flex-1">
-            <a class="btn btn-ghost text-xl" href="/">
+            <a class="btn btn-ghost text-xl" href="/dashboard">
                 <x-application-mark />
             </a>
         </div>
@@ -55,6 +55,7 @@
 
                     <div class="ml-4 text-lg  uppercase tracking-wider">
                         @yield('message')
+                        <p>gjdsf</p>
                     </div>
                 </div>
             </div>
