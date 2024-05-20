@@ -11,5 +11,5 @@ return [
     'search' => 'Buscar cliente...',
     'create' => 'Crear cliente',
     "update" => "Actualizar cliente",
-    'notfound' => 'Cliente no encontrado',
+    'notfound' => 'Aun sin clientes',
 ];

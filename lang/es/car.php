@@ -43,10 +43,10 @@ return [
 
     'notes' => 'Notas',
 
-    'search' => 'Buscar carro...',
-    'create' => 'Crear carro',
-    "update" => "Actualizar carro",
-    'notfound' => 'Carro no encontrado',
+    'search' => 'Buscar vehículo...',
+    'create' => 'Crear vehículo',
+    "update" => "Actualizar vehículo",
+    'notfound' => 'Aun sin vehículos',
 
     "uploading" => "Subiendo...",
 ];

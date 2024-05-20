@@ -25,5 +25,5 @@ return [
     'search' => 'Buscar región...',
     'create' => 'Crear región',
     "update" => "Actualizar región",
-    'notfound' => 'región no encontrado',
+    'notfound' => 'Aun sin regiones',
 ];

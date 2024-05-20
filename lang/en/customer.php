@@ -11,5 +11,5 @@ return [
     'search' => 'Search customer...',
     'create' => 'Create customer',
     "update" => "Update customer",
-    'notfound' => 'Customer not found',
+    'notfound' => 'No customers yet',
 ];

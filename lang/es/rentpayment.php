@@ -8,5 +8,5 @@ return [
     'search' => 'Buscar pago...',
     'create' => 'Crear pago',
     "update" => "Actualizar pago",
-    'notfound' => 'Pago no encontrado',
+    'notfound' => 'Aun sin pagos',
 ];

@@ -7,8 +7,8 @@ return [
     'price' => 'Precio',
     'notes' => 'Notas',
 
-    'search' => 'Buscar producto...',
-    'create' => 'Crear producto',
-    'update' => 'Actualizar producto',
-    'notfound' => 'Producto no encontrado',
+    'search' => 'Buscar producto/servicio...',
+    'create' => 'Crear producto/servicio',
+    'update' => 'Actualizar producto/servicio',
+    'notfound' => 'Aun sin productos/servicios',
 ];

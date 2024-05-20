@@ -1,10 +1,10 @@
 <?php
 return [
-    'dashboard' => 'Panel',
+    'dashboard' => 'Calendario',
     'customers' => 'Clientes',
-    'cars' => 'Carros',
+    'cars' => 'Vehículos',
     'regions' => 'Regiones',
-    'products' => 'Productos',
+    'products' => 'Productos/Servicios',
     'Settings' => 'Configuración',
     'more' => 'Más',
     'payments' => 'Pagos',
@@ -12,6 +12,6 @@ return [
     'rents' => 'Rentas',
 
     'App' => 'Aplicación',
-    'tenants' => "Arrendatarios",
+    'tenants' => "Compañías",
     'plans' => 'Planes',
 ];
