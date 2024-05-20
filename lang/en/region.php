@@ -1,15 +1,25 @@
 <?php
 return [
     'name' => 'Name',
-    'cities' => 'Cities',
+    'locations' => 'Locations',
     'country' => 'Country',
     "country-placeholder" => "Select country",
-    'division' => 'State',
-    'division-placeholder' => 'Select state',
 
-    "available-cities" => "Available cities",
-    'selected-cities' => 'Selected cities',
+    'rate_type' => 'Rate type',
+    'price' => 'Price',
+    'percentage' => 'Percentage',
+    "daily_rate" => "Daily rate",
 
+    'rate_schedule' => "Rates",
+    'rate-range' => 'Rate range',
+    'rate-value' => 'Rate value',
+    'rate-actions' => 'Actions',
+
+    "min" => "Min",
+    "to" => "to",
+    "max" => "Max",
+
+    'days' => 'Days',
 
     'search' => 'Search region...',
     'create' => 'Create region',

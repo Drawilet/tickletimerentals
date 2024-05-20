@@ -10,10 +10,16 @@
 
             <div class="flex justify-between items-center">
                 <h3 class="text-2xl">
-                    @isset($rent['date'])
-                        {{ \Carbon\Carbon::parse($rent['date'])->format('d') }},
-                        {{ __('month.' . strtolower(\Carbon\Carbon::parse($rent['date'])->format('F'))) }},
-                        {{ \Carbon\Carbon::parse($rent['date'])->format('Y') }}
+                    @isset($rent['start_date'])
+                        {{ \Carbon\Carbon::parse($rent['start_date'])->format('d') }},
+                        {{ __('month.' . strtolower(\Carbon\Carbon::parse($rent['start_date'])->format('F'))) }},
+                        {{ \Carbon\Carbon::parse($rent['start_date'])->format('Y') }}
+                    @endisset
+
+                    @isset($rent['end_date'])
+                        - {{ \Carbon\Carbon::parse($rent['end_date'])->format('d') }},
+                        {{ __('month.' . strtolower(\Carbon\Carbon::parse($rent['end_date'])->format('F'))) }},
+                        {{ \Carbon\Carbon::parse($rent['end_date'])->format('Y') }}
                     @endisset
 
                 </h3>
@@ -30,17 +36,17 @@
                 {{-- INFORMATION --}}
                 <section>
                     <x-form-control>
-                        <x-label for="name" value="{{ __('calendar.Rentname') }}" />
+                        <x-label for="name" value="{{ __('calendar.rent-name') }}" />
                         <x-input id="name" name="name" wire:model="rent.name" wire:loading.attr="disabled"
                             wire:target="saveRent" />
                         <x-input-error for="name" class="mt-2" />
                     </x-form-control>
 
                     <x-form-control>
-                        <x-label for="car_id" value="{{ __('calendar.Car') }}" />
+                        <x-label for="car_id" value="{{ __('calendar.car') }}" />
                         <select class="select select-bordered" wire:model="rent.car_id" wire:loading.attr="disabled"
                             wire:target="saveRent">
-                            <option value="{{ null }}">{{ __('calendar.Pickone') }}</option>
+                            <option value="{{ null }}">{{ __('calendar.pick-car') }}</option>
                             @foreach ($cars as $car)
                                 <option value="{{ $car->id }}">{{ $car->name }}
                                 </option>
@@ -50,7 +56,20 @@
                     </x-form-control>
 
                     <x-form-control>
-                        <x-label for="customer_id" value="{{ __('calendar.Customer') }}" />
+                        <x-label for="region_id" value="{{ __('calendar.region') }}" />
+                        <select class="select select-bordered" wire:model="rent.region_id" wire:loading.attr="disabled"
+                            wire:target="saveRent">
+                            <option value="{{ null }}">{{ __('calendar.pick-region') }}</option>
+                            @foreach ($regions as $region)
+                                <option value="{{ $region->id }}">{{ $region->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <x-input-error for="region_id" class="mt-2" />
+                    </x-form-control>
+
+                    <x-form-control>
+                        <x-label for="customer_id" value="{{ __('calendar.customer') }}" />
                         <div class="flex items-center">
                             <div x-data="{ open: false }" class="flex-grow relative">
                                 <input type="text" class="input input-bordered w-full"
@@ -80,41 +99,22 @@
                         <x-input-error for="customer_id" class="mt-2" />
                     </x-form-control>
 
-                    @php
-                        $schedule = $this->getSchedule();
-                    @endphp
-
                     <x-form-control>
-                        <x-label for="date" value="{{ __('calendar.Date') }}" />
-                        <x-input id="date" name="date" type="date" wire:model="rent.date"
+                        <x-label for="date" value="{{ __('calendar.start_date') }}" />
+                        <x-input id="date" name="date" type="date" wire:model="rent.start_date"
                             wire:loading.attr="disabled" wire:target="saveRent" />
-                        <x-input-error for="date" class="mt-2" />
+                        <x-input-error for="start_date" class="mt-2" />
                     </x-form-control>
 
                     <x-form-control>
-                        <x-label for="start_time" value="{{ __('calendar.Starttime') }}" />
-                        <x-input id="start_time" name="start_time" type="time" wire:model="rent.start_time"
-                            wire:change='updateEndTime' min="{{ $schedule['opening'] }}"
-                            max="{{ $schedule['closing'] }}" wire:loading.attr="disabled" wire:target="saveRent" />
-                        <x-input-error for="start_time" class="mt-2" />
-                    </x-form-control>
-
-                    <x-form-control>
-                        <x-label for="end_time" value="{{ __('calendar.Endtime') }}" />
-                        <x-input id="end_time" name="end_time" type="time" wire:model="rent.end_time"
+                        <x-label for="end_date" value="{{ __('calendar.end_date') }}" />
+                        <x-input id="end_date" name="end_date" type="date" wire:model="rent.end_date"
                             wire:loading.attr="disabled" wire:target="saveRent" />
-                        <x-input-error for="end_time" class="mt-2" />
+                        <x-input-error for="end_date" class="mt-2" />
                     </x-form-control>
 
                     <x-form-control>
-                        <x-label for="price" value="{{ __('calendar.Price') }}" />
-                        <x-input id="price" name="price" type="number" wire:model="rent.price"
-                            wire:loading.attr="disabled" wire:target="saveRent" />
-                        <x-input-error for="price" class="mt-2" />
-                    </x-form-control>
-
-                    <x-form-control>
-                        <x-label for="notes" value="{{ __('calendar.Notes') }}" />
+                        <x-label for="notes" value="{{ __('calendar.notes') }}" />
                         <textarea id="notes" name="notes" class="textarea textarea-bordered" wire:model="rent.notes"
                             wire:loading.attr="disabled" wire:target="saveRent"></textarea>
                         <x-input-error for="notes" class="mt-2" />
@@ -127,13 +127,13 @@
                         <button class="btn mr-2" wire:click="Modal('addProduct', true)">
                             <x-icons.plus />
                         </button>
-                        {{ __('calendar.Products') }}
+                        {{ __('calendar.products') }}
                     </h2>
                     <div class="overflow-x-auto">
                         <table class="table w-full table-zebra ">
                             <thead>
                                 <tr>
-                                    <th class="w-3/4">{{ __('calendar.Name') }}</th>
+                                    <th class="w-3/4">{{ __('calendar.product-name') }}</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -190,7 +190,7 @@
                     {{ __('auth.cargando') }}...
                 </span>
                 <span wire:loading.remove wire:target="saveRent">
-                    {{ __('calendar.Save') }}
+                    {{ __('calendar.save') }}
                 </span>
             </button>
 

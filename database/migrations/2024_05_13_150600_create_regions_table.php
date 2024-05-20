@@ -16,7 +16,9 @@ return new class extends Migration {
             $table->id();
 
             $table->string('name');
-            $table->json('cities');
+            $table->json('locations');
+            $table->json('rate_schedule');
+            $table->decimal('daily_rate', 10, 2)->nullable();
 
             $table->foreignId("tenant_id")->constrained("tenants");
 
