@@ -5,21 +5,15 @@ return [
     'country' => 'Country',
     "country-placeholder" => "Select country",
 
+    'rate_schedule' => "",
     'rate_type' => 'Rate type',
     'price' => 'Price',
-    'percentage' => 'Percentage',
-    "daily_rate" => "Daily rate",
-
-    'rate_schedule' => "Rates",
-    'rate-range' => 'Rate range',
-    'rate-value' => 'Rate value',
+    "discount" => "Discount",
     'rate-actions' => 'Actions',
 
-    "min" => "Min",
-    "to" => "to",
-    "max" => "Max",
+    "rate-already-exists" => "Rate already exists",
 
-    'days' => 'Days',
+    "days" => "Days",
 
     'search' => 'Search region...',
     'create' => 'Create region',

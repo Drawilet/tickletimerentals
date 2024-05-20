@@ -10,7 +10,7 @@ class RateComponent extends Component
 
     public $usingPrice = true;
 
-    public $min, $max, $value;
+    public $days, $price, $discount;
     public $editingId = null;
 
     public $data = [
@@ -47,30 +47,61 @@ class RateComponent extends Component
         $this->emitUp('update-data', $this->data);
     }
 
+    public function handlePriceChange()
+    {
+        if ($this->price > $this->data['daily_rate']) {
+            $this->price = $this->data['daily_rate'];
+        } else if ($this->price < 0) {
+            $this->price = 0;
+        }
+
+        $this->discount = 100 - (($this->price / $this->data['daily_rate']) * 100);
+    }
+
+    public function handleDiscountChange()
+    {
+        if ($this->discount < 0) {
+            $this->discount = 0;
+        } else if ($this->discount > 100) {
+            $this->discount = 100;
+        }
+
+        $this->price = $this->data['daily_rate'] - ($this->data['daily_rate'] * ($this->discount / 100));
+    }
+
 
     public function add()
     {
         $this->validate([
-            'min' => 'required',
-            'max' => 'required',
-            'value' => 'required',
+            'days' => 'required|integer|min:2',
+            'price' => 'required|integer|min:0|max:' . $this->data['daily_rate'],
+            'discount' => 'required|integer|lte:100',
         ]);
 
+        foreach ($this->data['rate_schedule'] as $rate) {
+            if ($rate['days'] == $this->days) {
+                $this->addError('days', __('region.rate-already-exists'));
+                return;
+            }
+        }
+
         $this->data['rate_schedule'][] = [
-            'min' => $this->min,
-            'max' => $this->max,
-            'value' => $this->value,
+            'days' => $this->days,
+            'price' => $this->price,
+            'discount' => $this->discount,
         ];
 
-        $this->min = '';
-        $this->max = '';
-        $this->value = '';
+        $this->sortSchedule();
+
+        $this->days = '';
+        $this->price = '';
+        $this->discount = '';
         $this->handleratesChange();
     }
     public function delete($key)
     {
         unset($this->data['rate_schedule'][$key]);
-        $this->data['rate_schedule'] = array_values($this->data['rate_schedule']);
+        $this->data['rate_schedule'] = array_discounts($this->data['rate_schedule']);
         $this->handleratesChange();
     }
 
@@ -80,25 +111,34 @@ class RateComponent extends Component
         $this->editingId = $key;
 
         $rate = $this->data['rate_schedule'][$key];
-        $this->min = $rate['min'];
-        $this->max = $rate['max'];
-        $this->value = $rate['value'];
+        $this->days = $rate['days'];
+        $this->price = $rate['price'];
+        $this->discount = $rate['discount'];
     }
 
     public function save()
     {
         $this->data['rate_schedule'][$this->editingId] = [
-            'min' => $this->min,
-            'max' => $this->max,
-            'value' => $this->value,
+            'days' => $this->days,
+            'price' => $this->price,
+            'discount' => $this->discount,
         ];
 
-        $this->min = '';
-        $this->max = '';
-        $this->value = '';
+        $this->days = '';
+        $this->price = '';
+        $this->discount = '';
         $this->editingId = null;
 
+        $this->sortSchedule();
+
         $this->handleratesChange();
+    }
+
+    public function sortSchedule()
+    {
+        usort($this->data['rate_schedule'], function ($a, $b) {
+            return $a['days'] <=> $b['days'];
+        });
     }
 
 
