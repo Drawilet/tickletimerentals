@@ -13,14 +13,14 @@ return [
     'tenant.users.show' => 'Mostrar Usuarios',
     'tenant.payments.show' => 'Mostrar Pagos',
     'tenant.payments.manage' => 'Administrar Pagos',
-    'tenant.cars.show' => 'Mostrar Carros',
-    'tenant.cars.manage' => 'Administrar Carros',
+    'tenant.cars.show' => 'Mostrar Vehículos',
+    'tenant.cars.manage' => 'Administrar Vehículos',
 
-    "app.tenants.manage" => "Administrar Arrendatarios",
-    "app.tenants.show" => "Mostrar Arrendatarios",
+    "app.tenants.manage" => "Administrar Compaias",
+    "app.tenants.show" => "Mostrar Compañias",
 
     'search' => 'Buscar usuario...',
     'create' => 'Crear usuario',
     'update' => 'Actualizar usuario',
-    'notfound' => 'Usuario no encontrado',
+    'notfound' => 'Aun sin usuarios',
 ];

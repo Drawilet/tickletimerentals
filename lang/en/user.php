@@ -22,5 +22,5 @@ return [
     'search' => 'Search user...',
     'create' => 'Create user',
     "update" => "Update user",
-    'notfound' => 'User not found',
+    'notfound' => 'No users yet',
 ];

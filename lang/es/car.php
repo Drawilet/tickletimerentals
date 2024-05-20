@@ -31,7 +31,7 @@ return [
     'engine' => 'Motor',
     'seats' => 'Asientos',
     'doors' => 'Puertas',
-    "features" => "Características",
+    "features" => "Características adicionales",
     "feature-name" => "Nombre de la característica",
     "feature-value" => "Valor de la característica",
     "feature-actions" => "Acciones",
@@ -43,10 +43,10 @@ return [
 
     'notes' => 'Notas',
 
-    'search' => 'Buscar carro...',
-    'create' => 'Crear carro',
-    "update" => "Actualizar carro",
-    'notfound' => 'Carro no encontrado',
+    'search' => 'Buscar vehículo...',
+    'create' => 'Crear vehículo',
+    "update" => "Actualizar vehículo",
+    'notfound' => 'Aun sin vehículos',
 
     "uploading" => "Subiendo...",
 ];

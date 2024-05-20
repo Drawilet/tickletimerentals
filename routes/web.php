@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 $defaultMiddleware = [
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
+    "wizard"
 ];
 
 

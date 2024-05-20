@@ -46,7 +46,7 @@ return [
     'search' => 'Search car...',
     'create' => 'Create car',
     "update" => "Update car",
-    'notfound' => 'Car not found',
+    'notfound' => 'No cars yet',
 
     "uploading" => "Uploading...",
 ];

@@ -6,8 +6,8 @@ return [
     /*<──  ───────    RENT   ───────  ──>*/
     "rent-name" => "Nombre del alquiler",
 
-    "car" => "Coche",
-    "pick-car" => "Seleccionar coche",
+    "car" => "Vehículo",
+    "pick-car" => "Seleccionar vehículo",
 
     "region" => "Región",
     "pick-region" => "Seleccionar región",
@@ -50,7 +50,7 @@ return [
     "rent" => "Alquiler",
 
     /*<──  ───────    TOAST   ───────  ──>*/
-    "car-not-available" => "El coche no está disponible en las fechas seleccionadas",
+    "car-not-available" => "El vehículo no está disponible en las fechas seleccionadas",
     "save-success" => "Alquiler guardado con éxito: ",
     "delete-success" => "Alquiler eliminado con éxito",
 

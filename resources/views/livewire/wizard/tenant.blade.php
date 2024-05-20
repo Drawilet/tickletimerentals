@@ -1,6 +1,16 @@
 <div>
-    <h2 class="text-2xl font-bold mb-4 text-center">{{ __("wizard.tenants.text-1") }}</h2>
-    <p class="mb-6">{{ __("wizard.tenants.text-2") }}</p>
+    <h2 class="text-2xl font-bold mb-4 text-cente text-centerr">{{ __('wizard.tenant.welcome') }}
+        {{ config('app.name') }}!</h2>
+    <p class=" mb-6">
+        {{ __('wizard.tenant.title') }}
+    </p>
 
-    <p class="mb-4">{{ __("wizard.tenants.text-3") }}</p>
+    <ul class="list-disc ml-6 mb-6">
+        <li class="mb-2"><strong>{{ __('wizard.tenant.text-1') }}</strong></li>
+        <li class="mb-2"><strong>{{ __('wizard.tenant.text-2') }}</strong></li>
+        <li class="mb-2"><strong>{{ __('wizard.tenant.text-3') }}</strong></li>
+        <li class="mb-2"><strong>{{ __('wizard.tenant.text-4') }}.</strong></li>
+    </ul>
+
+    <p>{{ __('wizard.tenant.text-5') }}</p>
 </div>

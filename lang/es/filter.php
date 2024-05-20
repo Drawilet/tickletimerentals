@@ -1,5 +1,5 @@
 <?php
 return [
-    'Cars' => 'Carros',
+    'Cars' => 'Vehículos',
     'All' => 'Todos',
 ];

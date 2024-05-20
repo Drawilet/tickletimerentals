@@ -69,7 +69,7 @@ class ProductsComponent extends CrudComponent
 
         if ($products->count() == 1) {
             $user = Auth::user();
-            $user->wizard_step = 3;
+            $user->wizard_step = 4;
             $user->save();
 
             return redirect()->route('tenant.products.show');

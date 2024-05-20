@@ -6,6 +6,7 @@ use App\Http\Livewire\Tenant\Regions\LocationComponent;
 use App\Http\Livewire\Tenant\Regions\RateComponent;
 use App\Http\Livewire\Util\CrudComponent;
 use App\Models\Region;
+use Auth;
 
 class RegionsComponent extends CrudComponent
 {
@@ -70,5 +71,17 @@ class RegionsComponent extends CrudComponent
                 $region->save();
             }
         }
+
+        $user = Auth::user();
+        $regions = Region::where('tenant_id', $user->tenant_id)->get();
+
+        if ($regions->count() == 1) {
+            $user = Auth::user();
+            $user->wizard_step = 3;
+            $user->save();
+
+            redirect()->route("tenant.regions.show");
+        }
+
     }
 }

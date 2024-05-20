@@ -24,5 +24,5 @@ return [
     'search' => 'Search region...',
     'create' => 'Create region',
     "update" => "Update region",
-    'notfound' => 'Region not found',
+    'notfound' => 'No regions yet',
 ];

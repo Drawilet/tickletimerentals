@@ -1,10 +1,10 @@
 <?php
 return [
-    'dashboard' => 'Dashboard',
+    'dashboard' => 'Calendar',
     'customers' => 'Customers',
     'cars' => 'Cars',
     'regions' => 'Regions',
-    'products' => 'Products',
+    'products' => 'Products/Services',
     'Settings' => 'Settings',
     'payments' => 'Payments',
     'more' => 'More',

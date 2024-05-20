@@ -36,6 +36,10 @@ class RateComponent extends Component
         } else {
             $this->data['daily_rate'] = null;
         }
+
+        if ($this->data['daily_rate'] == null) {
+            $this->usingPrice = true;
+        }
     }
 
     public function handleratesChange()
