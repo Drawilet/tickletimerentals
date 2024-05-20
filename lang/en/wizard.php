@@ -31,6 +31,14 @@ return [
         "text-5" => "Each car can have its own characteristics, such as capacity, available resources, and specific schedules. This makes managing rents in different places easier and provides flexibility to adapt to the needs of your activities.",
         "text-6" => "Ready to set up your first car? Let's go!"
     ],
+    "region" => [
+        "text-1" => "Let's get ready to set up your first region!",
+        "text-2" => "Before we start, let me explain what regions are and why they're important:",
+        "text-3" => "Regions in",
+        "text-4" => "allow you to organize your rents efficiently. You can think of them as areas, zones, or locations where your rents take place.",
+        "text-5" => "Each region can have its own characteristics, such as capacity, available resources, and specific schedules. This makes managing rents in different places easier and provides flexibility to adapt to the needs of your activities.",
+        "text-6" => "Ready to set up your first region? Let's go!"
+    ],
     "product" => [
         "text-1" => "Let's get ready to set up your first product!",
         "text-2" => "Before we start, let me explain what products are for in ",

@@ -31,6 +31,14 @@ return [
         "text-5" => "Cada carro puede tener sus propias características, como capacidad, recursos disponibles y horarios específicos. Esto facilita la gestión de rentas en diferentes lugares y te brinda flexibilidad para adaptarte a las necesidades de tus actividades.",
         "text-6" => "¡Listo para configurar tu primer carro? ¡Vamos allá!"
     ],
+    "region" => [
+        "text-1" => "¡Preparémonos para configurar tu primera región!",
+        "text-2" => "Antes de comenzar, déjame explicarte qué son las regiones y por qué son importantes:",
+        "text-3" => "Las regiones en",
+        "text-4" => "te permiten organizar tus rentas de manera eficiente. Puedes pensar en ellas como áreas, zonas o ubicaciones donde ocurren tus rentas.",
+        "text-5" => "Cada región puede tener sus propias características, como capacidad, recursos disponibles y horarios específicos. Esto facilita la gestión de rentas en diferentes lugares y te brinda flexibilidad para adaptarte a las necesidades de tus actividades.",
+        "text-6" => "¡Listo para configurar tu primera región? ¡Vamos allá!"
+    ],
     "product" => [
         "text-1" => "¡Preparémonos para configurar tu primer producto!",
         "text-2" => "Antes de comenzar, déjame explicarte para qué sirven los productos en ",

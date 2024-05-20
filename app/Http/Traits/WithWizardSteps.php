@@ -14,6 +14,10 @@ trait WithWizardSteps
             "route" => "tenant.cars.show"
         ],
         [
+            "name" => "region",
+            "route" => "tenant.regions.show"
+        ],
+        [
             "name" => "product",
             "route" => "tenant.products.show",
             "skippable" => true
