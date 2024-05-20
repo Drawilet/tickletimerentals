@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->string("seats");
             $table->string("doors");
 
-            $table->json("features");
+            $table->json("features")->nullable();
 
             $table->text('notes')->nullable();
 
