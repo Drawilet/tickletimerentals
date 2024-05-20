@@ -1,5 +1,6 @@
 <?php
 return [
+    "title" => "Company settings",
     'name' => 'Name',
     'email' => 'Email',
     'description' => 'Description',

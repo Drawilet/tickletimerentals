@@ -1,6 +1,7 @@
 <?php
 return [
-    'name' => 'Nombre',
+    "title" => "Configuración de la empresa",
+    'name' => 'Nombre comercial',
     'email' => 'Correo',
     'description' => 'Descripción',
     'phone' => 'Teléfono',

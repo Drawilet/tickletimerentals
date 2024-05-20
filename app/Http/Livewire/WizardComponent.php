@@ -2,35 +2,16 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Traits\WithWizardSteps;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class WizardComponent extends Component
 {
+    use WithWizardSteps;
     public $user;
     public $step;
     public $currentRoute;
-
-    public $steps = [
-        [
-            "name" => "tenant",
-            "route" => "settings.show"
-        ],
-        [
-            "name" => "car",
-            "route" => "tenant.cars.show"
-        ],
-        [
-            "name" => "product",
-            "route" => "tenant.products.show",
-            "skippable" => true
-        ],
-        [
-            "name" => "rent",
-            "route" => "dashboard.show",
-            "skippable" => true
-        ]
-    ];
 
 
     public function mount()
@@ -63,5 +44,6 @@ class WizardComponent extends Component
             redirect()->route($step['route']);
         else
             redirect()->route('dashboard.show');
+
     }
 }
