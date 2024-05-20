@@ -30,6 +30,7 @@ return [
     "save" => "Guardar",
 
     /*<──  ───────    CUSTOMER   ───────  ──>*/
+    "new-customer" => "Nuevo cliente",
     "firstname" => "Nombre",
     "lastname" => "Apellido",
     "email" => "Correo electrónico",

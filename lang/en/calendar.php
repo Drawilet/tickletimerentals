@@ -30,6 +30,7 @@ return [
     "save" => "Save",
 
     /*<──  ───────    CUSTOMER   ───────  ──>*/
+    "new-customer" => "New customer",
     "firstname" => "First name",
     "lastname" => "Last name",
     "email" => "Email",
