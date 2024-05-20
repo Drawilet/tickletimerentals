@@ -31,7 +31,7 @@ return [
     'engine' => 'Motor',
     'seats' => 'Asientos',
     'doors' => 'Puertas',
-    "features" => "Características",
+    "features" => "Características adicionales",
     "feature-name" => "Nombre de la característica",
     "feature-value" => "Valor de la característica",
     "feature-actions" => "Acciones",
