@@ -1,11 +1,17 @@
-<div class="w-full max-w-xs mx-auto">
-    <label class="block text-gray-700 text-sm font-bold mb-2" for="grid-state">
-        Seleccione
-    </label>
-    <select class="select select-bordered select-md w-full" wire:model="data.theme">
+<x-form-control class="max-w-sm mx-auto mt-10">
+    <x-label for="theme" value="{{ __('tenant-settings.theme') }}" />
+    <select class="select select-bordered" wire:model="data.theme" id="theme-selector">
         @foreach ($themes as $theme)
             <option value="{{ $theme }}">{{ $theme }}</option>
         @endforeach
     </select>
-    <x-input-error for="theme" />
-</div>
+    <x-input-error for="theme" class="mt-2" />
+</x-form-control>
+
+<script>
+    const themeSelector = document.getElementById('theme-selector');
+    themeSelector.addEventListener('change', (e) => {
+        const theme = e.target.value;
+        document.documentElement.setAttribute('data-theme', theme);
+    });
+</script>

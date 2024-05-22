@@ -18,5 +18,7 @@ return [
 
     "alert" => " El plan se actualizará hasta la próxima fecha de corte",
 
+    "theme" => "Tema",
+
     'save' => 'Guardar',
 ];

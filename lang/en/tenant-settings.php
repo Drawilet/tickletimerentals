@@ -18,5 +18,7 @@ return [
 
     "alert" => " The plan will be updated until the next cut-off date",
 
+    "theme" => "Theme",
+
     'save' => 'Save',
 ];
