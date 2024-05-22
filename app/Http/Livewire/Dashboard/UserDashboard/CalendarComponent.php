@@ -56,8 +56,9 @@ class CalendarComponent extends LivewireCalendar
                         'description' => $event->notes,
                         'date' => $event->start_date,
                         'color' => $event->car->color,
-                        'start_time' => $event->start_time,
                         'isDraft' => isset ($event->payments) && count($event->payments) == 0,
+                        'start_date' => $event->start_date,
+                        'end_date' => $event->end_date,
                     ];
                 })
                 ->sortBy('start_date')
