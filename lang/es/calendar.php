@@ -54,6 +54,7 @@ return [
     "car-not-available" => "El vehículo no está disponible en las fechas seleccionadas",
     "save-success" => "Alquiler guardado con éxito: ",
     "delete-success" => "Alquiler eliminado con éxito",
+    "payment-success" => "Pago añadido con éxito",
 
     /*<──  ───────    DELETE   ───────  ──>*/
     "delete-title" => "Eliminar alquiler",

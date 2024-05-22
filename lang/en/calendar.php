@@ -54,6 +54,7 @@ return [
     "car-not-available" => "The car is not available on the selected dates",
     "save-success" => "Rent saved successfully: ",
     "delete-success" => "Rent deleted successfully",
+    "payment-success" => "Payment added successfully",
 
     /*<──  ───────    DELETE   ───────  ──>*/
     "delete-title" => "Delete rent",

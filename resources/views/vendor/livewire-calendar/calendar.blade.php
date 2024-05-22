@@ -63,7 +63,9 @@
                         style="background-color: {{ $event['isDraft'] ? '' : $event['color'] }}">
                     </span>
 
-                    {{ $event['title'] }}
+                    <span class="text-sm">
+                        {{ \Carbon\Carbon::parse($event['start_date'])->format('d') }} |
+                        {{ $event['title'] }}</span>
                 </button>
             @endforeach
             </d>
