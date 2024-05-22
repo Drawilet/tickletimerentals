@@ -30,7 +30,7 @@
 
                         <label class="swap swap-rotate">
                             <!-- this hidden checkbox controls the state -->
-                            <x-checkbox id="show-password" class="theme-controller sr-only absolute"
+                            <x-checkbox id="show-password" class=" sr-only absolute"
                                 value="synthwave" />
 
                             <!-- eye -->
