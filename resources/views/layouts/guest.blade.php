@@ -14,7 +14,6 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
 </head>
 
 <body>
@@ -25,8 +24,7 @@
 href="{{ url('/dashboard') }}"
                 @else
                 @auth
-                href="{{ url('/dashboard') }}"
-                 @endauth
+                href="{{ url('/dashboard') }}" @endauth
             href="{{ url('/') }}" @endauth>
             <x-application-mark />
         </a>
