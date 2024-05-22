@@ -352,7 +352,7 @@ class UserDashboardComponent extends Component
         $this->rent["payments"][] = $payment;
         $this->payment = $this->initialRentPayment;
 
-        $this->emit("toast", "success", __("calendar.RentPayment"));
+        $this->emit("toast", "success", __("calendar.payment-success"));
 
         $this->handleCrudActions(
             "payment",
