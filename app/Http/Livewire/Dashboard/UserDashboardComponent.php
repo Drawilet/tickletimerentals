@@ -288,6 +288,9 @@ class UserDashboardComponent extends Component
 
     public function getTotal()
     {
+        if (isset($this->rent['total']))
+            return $this->rent['total'];
+
         $total = 0;
         if ($this->rent["products"])
             foreach ($this->rent["products"] as $data) {
