@@ -1,8 +1,7 @@
 @livewire('wizard-component')
 
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="{{ Auth::user()->tenant->theme }}">
 <head>
 
     <meta charset="utf-8">

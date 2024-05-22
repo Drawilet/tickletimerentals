@@ -23,6 +23,7 @@ return new class extends Migration {
 
             $table->string('background_image')->nullable();
             $table->string('profile_image')->nullable();
+            $table->string('theme')->default('business');
 
             $table->decimal('balance', 10, 2)->default(0);
 
