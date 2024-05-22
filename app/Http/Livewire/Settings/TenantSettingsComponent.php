@@ -23,10 +23,45 @@ class TenantSettingsComponent extends Component
         'description' => '',
         'phone' => '',
         'email' => '',
+        'theme' => '',
 
         'plan_id' => '',
         'next_plan_id' => '',
     ];
+    public $themes = [
+        "light",
+        "dark",
+        "cupcake",
+        "bumblebee",
+        "emerald",
+        "corporate",
+        "synthwave",
+        "retro",
+        "cyberpunk",
+        "valentine",
+        "halloween",
+        "garden",
+        "forest",
+        "aqua",
+        "lofi",
+        "pastel",
+        "fantasy",
+        "wireframe",
+        "black",
+        "luxury",
+        "dracula",
+        "cmyk",
+        "autumn",
+        "business",
+        "acid",
+        "lemonade",
+        "night",
+        "coffee",
+        "winter",
+        "dim",
+        "nord",
+        "sunset",
+      ];
 
     public $oldData = [];
 
@@ -66,6 +101,7 @@ class TenantSettingsComponent extends Component
             'description' => $this->validations['textarea'],
             'phone' => $this->validations['tel'],
             'email' => $this->validations['email'],
+            'theme' => 'required|in:' . implode(',', $this->themes),
             'plan_id' => 'required|exists:plans,id',
             'next_plan_id' => 'nullable|exists:plans,id',
         ])->validate();

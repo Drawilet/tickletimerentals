@@ -17,6 +17,7 @@ class Tenant extends Model
         'suspended',
         'background_image',
         'profile_image',
+        'theme',
         'plan_id',
         'next_plan_id',
         'subscription_ends_at',
