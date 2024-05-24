@@ -60,5 +60,29 @@
                 {{ __('calendar.save') }}
             </span>
         </button>
+
+        @php
+            $err = $errors->toArray();
+        @endphp
+        @if (count($err) > 0)
+            <script>
+                function scrollToFirstError() {
+                    const errors = @json($err);
+                    const keys = Object.keys(errors);
+                    const firstKey = keys[0];
+                    if (!firstKey) return;
+
+                    const errorElement = document.getElementById(firstKey);
+                    if (!errorElement) return;
+
+                    errorElement.parentElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                    });
+                }
+                scrollToFirstError();
+            </script>
+        @endif
+
     </x-slot>
 </x-dialog-modal>
