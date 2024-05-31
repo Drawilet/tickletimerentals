@@ -56,6 +56,15 @@
 
         <div class="max-h-96 overflow-y-scroll">
             @foreach ($events as $event)
+                @php
+                    $startDate = \Carbon\Carbon::parse($event['start_date']);
+                    $now = \Carbon\Carbon::now();
+                @endphp
+
+                @if ($startDate->lt($now->startOfDay()))
+                    @continue
+                @endif
+
                 <button class="cursor-pointer flex gap-2 items-center"
                     wire:click.stop="onEventClick('{{ $event['id'] }}')">
 
