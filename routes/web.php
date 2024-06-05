@@ -80,6 +80,11 @@ Route::prefix("tenant")->name("tenant.")->middleware($defaultMiddleware)->group(
         ::middleware("permission:tenant.regions.show")
         ->get('regions', \App\Http\Livewire\Tenant\RegionsComponent::class)
         ->name('regions.show');
+
+     Route
+        ::middleware("permission:tenant.taxes.show")
+        ->get('taxes', \App\Http\Livewire\Tenant\TaxesComponent::class)
+        ->name('taxes.show');
 });
 
 Route

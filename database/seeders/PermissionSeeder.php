@@ -35,6 +35,9 @@ class PermissionSeeder extends Seeder
 
                     "tenant.regions.manage",
                     "tenant.regions.show",
+
+                    "tenant.taxes.manage",
+                    "tenant.taxes.show",
                 ],
             "app.admin" => [
                 "app.tenants.manage",
