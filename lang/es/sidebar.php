@@ -10,6 +10,7 @@ return [
     'payments' => 'Pagos',
     'users' => 'Usuarios',
     'rents' => 'Rentas',
+    'Taxes' => 'Impuestos',
 
     'App' => 'Aplicación',
     'tenants' => "Compañías",
