@@ -199,10 +199,6 @@
                 {{ number_format($this->getTotal(), 2) }}
 
             </span>
-            <span>
-                {{ number_format($this->calculateTax(), 2) }}
-            </span>
-
 
             <button class="btn btn-primary px-8" wire:click="saveRent" wire:loading.attr="disabled">
                 <span wire:loading wire:target="saveRent">
