@@ -34,8 +34,6 @@ return [
     "close" => "Close",
     "save" => "Save",
 
-
-
     /*<──  ───────    CUSTOMER   ───────  ──>*/
     "new-customer" => "New customer",
     "firstname" => "First name",
