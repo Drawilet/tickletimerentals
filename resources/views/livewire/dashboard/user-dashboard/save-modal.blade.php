@@ -207,15 +207,15 @@
                 <tbody>
                     <tr>
                         <td class="pr-8">{{ __('calendar.subtotal') }}</td>
-                        <td> ${{ number_format($this->rent['subtotal'], 2) }}</td>
+                        <td class="text-right"> ${{ number_format($this->rent['subtotal'], 2) }}</td>
                     </tr>
                     <tr>
-                        <td class="pr-8">{{ __('calendar.taxes') }}</td>
-                        <td> ${{ number_format($this->rent['tax_amount'], 2) }}</td>
+                        <td class="pr-8 ">{{ __('calendar.taxes') }}</td>
+                        <td class="text-right"> ${{ number_format($this->rent['tax_amount'], 2) }}</td>
                     </tr>
                     <tr class=" text-xl w-full border-t border-base-300 mt-4">
                         <td class="pr-8">{{ __('calendar.total') }}</td>
-                        <td> ${{ number_format($this->rent['total'], 2) }}</td>
+                        <td class="text-right"> ${{ number_format($this->rent['total'], 2) }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -233,7 +233,7 @@
         </div>
 
         <div class="w-11/12 mx-auto flex md:hidden gap-2">
-            <button class="w-1/3 btn btn-neutral" wire:click='Modal("save",false)'>
+            <button class="w-1/3 btn btn-neutral " wire:click='Modal("save",false)'>
                 {{ __('calendar.close') }}
             </button>
 
