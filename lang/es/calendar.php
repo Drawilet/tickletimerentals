@@ -12,6 +12,9 @@ return [
     "region" => "Región",
     "pick-region" => "Seleccionar región",
 
+    "tax" => "Impuesto",
+    "pick-tax" => "Seleccionar impuesto",
+
     "customer" => "Cliente",
 
     "start_date" => "Fecha de inicio",
@@ -24,7 +27,10 @@ return [
     "add-product" => "Añadir producto",
     "search-product" => "Buscar producto",
 
+    "subtotal" => "Sub total",
+    "taxes" => "Impuestos",
     "total" => "Total",
+
 
     "close" => "Cerrar",
     "save" => "Guardar",
