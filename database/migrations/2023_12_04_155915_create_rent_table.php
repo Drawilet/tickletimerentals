@@ -18,8 +18,13 @@ return new class extends Migration {
             $table->string('name');
             $table->foreignId('car_id')->constrained();
             $table->foreignId('customer_id')->constrained();
+            $table->foreignId('region_id')->constrained();
 
+            $table->date("start_date");
             $table->date("end_date");
+
+            $table->foreignId("tax_id")->constrained();
+            $table->decimal("tax_amount");
 
             $table->decimal("subtotal");
             $table->decimal("total");

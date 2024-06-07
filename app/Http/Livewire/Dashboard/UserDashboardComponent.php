@@ -44,6 +44,10 @@ class UserDashboardComponent extends Component
         "notes" => null,
 
         "products" => [],
+
+        "tax_amount" => null,
+        "subtotal" => null,
+        "total" => null,
     ];
 
     public $filters, $initialFilters = [
@@ -141,6 +145,9 @@ class UserDashboardComponent extends Component
         $this->currentSpace = $this->cars->find($this->rent["car_id"]) ?? null;
 
         $this->CAN_LOAD_MORE = $this->customers->count() > $this->skip_customer;
+
+        $this->getTotal();
+
         return view('livewire.dashboard.user-dashboard-component');
     }
 
@@ -206,7 +213,6 @@ class UserDashboardComponent extends Component
             "notes" => "nullable|" . $this->validations["textarea"],
         ])->validate();
 
-        $this->rent["total"] = $this->getTotal();
 
         // validate car availability
         $rents = Rent::where('car_id', $this->rent["car_id"])->get();
@@ -290,8 +296,6 @@ class UserDashboardComponent extends Component
 
     public function getTotal()
     {
-        if (isset($this->rent['total']))
-            return $this->rent['total'];
 
         $total = 0;
         if ($this->rent["products"])
@@ -322,12 +326,17 @@ class UserDashboardComponent extends Component
                 $currentRate = $region->daily_rate;
 
             $total += $currentRate * $days;
-            //add tax
-            $taxRate = $this->taxes->find($this->rent["tax_id"])->rate;
-            $tax = $total * $taxRate / 100;
-            $total += $tax;
         }
-        return $total;
+
+        $this->rent["subtotal"] = $total;
+
+        if ($this->rent["tax_id"]) {
+            $tax = $this->taxes->find($this->rent["tax_id"]);
+            $this->rent["tax_amount"] = $total * $tax->rate / 100;
+            $total += $this->rent["tax_amount"];
+        }
+
+        $this->rent["total"] = $total;
     }
     public function getRemaining()
     {

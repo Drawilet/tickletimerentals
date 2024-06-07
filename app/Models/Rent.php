@@ -14,6 +14,10 @@ class Rent extends Base
         "start_date",
         "end_date",
         "total",
+        "subtotal",
+        "region_id",
+        "tax_id",
+        "tax_amount",
         "notes"
     ];
 

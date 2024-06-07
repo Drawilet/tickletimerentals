@@ -121,12 +121,13 @@
                     </x-form-control>
 
                     <x-form-control>
-                        <x-label for="taxes_id" value="{{ __('calendar.Taxe') }}" />
+                        <x-label for="tax_id" value="{{ __('calendar.tax') }}" />
                         <select class="select select-bordered" wire:model="rent.tax_id" wire:loading.attr="disabled"
                             wire:target="saveRent">
-                            <option value="{{ null }}">{{ __('calendar.pick-region') }}</option>
+                            <option value="{{ null }}">{{ __('calendar.pick-tax') }}</option>
                             @foreach ($taxes as $tax)
-                                <option value="{{ $tax->id }}">{{ $tax->name }}
+                                <option value="{{ $tax->id }}">{{ $tax->code }}
+                                    ({{ $tax->rate }}%)
                                 </option>
                             @endforeach
                         </select>
@@ -194,11 +195,30 @@
         </div>
 
 
-        <div class="flex flex-row items-center justify-end px-6 py-4">
-            <span class="text-xl mr-auto block">{{ __('calendar.total') }}: $
-                {{ number_format($this->getTotal(), 2) }}
+        <div class="flex flex-row items-center justify-between  px-6 py-4">
 
-            </span>
+            <table class="">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="pr-8">{{ __('calendar.subtotal') }}</td>
+                        <td> ${{ number_format($this->rent['subtotal'], 2) }}</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-8">{{ __('calendar.taxes') }}</td>
+                        <td> ${{ number_format($this->rent['tax_amount'], 2) }}</td>
+                    </tr>
+                    <tr class=" text-xl w-full border-t border-base-300 mt-4">
+                        <td class="pr-8">{{ __('calendar.total') }}</td>
+                        <td> ${{ number_format($this->rent['total'], 2) }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
             <button class="btn btn-primary px-8" wire:click="saveRent" wire:loading.attr="disabled">
                 <span wire:loading wire:target="saveRent">

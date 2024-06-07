@@ -9,12 +9,12 @@ class TaxesComponent extends CrudComponent
 {
     public function mount()
     {
-        $this->setup(Tax::class,[
+        $this->setup(Tax::class, [
             'mainKey' => 'name',
             'types' => [
                 'name' => ['type' => 'text'],
-                'rate' => ['type' => 'number', 'step' => '0.01'],
                 'code' => ['type' => 'text'],
+                'rate' => ['type' => 'number', 'step' => '0.01'],
             ],
         ]);
 

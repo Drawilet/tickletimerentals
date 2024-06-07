@@ -17,6 +17,9 @@ return [
     "start_date" => "Start date",
     "end_date" => "End date",
 
+    "tax" => "Tax",
+    "pick-tax" => "Pick tax",
+
     "notes" => "Notes",
 
     "products" => "Products",
@@ -24,10 +27,14 @@ return [
     "add-product" => "Add product",
     "search-product" => "Search product",
 
+    "subtotal" => "Sub total",
+    "taxes" => "Taxes",
     "total" => "Total",
 
     "close" => "Close",
     "save" => "Save",
+
+
 
     /*<──  ───────    CUSTOMER   ───────  ──>*/
     "new-customer" => "New customer",
