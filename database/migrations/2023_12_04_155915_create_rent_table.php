@@ -19,9 +19,9 @@ return new class extends Migration {
             $table->foreignId('car_id')->constrained();
             $table->foreignId('customer_id')->constrained();
 
-            $table->date("start_date");
             $table->date("end_date");
 
+            $table->decimal("subtotal");
             $table->decimal("total");
 
             $table->text('notes')->nullable();

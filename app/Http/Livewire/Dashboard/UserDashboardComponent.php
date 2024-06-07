@@ -10,6 +10,7 @@ use App\Models\Rent;
 use App\Models\RentPayment;
 use App\Models\Product;
 use App\Models\Car;
+use App\Models\Tax;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,7 @@ class UserDashboardComponent extends Component
         "name" => null,
         "car_id" => null,
         "region_id" => null,
+        "tax_id" => null,
 
         "start_date" => null,
         "end_date" => null,
@@ -64,7 +66,7 @@ class UserDashboardComponent extends Component
         "notes" => null,
     ];
 
-    public $products, $filteredProducts, $customers, $cars, $regions, $payments, $rents;
+    public $products, $filteredProducts, $customers, $cars, $regions, $payments, $rents, $taxes, $tax;
 
     public $currentSpace;
     public $searchTerm;
@@ -81,6 +83,7 @@ class UserDashboardComponent extends Component
     {
         $this->addCrud(Rent::class, ["useItemsKey" => false, "get" => true, "afterUpdate" => "updateRents"]);
         $this->addCrud(RentPayment::class, ["useItemsKey" => false, "get" => true]);
+        $this->addCrud(Tax::class, ["useItemsKey" => false, "get" => false]);
         $this->addCrud(Customer::class, ["useItemsKey" => false, "get" => true]);
         $this->addCrud(Car::class, ["useItemsKey" => false, "get" => true]);
         $this->addCrud(Product::class, ["useItemsKey" => false, "get" => true]);
@@ -91,15 +94,14 @@ class UserDashboardComponent extends Component
         $this->filters = $this->initialFilters;
 
         $this->customers = Customer::take($this->CUSTOMER_PER_PAGE)->get();
+        $this->taxes = Tax::all();
         $this->skip_customer = $this->CUSTOMER_PER_PAGE;
-
     }
     public function SetCustomer($id)
     {
         $this->SelectCustomer = Customer::find($id);
         $this->searchTerm = $this->SelectCustomer->firstname . ' ' . $this->SelectCustomer->lastname;
         $this->rent['customer_id'] = $id;
-
     }
 
     public function loadMore()
@@ -119,7 +121,6 @@ class UserDashboardComponent extends Component
         if ($NewCustomers->count() < $this->CUSTOMER_PER_PAGE) {
             $this->CUSTOMER_PER_PAGE = false;
         }
-
     }
     public function filterUpdated()
     {
@@ -201,6 +202,7 @@ class UserDashboardComponent extends Component
             "start_date" => "required|date|after_or_equal:" . Carbon::now()->format("Y-m-d"),
             "end_date" => "required|date|after:start_date",
             "customer_id" => "required|exists:customers,id",
+            "tax_id" => "required|exists:taxes,id",
             "notes" => "nullable|" . $this->validations["textarea"],
         ])->validate();
 
@@ -320,11 +322,13 @@ class UserDashboardComponent extends Component
                 $currentRate = $region->daily_rate;
 
             $total += $currentRate * $days;
+            //add tax
+            $taxRate = $this->taxes->find($this->rent["tax_id"])->rate;
+            $tax = $total * $taxRate / 100;
+            $total += $tax;
         }
-
         return $total;
     }
-
     public function getRemaining()
     {
         $remaining = $this->rent["total"] ?? 0;
