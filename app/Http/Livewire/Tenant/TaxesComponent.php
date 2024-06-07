@@ -14,7 +14,7 @@ class TaxesComponent extends CrudComponent
             'types' => [
                 'name' => ['type' => 'text'],
                 'rate' => ['type' => 'number', 'step' => '0.01'],
-                'code' => ['type' => 'number'],
+                'code' => ['type' => 'text'],
             ],
         ]);
 

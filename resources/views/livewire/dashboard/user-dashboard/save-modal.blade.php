@@ -119,6 +119,19 @@
                             wire:loading.attr="disabled" wire:target="saveRent"></textarea>
                         <x-input-error for="notes" class="mt-2" />
                     </x-form-control>
+
+                    <x-form-control>
+                        <x-label for="taxes_id" value="{{ __('calendar.Taxe') }}" />
+                        <select class="select select-bordered" wire:model="rent.tax_id" wire:loading.attr="disabled"
+                            wire:target="saveRent">
+                            <option value="{{ null }}">{{ __('calendar.pick-region') }}</option>
+                            @foreach ($taxes as $tax)
+                                <option value="{{ $tax->id }}">{{ $tax->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <x-input-error for="tax_id" class="mt-2" />
+                    </x-form-control>
                 </section>
 
                 {{-- PRODUCTS --}}
@@ -183,7 +196,13 @@
 
         <div class="flex flex-row items-center justify-end px-6 py-4">
             <span class="text-xl mr-auto block">{{ __('calendar.total') }}: $
-                {{ number_format($this->getTotal(), 2) }}</span>
+                {{ number_format($this->getTotal(), 2) }}
+
+            </span>
+            <span>
+                {{ number_format($this->calculateTax(), 2) }}
+            </span>
+
 
             <button class="btn btn-primary px-8" wire:click="saveRent" wire:loading.attr="disabled">
                 <span wire:loading wire:target="saveRent">

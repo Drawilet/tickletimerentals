@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('rate');
-            $table->integer('code')->unique();
+            $table->string('code');
             $table->timestamps();
         });
     }
