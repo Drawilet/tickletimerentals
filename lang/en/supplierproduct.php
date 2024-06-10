@@ -6,6 +6,8 @@ return [
     'name' => 'Name',
     'description' => 'Description',
     'price' => 'Price',
+    'iva' => 'IVA',
+    'unit' => 'Unit',
     'notes' => 'Notes',
 
     'search' => 'Search supplier product...',

@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->string('sku');
             $table->string('description');
             $table->decimal('price', 10, 2);
+            $table->decimal('iva', 10, 2);
+            $table->string('unit');
             $table->string('photo')->nullable();
             $table->string('notes')->nullable();
 

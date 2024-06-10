@@ -15,17 +15,14 @@ return new class extends Migration {
         Schema::create('expense_details', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('expense_id')
-                ->constrained()
-                ->onDelete('cascade');
+            $table->foreignId('expense_id')->constrained()->onDelete('cascade');
 
+            $table->string('sku');
             $table->string('concept');
             $table->string('unit');
             $table->integer('quantity');
             $table->decimal('price', 10, 2);
-            $table->decimal('iva_percentage', 10, 2);
-            $table->decimal('tax_amount', 10, 2);
-            $table->decimal('amount', 10, 2);
+            $table->decimal('iva', 10, 2);
 
             $table->timestamps();
         });

@@ -76,6 +76,11 @@ class SidebarComponent extends Component
             "route" => "tenant.supplier-products.show",
             "permission" => "tenant.supplier-products.show",
         ],
+        "expenses" => [
+            "icon" => "bank-notes",
+            "route" => "tenant.expenses.show",
+            "permission" => "tenant.expenses.show",
+        ],
 
     ];
 

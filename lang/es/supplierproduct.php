@@ -6,6 +6,8 @@ return [
     'name' => 'Nombre',
     'description' => 'Descripción',
     'price' => 'Precio',
+    'iva' => 'IVA',
+    'unit' => 'Unidad',
     'notes' => 'Notas',
 
     'search' => 'Buscar producto del proveedor...',

@@ -16,6 +16,8 @@ class SupplierProduct extends Model
         'sku',
         'description',
         'price',
+        "iva",
+        'unit',
         'notes',
     ];
 }

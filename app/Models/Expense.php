@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Expense extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'subtotal',
+        'total',
+    ];
+
+    public function details()
+    {
+        return $this->hasMany(ExpenseDetail::class);
+    }
 }

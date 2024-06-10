@@ -44,6 +44,9 @@ class PermissionSeeder extends Seeder
 
                     "tenant.supplier-products.manage",
                     "tenant.supplier-products.show",
+
+                    "tenant.expenses.manage",
+                    "tenant.expenses.show",
                 ],
             "app.admin" => [
                 "app.tenants.manage",
