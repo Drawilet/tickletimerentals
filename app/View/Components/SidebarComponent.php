@@ -60,11 +60,21 @@ class SidebarComponent extends Component
             "route" => "app.plans",
             "permission" => "app.plans.show",
         ],
-        "Taxes"=>
-        [
-            "icon"=>"credit-card",
-            "route"=>"tenant.taxes.show",
-            "permission"=>"tenant.taxes.show",
+        "taxes" => [
+            "icon" => "credit-card",
+            "route" => "tenant.taxes.show",
+            "permission" => "tenant.taxes.show",
+        ],
+        "suppliers" => [
+            "icon" => "brief-case",
+            "route" => "tenant.suppliers.show",
+            "permission" => "tenant.suppliers.show",
+        ],
+
+        "supplier-products" => [
+            "icon" => "shopping-bag",
+            "route" => "tenant.supplier-products.show",
+            "permission" => "tenant.supplier-products.show",
         ],
 
     ];

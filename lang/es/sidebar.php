@@ -10,7 +10,9 @@ return [
     'payments' => 'Pagos',
     'users' => 'Usuarios',
     'rents' => 'Rentas',
-    'Taxes' => 'Impuestos',
+    'taxes' => 'Impuestos',
+    "suppliers" => "Proveedores",
+    "supplier-products" => "Productos de Proveedor",
 
     'App' => 'Aplicación',
     'tenants' => "Compañías",
