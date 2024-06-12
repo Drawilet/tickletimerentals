@@ -10,13 +10,13 @@
             <label class="divider divider-base-200"></label>
             <li>
                 <x-form-control>
-                    <x-label for="damage" value="Es daño ?" />
+                    <x-label for="damage" value="{{ __('calendar.daño') }}" />
                     <input type="checkbox" class="checkbox" wire:model="rent.photos.{{ $selectedPhoto }}.damage">
                     <x-input-error for="damage" class="mt-2" />
                 </x-form-control>
 
                 <x-form-control>
-                    <x-label for="notes" value="Notas" />
+                    <x-label for="notes" value="{{ __('calendar.notes') }}" />
                     <textarea id="notes" name="notes" wire:model="rent.photos.{{ $selectedPhoto }}.notes"
                         type="text" class="textarea"></textarea>
                     <x-input-error for="notes" class="mt-2" />

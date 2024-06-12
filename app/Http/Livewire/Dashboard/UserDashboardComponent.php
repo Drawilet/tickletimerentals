@@ -11,7 +11,7 @@ use App\Models\RentPayment;
 use App\Models\Product;
 use App\Models\Car;
 use App\Models\Tax;
-use App\models\RentPhotos;
+use App\Models\RentPhotos;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +50,6 @@ class UserDashboardComponent extends Component
         "products" => [],
 
         "photos" => [],
-        'notesPhotos' => null,
 
         "tax_amount" => null,
         "subtotal" => null,
