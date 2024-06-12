@@ -2,7 +2,6 @@
 return [
     "new-rent" => "New rent",
     "update-rent" => "Update rent",
-    "damege" => "Is damage?",
 
     /*<──  ───────    RENT   ───────  ──>*/
     "rent-name" => "Rent name",

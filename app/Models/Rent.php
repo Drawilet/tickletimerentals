@@ -40,12 +40,8 @@ class Rent extends Base
     {
         return $this->hasMany(RentPayment::class);
     }
-    public function tax()
+    public function Tax()
     {
         return $this->hasMany(Tax::class);
-    }
-    public function photos()
-    {
-        return $this->hasMany(RentPhotos::class);
     }
 }
