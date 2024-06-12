@@ -2,6 +2,7 @@
 return [
     "new-rent" => "Nuevo alquiler",
     "update-rent" => "Actualizar alquiler",
+    "damege" => "¿Es daño?",
 
     /*<──  ───────    RENT   ───────  ──>*/
     "rent-name" => "Nombre del alquiler",
