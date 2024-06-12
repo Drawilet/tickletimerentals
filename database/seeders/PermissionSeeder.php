@@ -42,8 +42,8 @@ class PermissionSeeder extends Seeder
                     "tenant.suppliers.manage",
                     "tenant.suppliers.show",
 
-                    "tenant.supplier-products.manage",
-                    "tenant.supplier-products.show",
+                    "tenant.expense-categories.manage",
+                    "tenant.expense-categories.show",
 
                     "tenant.expenses.manage",
                     "tenant.expenses.show",

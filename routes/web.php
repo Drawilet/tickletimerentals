@@ -92,9 +92,9 @@ Route::prefix("tenant")->name("tenant.")->middleware($defaultMiddleware)->group(
         ->name('suppliers.show');
 
     Route
-        ::middleware("permission:tenant.suppliers.show")
-        ->get('supplier-products', \App\Http\Livewire\Tenant\SupplierProductsComponent::class)
-        ->name('supplier-products.show');
+        ::middleware("permission:tenant.expense-categories.show")
+        ->get('expense-categories', \App\Http\Livewire\Tenant\ExpenseCategoriesComponent::class)
+        ->name('expense-categories.show');
 
     Route::get('expenses', \App\Http\Livewire\Tenant\ExpensesComponent::class)
         ->name('expenses.show');

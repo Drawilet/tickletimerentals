@@ -4,84 +4,89 @@
        </x-slot>
 
        <x-slot name="content">
-           <h2 class="mb-2">
-               {{ __('expense.add-detail') }}
-           </h2>
-           <div class="join w-full gap-2 mb-2">
-               <select wire:model='filter.supplier_id' wire:change='filterProducts' class="select select-bordered flex-1">
-                   <option value='{{ null }}'>{{ __('expense.supplier') }}</option>
+           <x-form-control class="mb-4">
+               <x-label for="" value="{{ __('expense.supplier') }}" />
+               <select wire:model='data.supplier_id' class="select select-bordered flex-1 w-full">
+                   <option value='{{ null }}'>{{ __('expense.pick-supplier') }}</option>
                    @foreach ($suppliers as $supplier)
                        <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
                    @endforeach
                </select>
-               <select wire:model='filter.product_id' class="select select-bordered flex-1">
-                   <option value='{{ null }}'>{{ __('expense.product') }}</option>
-                   @isset($products)
-                       @foreach ($products as $product)
-                           <option value="{{ $product->id }}">{{ $product->name }}</option>
-                       @endforeach
-                   @endisset
-               </select>
-               <button class="btn btn-secondary" wire:click='addDetail'>
-                   <x-icons.plus class="w-6 h-6" />
-               </button>
-           </div>
+               <x-input-error for="data.supplier_id" />
+           </x-form-control>
 
-           <span class="opacity-80 mb-4 block">
-               {{ __('expense.db-click-to-remove') }}
-           </span>
+           <h2 class="text-xl mb-4">
+               {{ __('expense.details') }}
+           </h2>
 
            <table class="table table-xs table-zebra mb-2">
                <thead>
                    <tr>
                        <th></th>
-                       <th>{{ __('expense.sku') }}</th>
-                       <th>{{ __('expense.concept') }}</th>
-                       <th>{{ __('expense.quantity') }}</th>
-                       <th>{{ __('expense.unit') }}</th>
-                       <th>{{ __('expense.price') }}</th>
+                       <th>{{ __('expense.category') }}</th>
                        <th>{{ __('expense.iva') }}</th>
                        <th>{{ __('expense.amount') }}</th>
-
+                       <th></th>
                    </tr>
                </thead>
                <tbody>
                    @foreach ($data['details'] as $detail)
-                       <tr class="hover" wire:dblclick='removeDetail({{ $loop->index }})'>
+                       <tr class="hover">
                            <td>
                                {{ $loop->index + 1 }}
                            </td>
                            <td>
-                               {{ $data['details'][$loop->index]['sku'] }}
+                               {{ $categories->where('id', $detail['category_id'])->first()->name }}
                            </td>
-                           <td>
-                               {{ $data['details'][$loop->index]['concept'] }}
-                           </td>
-                           <td>
-                               <input type="text" wire:model='data.details.{{ $loop->index }}.quantity'
-                                   class="input max-w-16 px-1" />
-                           </td>
-                           <td>
-                               {{ $data['details'][$loop->index]['unit'] }}
-                           </td>
-                           <td>
-                               <input type="text" wire:model='data.details.{{ $loop->index }}.price'
-                                   class="input max-w-16 px-1" />
-                           </td>
+
                            <td>
                                {{ $data['details'][$loop->index]['iva'] }}%
                            </td>
                            <td>
-                               @if ($data['details'][$loop->index]['quantity'] && $data['details'][$loop->index]['price'])
-                                   ${{ number_format($data['details'][$loop->index]['quantity'] * $data['details'][$loop->index]['price'], 2) }}
-                               @endif
+                               <input type="number" wire:model='data.details.{{ $loop->index }}.price'
+                                   class="input max-w-16 px-1" />
                            </td>
+                           <td>
+                               <button wire:click='removeDetail({{ $loop->index }})' type="button"
+                                   class="btn btn-sm btn-ghost">
+                                   <x-icons.trash />
+                               </button>
+                           </td>
+
                        </tr>
                    @endforeach
+
+                   <tr>
+                       <td>
+                           {{ count($data['details']) + 1 }}
+                       </td>
+                       <td>
+                           <select wire:model='detail.category_id' wire:change='updateIva'
+                               class="select select-bordered flex-1 w-full">
+                               <option value="">{{ __('expense.pick-category') }}</option>
+                               @foreach ($categories as $category)
+                                   <option value="{{ $category->id }}">{{ $category->name }}</option>
+                               @endforeach
+                           </select>
+                       </td>
+                       <td>
+                           <input type="number" wire:model='detail.iva' class="input max-w-16 px-1" />
+                       </td>
+                       <td>
+                           <input type="number" wire:model='detail.price' class="input max-w-16 px-1" />
+                       </td>
+                       <td>
+                           <button wire:click='addDetail' type="button" class="btn btn-sm btn-ghost">
+                               <x-icons.plus />
+                           </button>
+                       </td>
+                   </tr>
 
 
                </tbody>
            </table>
+
+           <x-input-error for="data.details" />
 
            <div class="flex flex-col items-end justify-center">
                <div>

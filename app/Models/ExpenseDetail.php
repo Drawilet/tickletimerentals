@@ -11,10 +11,7 @@ class ExpenseDetail extends Model
 
     protected $fillable = [
         'expense_id',
-        'sku',
-        'concept',
-        'unit',
-        'quantity',
+        'expense_category_id',
         'price',
         'iva',
     ];

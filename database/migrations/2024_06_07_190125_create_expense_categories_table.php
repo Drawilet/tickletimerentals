@@ -12,14 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('expense_details', function (Blueprint $table) {
+        Schema::create('expense_categories', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('expense_id')->constrained()->onDelete('cascade');
-            $table->foreignId('expense_category_id')->constrained()->onDelete('cascade');
-
-            $table->decimal('price', 10, 2);
-            $table->decimal('iva', 10, 2);
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->decimal('iva', 5, 2)->default(0);
 
             $table->timestamps();
         });
@@ -32,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('expense_details');
+        Schema::dropIfExists('expense_categories');
     }
 };

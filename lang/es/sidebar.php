@@ -12,7 +12,8 @@ return [
     'rents' => 'Rentas',
     'taxes' => 'Impuestos',
     "suppliers" => "Proveedores",
-    "supplier-products" => "Productos de Proveedor",
+    "expense-categories" => "Categorías de gastos",
+    "expenses" => "Gastos",
 
     'App' => 'Aplicación',
     'tenants' => "Compañías",

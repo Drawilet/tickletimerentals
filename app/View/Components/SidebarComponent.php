@@ -71,10 +71,10 @@ class SidebarComponent extends Component
             "permission" => "tenant.suppliers.show",
         ],
 
-        "supplier-products" => [
+        "expense-categories" => [
             "icon" => "shopping-bag",
-            "route" => "tenant.supplier-products.show",
-            "permission" => "tenant.supplier-products.show",
+            "route" => "tenant.expense-categories.show",
+            "permission" => "tenant.expense-categories.show",
         ],
         "expenses" => [
             "icon" => "bank-notes",

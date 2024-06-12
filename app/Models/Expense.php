@@ -10,6 +10,7 @@ class Expense extends Model
     use HasFactory;
 
     protected $fillable = [
+        'supplier_id',
         'subtotal',
         'total',
     ];
@@ -17,5 +18,10 @@ class Expense extends Model
     public function details()
     {
         return $this->hasMany(ExpenseDetail::class);
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
     }
 }

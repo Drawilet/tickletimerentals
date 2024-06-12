@@ -12,7 +12,8 @@ return [
     'rent' => 'Rents',
     'taxes' => 'Taxes',
     "suppliers" => "Suppliers",
-    "supplier-products" => "Supplier Products",
+    "expense-categories" => "Expense Categories",
+    "expenses" => "Expenses",
 
     'App' => 'App',
     'tenants' => 'Tenants',

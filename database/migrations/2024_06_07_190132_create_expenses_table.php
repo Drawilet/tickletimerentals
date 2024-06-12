@@ -15,6 +15,7 @@ return new class extends Migration {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
 
+            $table->foreignId('supplier_id')->constrained()->onDelete('cascade');
             $table->decimal('subtotal', 10, 2);
             $table->decimal('total', 10, 2);
 
