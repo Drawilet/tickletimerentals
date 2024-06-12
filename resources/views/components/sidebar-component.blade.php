@@ -20,7 +20,7 @@
             {{-- MENU --}}
             @foreach ($sidebar as $label => $item)
                 @if (gettype($item) == 'string')
-                    <label class="divider divider-accent">{{ __('sidebar.' . $item) }}</label>
+                    <label class="divider divider-accent my-0">{{ __('sidebar.' . $item) }}</label>
                 @else
                     @can(isset($item['permission']) ? $item['permission'] : null)
                         <li class="{{ isset($item['sub']) ? 'dropdown dropdown-hover dropdown-right' : '' }}">

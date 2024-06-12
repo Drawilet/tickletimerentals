@@ -10,7 +10,10 @@ return [
     'more' => 'More',
     'users' => 'Users',
     'rent' => 'Rents',
-    'Taxes' => 'Taxes',
+    'taxes' => 'Taxes',
+    "suppliers" => "Suppliers",
+    "expense-categories" => "Expense Categories",
+    "expenses" => "Expenses",
 
     'App' => 'App',
     'tenants' => 'Tenants',

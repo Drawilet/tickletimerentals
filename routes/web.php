@@ -81,10 +81,23 @@ Route::prefix("tenant")->name("tenant.")->middleware($defaultMiddleware)->group(
         ->get('regions', \App\Http\Livewire\Tenant\RegionsComponent::class)
         ->name('regions.show');
 
-     Route
+    Route
         ::middleware("permission:tenant.taxes.show")
         ->get('taxes', \App\Http\Livewire\Tenant\TaxesComponent::class)
         ->name('taxes.show');
+
+    Route
+        ::middleware("permission:tenant.suppliers.show")
+        ->get('suppliers', \App\Http\Livewire\Tenant\SuppliersComponent::class)
+        ->name('suppliers.show');
+
+    Route
+        ::middleware("permission:tenant.expense-categories.show")
+        ->get('expense-categories', \App\Http\Livewire\Tenant\ExpenseCategoriesComponent::class)
+        ->name('expense-categories.show');
+
+    Route::get('expenses', \App\Http\Livewire\Tenant\ExpensesComponent::class)
+        ->name('expenses.show');
 });
 
 Route

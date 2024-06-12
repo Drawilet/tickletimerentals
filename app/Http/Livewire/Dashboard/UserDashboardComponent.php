@@ -214,8 +214,7 @@ class UserDashboardComponent extends Component
         ])->validate();
 
 
-        // validate car availability
-        $rents = Rent::where('car_id', $this->rent["car_id"])->get();
+        $rents = Rent::where('car_id', $this->rent["car_id"])->where('id', '!=', $this->rent["id"] ?? 0)->get();
         foreach ($rents as $rent) {
             if ($this->rent["start_date"] >= $rent->start_date && $this->rent["start_date"] <= $rent->end_date) {
                 return $this->emit("toast", "error", __("calendar.car-not-available"));
