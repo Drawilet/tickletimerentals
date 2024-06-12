@@ -10,7 +10,7 @@
             <label class="divider divider-base-200"></label>
             <li>
                 <x-form-control>
-                    <x-label for="damage" value="{{ __('calendar.daño') }}" />
+                    <x-label for="damage" value="{{ __('calendar.damege') }}" />
                     <input type="checkbox" class="checkbox" wire:model="rent.photos.{{ $selectedPhoto }}.damage">
                     <x-input-error for="damage" class="mt-2" />
                 </x-form-control>
@@ -25,3 +25,5 @@
         </ul>
     </div>
 @endisset
+
+
