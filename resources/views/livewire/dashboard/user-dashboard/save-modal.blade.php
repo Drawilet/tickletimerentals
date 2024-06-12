@@ -133,35 +133,7 @@
                         </select>
                         <x-input-error for="tax_id" class="mt-2" />
                     </x-form-control>
-
                 </section>
-
-                <section class="flex flex-wrap gap-3">
-                    @foreach ($rent['photos'] as $key => $file)
-                        <div class="relative">
-                            <button wire:click="Modal('notes',true,'{{ $key }}')">
-                                <img src="{{ $file['url'] }}" alt=""
-                                    class="w-full max-w-xs max-h-20 object-cover rounded-md cursor-pointer " />
-                            </button>
-                            {{-- <button
-                                class="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-base-200 rounded-full text-red-500"
-                                wire:click="Modal('notes', true )">
-                                <x-icons.x-circle />
-                            </button> --}}
-                        </div>
-                    @endforeach
-
-                    <input type="file" id="imgs-id" class="hidden" wire:model="photo" name="photo" />
-
-                    <label for="imgs-id" class="border border-dashed rounded-md p-6 cursor-pointer">
-                        <x-icons.plus name="plus" class="w-6 h-6" />
-                    </label>
-
-                    <div class="w-full" {{-- wire:loading wire:target="uploadedPhotos" --}}>
-                    </div>
-                </section>
-
-
 
                 {{-- PRODUCTS --}}
                 <section class="mt-2">
@@ -273,10 +245,10 @@
 
         </div>
     </div>
+
     @include('livewire.dashboard.user-dashboard.save-modal.products-modal')
     @include('livewire.dashboard.user-dashboard.save-modal.payments-modal')
     @include('livewire.dashboard.user-dashboard.save-modal.new-customer-modal')
-    @include('livewire.dashboard.user-dashboard.save-modal.notesPhoto')
 
     <label class="modal-backdrop" wire:click="Modal('save', false)">Close</label>
 </div>
