@@ -11,17 +11,20 @@ use App\Models\RentPayment;
 use App\Models\Product;
 use App\Models\Car;
 use App\Models\Tax;
+use App\models\RentPhotos;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class UserDashboardComponent extends Component
 {
-    use WithCrudActions, WithValidations;
+    use WithCrudActions, WithValidations, WithFileUploads;
     protected $listeners = [
         "Modal" => "Modal",
+
     ];
 
     public $modals = [
@@ -30,6 +33,7 @@ class UserDashboardComponent extends Component
         "addProduct" => false,
         "newCustomer" => false,
         "payments" => false,
+        "notes" => false,
     ];
     public $rent, $initialRent = [
         "customer_id" => null,
@@ -44,6 +48,9 @@ class UserDashboardComponent extends Component
         "notes" => null,
 
         "products" => [],
+
+        "photos" => [],
+        'notesPhotos' => null,
 
         "tax_amount" => null,
         "subtotal" => null,
@@ -82,6 +89,9 @@ class UserDashboardComponent extends Component
 
     public $CUSTOMER_PER_PAGE = 10;
     public $CAN_LOAD_MORE = true;
+
+    public $photo = null;
+    public $selectedPhoto = null;
 
     public function mount()
     {
@@ -165,14 +175,14 @@ class UserDashboardComponent extends Component
                     if (gettype($data) != "array" && array_keys($data->toArray()) > 2) {
                         $this->rent = array_merge(
                             $this->rent,
-                            $data->load("products", "payments", "customer")->toArray()
+                            $data->load("products", "payments", "customer", "photos")->toArray()
                         );
                     } else if (isset($data["id"])) {
                         $rent = Rent::find($data["id"]);
                         if ($rent)
                             $this->rent = array_merge(
                                 $this->rent,
-                                $rent->load("products", "payments", "customer")->toArray()
+                                $rent->load("products", "payments", "customer", "photos")->toArray()
                             );
                     } else
                         $this->rent = array_merge($this->rent, $data);
@@ -195,11 +205,25 @@ class UserDashboardComponent extends Component
                     $this->modals["save"] = false;
                 }
                 break;
+            case 'notes':
+                if ($value === true) {
+                    $this->selectedPhoto = $data;
+                }
+                break;
         }
 
         $this->modals[$name] = $value;
     }
+    public function updatedPhoto()
+    {
 
+        $this->rent['photos'][] = [
+            'url' => $this->photo->temporaryUrl(),
+            'photo' => $this->photo,
+            'notes' => null,
+            'damage' => false
+        ];
+    }
     public function saveRent()
     {
         Validator::make($this->rent, [
@@ -227,6 +251,21 @@ class UserDashboardComponent extends Component
 
         $rent = Rent::updateOrCreate(["id" => $this->rent["id"] ?? ""], $this->rent);
 
+        foreach ($this->rent['photos'] as $key => $fileArray) {
+            if (isset($fileArray['photo'])) {
+                $uploadedFile = $fileArray['photo'];
+                $fileName = $uploadedFile->getClientOriginalName();
+                $uploadedFile->storeAs('public/rents/', $fileName);
+                $path = '/storage/rents/' . $fileName;
+                RentPhotos::create([
+                    'rent_id' => $rent->id,
+                    'url' => $path,
+                    'notes' => $fileArray['notes'],
+                    'damage' => $fileArray['damage']
+                ]);
+            }
+        }
+
         $rent->products()->delete();
         foreach ($this->rent["products"] as $product) {
             $rent->products()->create([
@@ -235,7 +274,7 @@ class UserDashboardComponent extends Component
             ]);
         }
 
-        $this->Modal("save", true, $rent->load("products", "payments", "customer")->toArray());
+        $this->Modal("save", true, $rent->load("products", "payments", "customer", "photos")->toArray());
 
         $this->emit("update-rent", $rent);
         $this->emit("toast", "success", __("calendar.save-success") . " " . $rent->name);
@@ -252,7 +291,7 @@ class UserDashboardComponent extends Component
         if (isset($this->rent["id"]) && $this->rent["id"] == $data["id"]) {
             $rent = $this->rents->find($data["id"]);
             if ($rent)
-                $this->rent = $rent->load("products", "payments", "customer", "car")->toArray();
+                $this->rent = $rent->load("products", "payments", "customer", "car", "photos")->toArray();
             else
                 $this->rent = $this->initialRent;
         }
