@@ -92,6 +92,8 @@ class UserDashboardComponent extends Component
     public $photo = null;
     public $selectedPhoto = null;
 
+    public $availableCars = [];
+
     public function mount()
     {
         $this->addCrud(Rent::class, ["useItemsKey" => false, "get" => true, "afterUpdate" => "updateRents"]);
@@ -237,16 +239,6 @@ class UserDashboardComponent extends Component
         ])->validate();
 
 
-        $rents = Rent::where('car_id', $this->rent["car_id"])->where('id', '!=', $this->rent["id"] ?? 0)->get();
-        foreach ($rents as $rent) {
-            if ($this->rent["start_date"] >= $rent->start_date && $this->rent["start_date"] <= $rent->end_date) {
-                return $this->emit("toast", "error", __("calendar.car-not-available"));
-            }
-            if ($this->rent["end_date"] >= $rent->start_date && $this->rent["end_date"] <= $rent->end_date) {
-                return $this->emit("toast", "error", __("calendar.car-not-available"));
-            }
-        }
-
         $rent = Rent::updateOrCreate(["id" => $this->rent["id"] ?? ""], $this->rent);
 
         foreach ($this->rent['photos'] as $key => $fileArray) {
@@ -331,28 +323,49 @@ class UserDashboardComponent extends Component
         $this->Modal("addProduct", false);
     }
 
+    public function filterCars()
+    {
+        if (!$this->rent["region_id"] || !$this->rent["start_date"] || !$this->rent["end_date"]) {
+            return;
+        }
+
+        $region = $this->regions->find($this->rent["region_id"]);
+        $start_date = Carbon::parse($this->rent["start_date"]);
+        $end_date = Carbon::parse($this->rent["end_date"]);
+
+        $this->avaiableCars = $this->cars->filter(function ($car) use ($start_date, $end_date, $region) {
+            return $car->isAvailable($start_date, $end_date) && in_array('' . $region->id, $car->getRegions());
+        });
+    }
+
     public function getTotal()
     {
 
         $total = 0;
+
         if ($this->rent["products"])
             foreach ($this->rent["products"] as $data) {
                 $total += $this->products->find($data["product_id"])->price * $data["quantity"];
             }
 
-        if ($this->rent["region_id"] && $this->rent["start_date"] && $this->rent["end_date"]) {
+        if ($this->rent["region_id"] && $this->rent["start_date"] && $this->rent["end_date"] && $this->rent["car_id"]) {
             $region = $this->regions->find($this->rent["region_id"]);
+            $car = $this->cars->find($this->rent["car_id"]);
             $start_date = Carbon::parse($this->rent["start_date"]);
             $end_date = Carbon::parse($this->rent["end_date"]);
 
-            // if the rent days is negative then return 0
             if ($end_date->diffInDays($start_date) < 0)
                 return $total;
 
             $days = $end_date->diffInDays($start_date);
 
             $currentRate = null;
-            foreach ($region->rate_schedule as $rate) {
+            $rate_schedule = $car->rate_schedule["region-" . $region->id];
+            if (!$rate_schedule) {
+                return $total;
+            }
+
+            foreach ($rate_schedule as $rate) {
                 if ($days == (int) $rate["days"]) {
                     $currentRate = (int) $rate["price"];
                     break;
@@ -360,7 +373,7 @@ class UserDashboardComponent extends Component
             }
 
             if (!$currentRate)
-                $currentRate = $region->daily_rate;
+                $currentRate = $rate_schedule[0]["price"];
 
             $total += $currentRate * $days;
         }
@@ -445,19 +458,6 @@ class UserDashboardComponent extends Component
         $this->emit("toast", "success", __('toast.Customeraddedsuccessfully'));
     }
 
-    public function getSchedule()
-    {
-        $date = Carbon::parse($this->rent["date"]);
-        $dayName = strtolower($date->format("l"));
-        $schedule = $this->currentSpace
-            ? $this->currentSpace->schedule[$dayName]
-            : [
-                'opening' => '00:00',
-                'closing' => '00:00',
-            ];
-
-        return $schedule;
-    }
 
     function updateEndTime()
     {

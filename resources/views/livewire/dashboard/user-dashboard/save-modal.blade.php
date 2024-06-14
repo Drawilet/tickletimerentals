@@ -36,39 +36,6 @@
                 {{-- INFORMATION --}}
                 <section>
                     <x-form-control>
-                        <x-label for="name" value="{{ __('calendar.rent-name') }}" />
-                        <x-input id="name" name="name" wire:model="rent.name" wire:loading.attr="disabled"
-                            wire:target="saveRent" />
-                        <x-input-error for="name" class="mt-2" />
-                    </x-form-control>
-
-                    <x-form-control>
-                        <x-label for="car_id" value="{{ __('calendar.car') }}" />
-                        <select class="select select-bordered" wire:model="rent.car_id" wire:loading.attr="disabled"
-                            wire:target="saveRent">
-                            <option value="{{ null }}">{{ __('calendar.pick-car') }}</option>
-                            @foreach ($cars as $car)
-                                <option value="{{ $car->id }}">{{ $car->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <x-input-error for="car_id" class="mt-2" />
-                    </x-form-control>
-
-                    <x-form-control>
-                        <x-label for="region_id" value="{{ __('calendar.region') }}" />
-                        <select class="select select-bordered" wire:model="rent.region_id" wire:loading.attr="disabled"
-                            wire:target="saveRent">
-                            <option value="{{ null }}">{{ __('calendar.pick-region') }}</option>
-                            @foreach ($regions as $region)
-                                <option value="{{ $region->id }}">{{ $region->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <x-input-error for="region_id" class="mt-2" />
-                    </x-form-control>
-
-                    <x-form-control>
                         <x-label for="customer_id" value="{{ __('calendar.customer') }}" />
                         <div class="flex items-center">
                             <div x-data="{ open: false }" class="flex-grow relative">
@@ -100,19 +67,60 @@
                     </x-form-control>
 
                     <x-form-control>
+                        <x-label for="name" value="{{ __('calendar.rent-name') }}" />
+                        <x-input id="name" name="name" wire:model="rent.name" wire:loading.attr="disabled"
+                            wire:target="saveRent" wire:change='filterCars' />
+                        <x-input-error for="name" class="mt-2" />
+                    </x-form-control>
+
+                    <x-form-control>
                         <x-label for="date" value="{{ __('calendar.start_date') }}" />
                         <x-input id="date" name="date" type="date" wire:model="rent.start_date"
-                            wire:loading.attr="disabled" wire:target="saveRent" />
+                            wire:loading.attr="disabled" wire:target="saveRent" wire:change='filterCars' />
                         <x-input-error for="start_date" class="mt-2" />
                     </x-form-control>
 
                     <x-form-control>
                         <x-label for="end_date" value="{{ __('calendar.end_date') }}" />
                         <x-input id="end_date" name="end_date" type="date" wire:model="rent.end_date"
-                            wire:loading.attr="disabled" wire:target="saveRent" />
+                            wire:loading.attr="disabled" wire:target="saveRent" wire:change='filterCars' />
                         <x-input-error for="end_date" class="mt-2" />
                     </x-form-control>
 
+                    <x-form-control>
+                        <x-label for="region_id" value="{{ __('calendar.region') }}" />
+                        <select class="select select-bordered" wire:model="rent.region_id" wire:loading.attr="disabled"
+                            wire:target="saveRent" wire:change='filterCars'>
+                            <option value="{{ null }}">{{ __('calendar.pick-region') }}</option>
+                            @foreach ($regions as $region)
+                                <option value="{{ $region->id }}">{{ $region->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <x-input-error for="region_id" class="mt-2" />
+                    </x-form-control>
+
+                    @if (isset($rent['region_id']) && isset($rent['start_date']) && isset($rent['end_date']))
+                        @if (count($avaiableCars) != 0)
+                            <x-form-control>
+                                <x-label for="car_id" value="{{ __('calendar.car') }}" />
+                                <select class="select select-bordered" wire:model="rent.car_id"
+                                    wire:loading.attr="disabled" wire:target="saveRent">
+                                    <option value="{{ null }}">{{ __('calendar.pick-car') }}</option>
+                                    @foreach ($avaiableCars as $car)
+                                        <option value="{{ $car->id }}">{{ $car->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <x-input-error for="car_id" class="mt-2" />
+                            </x-form-control>
+                        @else
+                            <span class="block text-base mt-2 w-full text-center">{{ __('calendar.no-cars') }}</span>
+                        @endif
+                    @else
+                        <span
+                            class="block text-base mt-2 w-full text-center">{{ __('calendar.complete-first') }}</span>
+                    @endif
                     <x-form-control>
                         <x-label for="notes" value="{{ __('calendar.notes') }}" />
                         <textarea id="notes" name="notes" class="textarea textarea-bordered" wire:model="rent.notes"
@@ -136,18 +144,15 @@
 
                 </section>
 
+                <x-label for="photo" value="{{ __('calendar.photos') }}" />
                 <section class="flex flex-wrap gap-3">
+
                     @foreach ($rent['photos'] as $key => $file)
                         <div class="relative">
                             <button wire:click="Modal('notes',true,'{{ $key }}')">
                                 <img src="{{ $file['url'] }}" alt=""
                                     class="w-full max-w-xs max-h-20 object-cover rounded-md cursor-pointer " />
                             </button>
-                            {{-- <button
-                                class="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-base-200 rounded-full text-red-500"
-                                wire:click="Modal('notes', true )">
-                                <x-icons.x-circle />
-                            </button> --}}
                         </div>
                     @endforeach
 

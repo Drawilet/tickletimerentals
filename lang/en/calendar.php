@@ -21,6 +21,10 @@ return [
     "tax" => "Tax",
     "pick-tax" => "Pick tax",
 
+    'photos' => 'Photos',
+    'complete-first' => 'Complete the form first to see available cars',
+    'no-cars' => 'No cars available',
+
     "notes" => "Notes",
 
     "products" => "Products",
