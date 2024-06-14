@@ -21,6 +21,10 @@ return [
     "start_date" => "Fecha de inicio",
     "end_date" => "Fecha de finalización",
 
+    'photos' => 'Fotos',
+    'complete-first' => 'Completa el formulario primero para ver los vehículos disponibles',
+    'no-cars' => 'No hay vehículos disponibles',
+
     "notes" => "Notas",
 
     "products" => "Productos",
