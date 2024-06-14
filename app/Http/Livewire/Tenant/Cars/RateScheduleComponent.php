@@ -44,8 +44,29 @@ class RateScheduleComponent extends Component
     {
         if (isset($data['rate_schedule'])) {
             $this->data['rate_schedule'] = $data['rate_schedule'];
+
+            foreach ($this->regions as $region) {
+                if (!isset($this->data['rate_schedule']['region-' . $region->id])) {
+                    $this->data['rate_schedule']['region-' . $region->id] = [
+                        [
+                            'days' => '1',
+                            'price' => '1000',
+                            'discount' => '0',
+                        ]
+                    ];
+                }
+            }
         } else {
             $this->data['rate_schedule'] = [];
+            foreach ($this->regions as $region) {
+                $this->data['rate_schedule']['region-' . $region->id] = [
+                    [
+                        'days' => '1',
+                        'price' => '1000',
+                        'discount' => '0',
+                    ]
+                ];
+            }
         }
 
     }
