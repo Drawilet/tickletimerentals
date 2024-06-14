@@ -276,7 +276,7 @@
     @include('livewire.dashboard.user-dashboard.save-modal.products-modal')
     @include('livewire.dashboard.user-dashboard.save-modal.payments-modal')
     @include('livewire.dashboard.user-dashboard.save-modal.new-customer-modal')
-    @include('livewire.dashboard.user-dashboard.save-modal.notesPhoto')
+    @include('livewire.dashboard.user-dashboard.save-modal.photos-notes')
 
     <label class="modal-backdrop" wire:click="Modal('save', false)">Close</label>
 </div>

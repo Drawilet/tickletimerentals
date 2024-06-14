@@ -15,6 +15,8 @@ return new class extends Migration {
         Schema::create('expense_categories', function (Blueprint $table) {
             $table->id();
 
+            $table->foreignId('tenant_id')->constrained()->onDelete('cascade');
+
             $table->string('name');
             $table->string('description')->nullable();
             $table->decimal('iva', 5, 2)->default(0);
