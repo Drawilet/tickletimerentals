@@ -15,14 +15,10 @@ class Region extends Base
         'rate_schedule',
         'daily_rate',
     ];
-    // rate schedule is an array of objects with the following properties:
-    // days: number, price: number, discount: number
+
     protected $casts = [
         'locations' => 'array',
-        'rate_schedule' => 'array',
     ];
-
-    
 
     public function rents()
     {

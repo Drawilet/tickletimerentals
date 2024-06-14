@@ -43,6 +43,13 @@ return [
 
     'notes' => 'Notes',
 
+    'rate_schedule' => 'Rate schedule',
+    'region_id' => 'Region',
+
+    'rate-day' => 'Day',
+    'rate-price' => 'Price',
+    'rate-discount' => 'Discount',
+
     'search' => 'Search car...',
     'create' => 'Create car',
     "update" => "Update car",

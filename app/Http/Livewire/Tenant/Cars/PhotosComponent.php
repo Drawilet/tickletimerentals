@@ -48,7 +48,7 @@ class PhotosComponent extends Component
         if (is_array($this->uploadedPhotos)) {
             foreach ($this->uploadedPhotos as $photo) {
                 if (!in_array($photo->getMimeType(), ['image/jpeg', 'image/png', 'image/jpg'])) {
-                    $this->emit("toast", "error", __("toast.invalid-file"));
+                    $this->emitUp("toast", "error", __("toast.invalid-file"));
                     continue;
                 }
 
@@ -56,7 +56,7 @@ class PhotosComponent extends Component
             }
         } else {
             if (!in_array($this->uploadedPhotos->getMimeType(), ['image/jpeg', 'image/png', 'image/jpg'])) {
-                $this->emit("toast", "error", "Invalid file type");
+                $this->emitUp("toast", "error", "Invalid file type");
                 return;
             }
 
@@ -65,7 +65,7 @@ class PhotosComponent extends Component
 
         $this->uploadedPhotos = null;
 
-        $this->emit('update-files', ['photos' => $this->files['photos']]);
+        $this->emitUp('update-files', ['photos' => $this->files['photos']]);
     }
 
     public function delete($key)
@@ -75,10 +75,10 @@ class PhotosComponent extends Component
         unset($this->files['photos'][$key]);
         $this->files['photos'] = array_values($this->files['photos']);
 
-        $this->emit('update-files', ['photos' => $this->files['photos']]);
+        $this->emitUp('update-files', ['photos' => $this->files['photos']]);
 
         if ($id) {
-            $this->emit(
+            $this->emitUp(
                 'update-changelog',
                 ['id' => $id, 'action' => 'delete', "key" => "photos", 'type' => 'file']
             );

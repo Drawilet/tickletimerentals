@@ -31,7 +31,7 @@ class ScheduleComponent extends Component
 
     public function handleScheduleChange()
     {
-        $this->emit('update-data', $this->data);
+        $this->emitUp('update-data', $this->data);
     }
 
     public function toggleDay($day)
@@ -49,7 +49,7 @@ class ScheduleComponent extends Component
     function removeDay()
     {
         unset($this->data['schedule'][$this->selectedDay]);
-        $this->emit('update-data', $this->data);
+        $this->emitUp('update-data', $this->data);
     }
     function copyDay()
     {
@@ -57,6 +57,6 @@ class ScheduleComponent extends Component
             $this->data['schedule'][$day] = $this->data['schedule'][$this->selectedDay];
         }
 
-        $this->emit('update-data', $this->data);
+        $this->emitUp('update-data', $this->data);
     }
 }
