@@ -23,12 +23,6 @@ class RegionsComponent extends CrudComponent
                     "hidden" => true,
                     "component" => LocationComponent::class,
                 ],
-                "rate_schedule" => [
-                    'type' => 'array',
-                    'hidden' => true,
-                    'component' => RateComponent::class,
-
-                ],
             ],
             'mobileStyles' => "
                 .firstname,

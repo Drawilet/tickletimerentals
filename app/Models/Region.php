@@ -18,7 +18,6 @@ class Region extends Base
 
     protected $casts = [
         'locations' => 'array',
-        'rate_schedule' => 'array',
     ];
 
     public function rents()

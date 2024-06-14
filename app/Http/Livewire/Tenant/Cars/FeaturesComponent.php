@@ -32,7 +32,7 @@ class FeaturesComponent extends Component
 
     public function handlefeaturesChange()
     {
-        $this->emit('update-data', $this->data);
+        $this->emitUp('update-data', $this->data);
     }
 
     public function add()

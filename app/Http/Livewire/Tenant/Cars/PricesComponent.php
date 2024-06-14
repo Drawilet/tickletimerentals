@@ -32,7 +32,7 @@ class PricesComponent extends Component
 
     public function handlepricesChange()
     {
-        $this->emit('update-data', $this->data);
+        $this->emitUp('update-data', $this->data);
     }
 
     public function add()

@@ -43,6 +43,13 @@ return [
 
     'notes' => 'Notas',
 
+    'rate_schedule' => 'Tarifas',
+    'region_id' => 'Región',
+
+    'rate-day' => 'Días',
+    'rate-price' => 'Precio',
+    'rate-discount' => 'Descuento',
+
     'search' => 'Buscar vehículo...',
     'create' => 'Crear vehículo',
     "update" => "Actualizar vehículo",

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Tenant;
 
 use App\Http\Livewire\Tenant\Cars\FeaturesComponent;
+use App\Http\Livewire\Tenant\Cars\RateScheduleComponent;
 use App\Http\Livewire\Tenant\Cars\PhotosComponent;
 use App\Http\Livewire\Util\CrudComponent;
 
@@ -69,6 +70,11 @@ class CarsComponent extends CrudComponent
                     "type" => "array",
                     "hidden" => true,
                     "component" => FeaturesComponent::class,
+                ],
+                "rate_schedule" => [
+                    "type" => "array",
+                    "hidden" => true,
+                    "component" => RateScheduleComponent::class,
                 ],
                 'notes' => ['type' => 'textarea', 'rules' => 'nullable'],
             ],
