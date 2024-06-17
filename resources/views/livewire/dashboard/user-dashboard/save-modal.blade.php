@@ -166,7 +166,6 @@
                     @endforeach
 
                     <input type="file" id="imgs-id" class="hidden" name="photo" wire:model="photo" />
-                    @dump($rent['photos'])
 
                     <label for="imgs-id" class="border border-dashed rounded-md p-6 cursor-pointer">
                         <x-icons.plus name="plus" class="w-6 h-6" />
