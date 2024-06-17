@@ -20,7 +20,7 @@ class WizardStepValidation
     public function handle(Request $request, Closure $next)
     {
 
-        $user = Auth::user();
+        /* $user = Auth::user();
         $tenant = $user->tenant;
         if ($tenant && !$user->hasRole("tenant.admin"))
             return $next($request);
@@ -33,7 +33,7 @@ class WizardStepValidation
             $step = null;
 
         if ($step && $currentRoute != $step['route'])
-            return redirect()->route($step['route']);
+            return redirect()->route($step['route']); */
 
         return $next($request);
     }
