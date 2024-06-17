@@ -89,7 +89,7 @@ class UserDashboardComponent extends Component
     public $CUSTOMER_PER_PAGE = 10;
     public $CAN_LOAD_MORE = true;
 
-    public $photo = null;
+    public $photo;
     public $selectedPhoto = null;
 
     public $busyCars = [];
@@ -169,6 +169,8 @@ class UserDashboardComponent extends Component
                 if ($value === true) {
                     $this->rent = $this->initialRent;
                     $this->searchTerm = '';
+                    $this->photo = null;
+                    $this->selectedPhoto = null;
                 } else
                     $this->modals["payments"] = false;
 
@@ -217,6 +219,9 @@ class UserDashboardComponent extends Component
     }
     public function updatedPhoto()
     {
+    $this->validate([
+        'photo' => 'image|max:1024', // 1MB Max
+    ]);
 
         $this->rent['photos'][] = [
             'url' => $this->photo->temporaryUrl(),
@@ -225,6 +230,11 @@ class UserDashboardComponent extends Component
             'damage' => false
         ];
     }
+    public function delete($key)
+{
+    unset($this->rent['photos'][$key]);
+    $this->rent['photos'] = array_values($this->rent['photos']);
+}
     public function saveRent()
     {
         Validator::make($this->rent, [
