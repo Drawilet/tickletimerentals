@@ -46,4 +46,20 @@ return [
         "text-4" => "Configurar tus productos te permite organizar tus servicios y hacerlos disponibles para tus clientes. Esto facilita la gestión de tus ofertas y la realización de transacciones comerciales de manera eficiente.",
         "text-5" => "¡Listo para configurar tu primer producto? ¡Vamos allá!"
     ],
+    "tax" => [
+        "text-1" => "¡Preparémonos para configurar tu primer impuesto!",
+        "text-2" => "Antes de comenzar, déjame explicarte para qué sirven los impuestos en ",
+        "text-3" => "Los impuestos son elementos que puedes aplicar a tus servicios o productos para cumplir con las obligaciones fiscales. Pueden incluir impuestos sobre ventas, impuestos al valor agregado, entre otros.",
+        "text-4" => "Configurar tus impuestos te permite cumplir con las regulaciones fiscales y hacerlos aplicables a tus servicios o productos. Esto facilita la gestión de tus obligaciones fiscales y la realización de transacciones comerciales de manera eficiente.",
+        "text-5" => "¡Listo para configurar tu primer impuesto? ¡Vamos allá!"
+
+    ],
+    "suppliers" => [
+        "text-1" => "¡Vamos a configurar tu primer proveedor!",
+        "text-2" => "Antes de comenzar, déjame explicarte la importancia de gestionar tus proveedores en ",
+        "text-3" => "Los proveedores son fundamentales para asegurar el suministro de productos o servicios que ofreces. Gestionar adecuadamente tus proveedores te permite mantener una cadena de suministro eficiente y asegurar la calidad de lo que ofreces a tus clientes.",
+        "text-4" => "Configurar y gestionar tus proveedores te ayuda a tener un control preciso sobre tus adquisiciones, costos y relaciones comerciales. Esto facilita la negociación de mejores términos y condiciones, así como la resolución rápida de cualquier inconveniente que pueda surgir.",
+        "text-5" => "¿Listo para configurar tu primer proveedor? ¡Vamos allá!"
+    ],
+
 ];

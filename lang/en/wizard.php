@@ -46,4 +46,22 @@ return [
         "text-4" => "Setting up your products allows you to organize your services and make them available to your customers. This makes managing your offerings and conducting business transactions efficiently.",
         "text-5" => "Ready to set up your first product? Let's go!"
     ],
+    "tax" => [
+        "text-1" => "Let's get ready to set up your first tax!",
+        "text-2" => "Before we start, let me explain what taxes are for in ",
+        "text-3" => "Taxes are items you can apply to your services or products to comply with tax obligations. They can include sales taxes, value-added taxes, among others.",
+        "text-4" => "Setting up your taxes allows you to comply with tax regulations and make them applicable to your services or products. This makes managing your tax obligations and conducting business transactions efficiently.",
+        "text-5" => "Ready to set up your first tax? Let's go!"
+
+    ],
+    "suppliers" => [
+        "text-1" => "Let's get ready to set up your first supplier!",
+        "text-2" => "Before we begin, let me explain the importance of managing your suppliers in ",
+        "text-3" => "Suppliers are crucial for ensuring the supply of products or services you offer. Properly managing your suppliers allows you to maintain an efficient supply chain and ensure the quality of what you offer to your customers.",
+        "text-4" => "Configuring and managing your suppliers helps you have precise control over your acquisitions, costs, and business relationships. This facilitates negotiating better terms and conditions, as well as quickly resolving any issues that may arise.",
+        "text-5" => "Ready to set up your first supplier? Let's go!"
+    ],
+
+
+
 ];

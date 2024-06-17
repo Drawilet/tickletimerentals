@@ -129,7 +129,7 @@ class TenantSettingsComponent extends Component
         $user = Auth()->user();
         if (!$user->tenant) {
             $user->tenant_id = $tenant->id;
-            $user->wizard_step = 1;
+            $user->wizard_step++;
             $user->save();
 
             $user->assignRole('tenant.admin');

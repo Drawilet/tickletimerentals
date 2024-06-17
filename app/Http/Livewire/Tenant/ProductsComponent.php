@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Tenant;
 
 use App\Http\Livewire\Util\CrudComponent;
 use App\Models\Product;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsComponent extends CrudComponent
 {
@@ -65,11 +65,11 @@ class ProductsComponent extends CrudComponent
     public function afterSave($product, $data)
     {
         $user = Auth::user();
-        $products = Product::where('tenant_id', $user->tenant_id)->get();
+        $products = Product::count();
 
-        if ($products->count() == 1) {
+        if ($products == 1) {
             $user = Auth::user();
-            $user->wizard_step = 4;
+            $user->wizard_step++;
             $user->save();
 
             return redirect()->route('tenant.products.show');

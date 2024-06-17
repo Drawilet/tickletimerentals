@@ -272,7 +272,7 @@ class UserDashboardComponent extends Component
         $user = Auth::user();
         $rents = Rent::where('tenant_id', $user->tenant_id)->get();
         if ($rents->count() == 1) {
-            $user->wizard_step = 5;
+            $user->wizard_step++;
             $user->save();
         }
     }
