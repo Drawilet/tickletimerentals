@@ -11,7 +11,7 @@ class RateScheduleComponent extends Component
 
     public $dailyRate = 0;
 
-    public $days, $price, $discount, $currentRegion = 1;
+    public $days, $price, $discount, $currentRegion;
 
     public $data = [
         'rate_schedule' => [],
@@ -31,6 +31,8 @@ class RateScheduleComponent extends Component
                 ]
             ];
         }
+
+        $this->currentRegion = $this->regions[0]->id;
     }
 
     public function render()
@@ -67,6 +69,7 @@ class RateScheduleComponent extends Component
                     ]
                 ];
             }
+
         }
 
     }
