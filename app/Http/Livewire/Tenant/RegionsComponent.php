@@ -71,7 +71,7 @@ class RegionsComponent extends CrudComponent
 
         if ($regions->count() == 1) {
             $user = Auth::user();
-            $user->wizard_step = 3;
+            $user->wizard_step++;
             $user->save();
 
             redirect()->route("tenant.regions.show");

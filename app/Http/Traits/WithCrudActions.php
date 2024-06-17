@@ -66,3 +66,4 @@ trait WithCrudActions
         }
     }
 }
+
