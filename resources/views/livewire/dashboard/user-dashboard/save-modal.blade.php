@@ -101,14 +101,18 @@
                     </x-form-control>
 
                     @if (isset($rent['region_id']) && isset($rent['start_date']) && isset($rent['end_date']))
-                        @if (count($avaiableCars) != 0)
+                        @if (count($cars) != 0)
                             <x-form-control>
                                 <x-label for="car_id" value="{{ __('calendar.car') }}" />
                                 <select class="select select-bordered" wire:model="rent.car_id"
                                     wire:loading.attr="disabled" wire:target="saveRent">
                                     <option value="{{ null }}">{{ __('calendar.pick-car') }}</option>
-                                    @foreach ($avaiableCars as $car)
-                                        <option value="{{ $car->id }}">{{ $car->name }}
+                                    @foreach ($cars as $car)
+                                        <option value="{{ $car->id }}" @disabled(in_array($car->id, $busyCars))>
+                                            {{ $car->name }}
+                                            @if (in_array($car->id, $busyCars))
+                                                ({{ __('calendar.busy') }})
+                                            @endif
                                         </option>
                                     @endforeach
                                 </select>

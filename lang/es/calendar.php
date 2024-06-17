@@ -25,6 +25,8 @@ return [
     'complete-first' => 'Completa el formulario primero para ver los vehículos disponibles',
     'no-cars' => 'No hay vehículos disponibles',
 
+    'busy' => 'Ocupado',
+
     "notes" => "Notas",
 
     "products" => "Productos",

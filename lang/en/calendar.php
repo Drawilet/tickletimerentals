@@ -25,6 +25,8 @@ return [
     'complete-first' => 'Complete the form first to see available cars',
     'no-cars' => 'No cars available',
 
+    'busy' => 'Busy',
+
     "notes" => "Notes",
 
     "products" => "Products",
