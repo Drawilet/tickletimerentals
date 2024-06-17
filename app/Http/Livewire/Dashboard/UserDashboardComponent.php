@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 
 class UserDashboardComponent extends Component
@@ -50,6 +51,7 @@ class UserDashboardComponent extends Component
         "products" => [],
 
         "photos" => [],
+        "deleted_photos" => [],
 
         "tax_amount" => null,
         "subtotal" => null,
@@ -93,6 +95,7 @@ class UserDashboardComponent extends Component
     public $selectedPhoto = null;
 
     public $busyCars = [];
+
 
     public function mount()
     {
@@ -232,9 +235,19 @@ class UserDashboardComponent extends Component
     }
     public function delete($key)
 {
-    unset($this->rent['photos'][$key]);
-    $this->rent['photos'] = array_values($this->rent['photos']);
+        $this->selectedPhoto = null;
+
+    if (isset($this->rent['photos'][$key])) {
+        $id = $this->rent['photos'][$key]['id'] ?? null;
+        if ($id) {
+            $this->rent['deleted_photos'][] = $this->rent['photos'][$key];
+        }
+        unset($this->rent['photos'][$key]);
+        $this->rent['photos'] = array_values($this->rent['photos']);
+        $this->emitUp('update-rent-photos', ['photos' => $this->rent['photos']]);
+    }
 }
+
     public function saveRent()
     {
         Validator::make($this->rent, [
@@ -265,6 +278,12 @@ class UserDashboardComponent extends Component
                 ]);
             }
         }
+        foreach ($this->rent['deleted_photos'] as $deletedPhoto) {
+            // Aquí debes eliminar tanto del almacenamiento como de la base de datos
+            Storage::delete('public/rents/' . basename($deletedPhoto['url']));
+            RentPhotos::where('id', $deletedPhoto['id'])->delete();
+        }
+        $this->rent['deleted_photos'] = [];
 
         $rent->products()->delete();
         foreach ($this->rent["products"] as $product) {
