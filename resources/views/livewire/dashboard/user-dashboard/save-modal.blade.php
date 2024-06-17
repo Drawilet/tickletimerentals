@@ -157,10 +157,16 @@
                                 <img src="{{ $file['url'] }}" alt=""
                                     class="w-full max-w-xs max-h-20 object-cover rounded-md cursor-pointer " />
                             </button>
+                            <button
+                                class="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 bg-base-200 rounded-full text-red-500"
+                                wire:click='delete("{{ $key }}")'>
+                                <x-icons.x-circle />
+                            </button>
                         </div>
                     @endforeach
 
-                    <input type="file" id="imgs-id" class="hidden" wire:model="photo" name="photo" />
+                    <input type="file" id="imgs-id" class="hidden" name="photo" wire:model="photo" />
+                    @dump($rent['photos'])
 
                     <label for="imgs-id" class="border border-dashed rounded-md p-6 cursor-pointer">
                         <x-icons.plus name="plus" class="w-6 h-6" />
