@@ -26,6 +26,8 @@ return [
     'no-cars' => 'No cars available',
 
     'busy' => 'Busy',
+    'days' => 'days',
+    'daily-rate' => 'Daily rate',
 
     "notes" => "Notes",
 

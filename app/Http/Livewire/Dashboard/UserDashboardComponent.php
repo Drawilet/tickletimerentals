@@ -53,6 +53,9 @@ class UserDashboardComponent extends Component
         "photos" => [],
         "deleted_photos" => [],
 
+        'days' => 0,
+        'daily_rate' => 0,
+
         "tax_amount" => null,
         "subtotal" => null,
         "total" => null,
@@ -222,9 +225,9 @@ class UserDashboardComponent extends Component
     }
     public function updatedPhoto()
     {
-    $this->validate([
-        'photo' => 'image|max:1024', // 1MB Max
-    ]);
+        $this->validate([
+            'photo' => 'image|max:1024', // 1MB Max
+        ]);
 
         $this->rent['photos'][] = [
             'url' => $this->photo->temporaryUrl(),
@@ -377,16 +380,23 @@ class UserDashboardComponent extends Component
                 $total += $this->products->find($data["product_id"])->price * $data["quantity"];
             }
 
-        if ($this->rent["region_id"] && $this->rent["start_date"] && $this->rent["end_date"] && $this->rent["car_id"]) {
-            $region = $this->regions->find($this->rent["region_id"]);
-            $car = $this->cars->find($this->rent["car_id"]);
+        if ($this->rent["start_date"] && $this->rent["end_date"]) {
             $start_date = Carbon::parse($this->rent["start_date"]);
             $end_date = Carbon::parse($this->rent["end_date"]);
 
-            if ($end_date->diffInDays($start_date) < 0)
-                return $total;
+            $days = ceil($start_date->floatDiffInDays($end_date));
+            $this->rent["days"] = $days;
 
-            $days = $end_date->diffInDays($start_date);
+            if ($days < 0)
+                return;
+
+            if (!$this->rent["region_id"])
+                return;
+            $region = $this->regions->find($this->rent["region_id"]);
+
+            if (!$this->rent["car_id"])
+                return;
+            $car = $this->cars->find($this->rent["car_id"]);
 
             $currentRate = null;
             $rate_schedule = $car->rate_schedule["region-" . $region->id];
@@ -395,14 +405,15 @@ class UserDashboardComponent extends Component
             }
 
             foreach ($rate_schedule as $rate) {
-                if ($days == (int) $rate["days"]) {
+                if ($days >= (int) $rate["days"]) {
                     $currentRate = (int) $rate["price"];
-                    break;
                 }
             }
 
             if (!$currentRate)
                 $currentRate = $rate_schedule[0]["price"];
+
+            $this->rent["daily_rate"] = $currentRate;
 
             $total += $currentRate * $days;
         }

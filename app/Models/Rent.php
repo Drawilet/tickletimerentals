@@ -18,7 +18,8 @@ class Rent extends Base
         "region_id",
         "tax_id",
         "tax_amount",
-        "notes"
+        "notes",
+        "daily_rate",
     ];
 
     public function customer()
