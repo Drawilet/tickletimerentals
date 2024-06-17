@@ -8,7 +8,7 @@
         </select>
     </x-form-control>
 
-    @isset($currentRegion)
+    @if (isset($currentRegion) && isset($data['rate_schedule']['region-' . $currentRegion]))
         <table class="table table-xs table-zebra">
             <thead>
                 <tr>
@@ -68,5 +68,5 @@
         <x-input-error for="days" />
         <x-input-error for="price" />
         <x-input-error for="discount" />
-    @endisset
+    @endif
 </div>
