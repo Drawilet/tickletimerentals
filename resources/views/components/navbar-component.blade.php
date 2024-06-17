@@ -14,6 +14,7 @@
         @endrole
 
 
+        @livewire('look-for-car')
         @livewire('news-component')
 
         @livewire('notification-bar-component')

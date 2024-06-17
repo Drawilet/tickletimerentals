@@ -92,7 +92,7 @@ class UserDashboardComponent extends Component
     public $photo = null;
     public $selectedPhoto = null;
 
-    public $availableCars = [];
+    public $busyCars = [];
 
     public function mount()
     {
@@ -333,9 +333,9 @@ class UserDashboardComponent extends Component
         $start_date = Carbon::parse($this->rent["start_date"]);
         $end_date = Carbon::parse($this->rent["end_date"]);
 
-        $this->avaiableCars = $this->cars->filter(function ($car) use ($start_date, $end_date, $region) {
-            return $car->isAvailable($start_date, $end_date) && in_array('' . $region->id, $car->getRegions());
-        });
+        $this->busyCars = $this->cars->map(function ($car) use ($start_date, $end_date, $region) {
+            return $car->isAvailable($start_date, $end_date) && in_array('' . $region->id, $car->getRegions()) ? null : $car->id;
+        })->filter()->toArray();
     }
 
     public function getTotal()
