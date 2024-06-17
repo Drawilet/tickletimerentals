@@ -20,8 +20,10 @@ return new class extends Migration {
             $table->foreignId('customer_id')->constrained();
             $table->foreignId('region_id')->constrained();
 
-            $table->date("start_date");
-            $table->date("end_date");
+            $table->dateTime("start_date");
+            $table->dateTime("end_date");
+
+            $table->decimal("daily_rate");
 
             $table->foreignId("tax_id")->constrained();
             $table->decimal("tax_amount");

@@ -22,13 +22,13 @@
 
             <x-form-control>
                 <x-label for="date" value="{{ __('look-for-car.start_date') }}" />
-                <x-input id="date" name="date" type="date" wire:model="filters.start_date" />
+                <x-input id="date" name="date" type="datetime-local" wire:model="filters.start_date" />
                 <x-input-error for="start_date" class="mt-2" />
             </x-form-control>
 
             <x-form-control>
                 <x-label for="end_date" value="{{ __('look-for-car.end_date') }}" />
-                <x-input id="end_date" name="end_date" type="date" wire:model="filters.end_date" />
+                <x-input id="end_date" name="end_date" type="datetime-local" wire:model="filters.end_date" />
                 <x-input-error for="end_date" class="mt-2" />
             </x-form-control>
 

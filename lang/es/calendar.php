@@ -26,6 +26,8 @@ return [
     'no-cars' => 'No hay vehículos disponibles',
 
     'busy' => 'Ocupado',
+    'days' => 'días',
+    'daily-rate' => 'Tarifa diaria',
 
     "notes" => "Notas",
 

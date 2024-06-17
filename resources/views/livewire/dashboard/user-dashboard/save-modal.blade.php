@@ -75,17 +75,21 @@
 
                     <x-form-control>
                         <x-label for="date" value="{{ __('calendar.start_date') }}" />
-                        <x-input id="date" name="date" type="date" wire:model="rent.start_date"
+                        <x-input id="date" name="date" type="datetime-local" wire:model="rent.start_date"
                             wire:loading.attr="disabled" wire:target="saveRent" wire:change='filterCars' />
                         <x-input-error for="start_date" class="mt-2" />
                     </x-form-control>
 
                     <x-form-control>
                         <x-label for="end_date" value="{{ __('calendar.end_date') }}" />
-                        <x-input id="end_date" name="end_date" type="date" wire:model="rent.end_date"
+                        <x-input id="end_date" name="end_date" type="datetime-local" wire:model="rent.end_date"
                             wire:loading.attr="disabled" wire:target="saveRent" wire:change='filterCars' />
                         <x-input-error for="end_date" class="mt-2" />
                     </x-form-control>
+
+                    <span class="px-2 pt-8 flex justify-center items-end text-center w-full ">
+                        {{ $this->rent['days'] }} {{ __('calendar.days') }}
+                    </span>
 
                     <x-form-control>
                         <x-label for="region_id" value="{{ __('calendar.region') }}" />
@@ -247,6 +251,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td class="pr-8">{{ __('calendar.daily-rate') }}</td>
+                        <td class="text-right
+                                ">
+                            ${{ number_format($this->rent['daily_rate'], 2) }}</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-8 capitalize">{{ __('calendar.days') }}</td>
+                        <td class="text-right
+                                "> {{ $this->rent['days'] }}</td>
+                    </tr>
+
+
                     <tr>
                         <td class="pr-8">{{ __('calendar.subtotal') }}</td>
                         <td class="text-right"> ${{ number_format($this->rent['subtotal'], 2) }}</td>
