@@ -58,6 +58,7 @@
             @foreach ($events as $event)
                 @php
                     $startDate = \Carbon\Carbon::parse($event['start_date']);
+                    $endDate = \Carbon\Carbon::parse($event['end_date']);
                     $now = \Carbon\Carbon::now();
                 @endphp
 
@@ -65,16 +66,21 @@
                     @continue
                 @endif
 
-                <button class="cursor-pointer flex gap-2 items-center"
-                    wire:click.stop="onEventClick('{{ $event['id'] }}')">
+                <button class="cursor-pointer " wire:click.stop="onEventClick('{{ $event['id'] }}')">
+                    <div class="flex gap-2 items-center">
+                        <span class="size-3 bg-base-300 block rounded-full"
+                            style="background-color: {{ $event['isDraft'] ? '' : $event['color'] }}">
+                        </span>
 
-                    <span class="size-3 bg-base-300 block rounded-full"
-                        style="background-color: {{ $event['isDraft'] ? '' : $event['color'] }}">
-                    </span>
-
-                    <span class="text-sm">
-                        {{ \Carbon\Carbon::parse($event['start_date'])->format('d') }} |
-                        {{ $event['title'] }}</span>
+                        <span class="text-sm">
+                            {{ $event['title'] }} ({{ $event['location'] }})
+                        </span>
+                    </div>
+                    <div>
+                        <span>
+                            {{ $startDate->format('d/m') }} - {{ $endDate->format('d/m') }}
+                        </span>
+                    </div>
                 </button>
             @endforeach
             </d>
